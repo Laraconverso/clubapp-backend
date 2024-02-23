@@ -2,6 +2,7 @@ package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.service.PlayerService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ public class PlayerController {
 
     //private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    @Operation(summary = "Obtener jugador por ID")
     @GetMapping("/get/{id}")
     @PermitAll
     public ResponseEntity<Player> getPlayerById(@PathVariable Long id){
@@ -34,6 +36,7 @@ public class PlayerController {
         return response;
     }
 
+    @Operation(summary = "Obtener jugador por DNI")
     @GetMapping("/getByDni/{dni}")
     @PermitAll
     public ResponseEntity<Player> getPlayerById(@PathVariable String dni){
@@ -47,12 +50,14 @@ public class PlayerController {
         return response;
     }
 
+    @Operation(summary = "Listar todos los jugadores")
     @GetMapping("/listAll")
     @PermitAll
     public ResponseEntity<List<Player>> getAllPlayers(){
         return ResponseEntity.ok(playerService.listAllPlayers());
     }
 
+    @Operation(summary = "Guardar un jugador")
     @PostMapping("/save")
     @PermitAll
     public ResponseEntity<Player> savePlayer(@RequestBody Player player){
@@ -63,6 +68,7 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.savePlayer(player));
     }
 
+    @Operation(summary = "Eliminar un jugador por ID")
     @DeleteMapping("/{id}")
     public void deleteUsuario(@PathVariable Long id){
         if (playerService.getPlayerById(Long.valueOf(id))!=null){
@@ -72,6 +78,8 @@ public class PlayerController {
         }
     }
 
+
+    @Operation(summary = "Actualizar un jugador")
     @PutMapping()
     public ResponseEntity<Player> updatePlayer(@RequestBody Player player){
         Player player1 = playerService.getPlayerById(player.getIdPlayer());

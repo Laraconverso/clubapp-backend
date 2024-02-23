@@ -3,6 +3,7 @@ package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.service.ClubService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ public class ClubController {
     @Autowired
     private ClubService clubService;
 
+    @Operation(summary = "Guardar un club")
     @PostMapping("/save")
     //no tenia el permitAll
     @PermitAll
@@ -27,12 +29,14 @@ public class ClubController {
         return ResponseEntity.ok(clubService.saveClub(club));
     }
 
+    @Operation(summary = "Listar todos los clubes")
     @GetMapping("/list")
     @PermitAll
     public ResponseEntity<List<Club>> listAllClubes(){
         return ResponseEntity.ok(clubService.listAllClubes());
     }
 
+    @Operation(summary = "Obtener un club por su ID")
     @GetMapping("/get/{id}")
     @PermitAll
     public ResponseEntity<Club> getClubById(@PathVariable Long id){
