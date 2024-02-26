@@ -4,7 +4,6 @@ import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.repository.PlayerRepository;
 import com.APIclubApp.clubApp.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
