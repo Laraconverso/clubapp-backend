@@ -6,7 +6,6 @@ import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,7 +46,7 @@ public class PlayerController {
         return response;
     }
 
-    @GetMapping("/listAll")
+    @GetMapping("/list")
     @PermitAll
     public ResponseEntity<List<Player>> getAllPlayers(){
         return ResponseEntity.ok(playerService.listAllPlayers());
@@ -74,8 +73,8 @@ public class PlayerController {
 
     @PutMapping()
     public ResponseEntity<Player> updatePlayer(@RequestBody Player player){
-        Player player1 = playerService.getPlayerById(player.getIdPlayer());
-        if ( player1!= null && player1.getIdPlayer() != null)
+        Player player1 = playerService.getPlayerById(player.getPlayerId());
+        if ( player1!= null && player1.getPlayerId() != null)
             return ResponseEntity.ok(playerService.updatePlayer(player));
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

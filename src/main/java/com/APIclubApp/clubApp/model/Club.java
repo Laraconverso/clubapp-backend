@@ -19,8 +19,8 @@ import java.util.Set;
 public class Club {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id_club")
-    private Long idClub;
+    @Column(name="club_id")
+    private Long clubId;
 
     @Column(name = "club_name", nullable = false, unique = true)
     private String clubName;

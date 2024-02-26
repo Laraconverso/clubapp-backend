@@ -5,13 +5,13 @@ import com.APIclubApp.clubApp.model.Club;
 import java.util.List;
 
 public interface ClubService {
-    public List<Club> listAllClubes();
+    List<Club> listAllClubs();
 
-    public  Club saveClub(Club club);
+    Club saveClub(Club club);
 
-    public Club getClubById(Long id);
+    Club getClubById(Long id);
 
-    public  Club updateClub(Club club);
+    Club updateClub(Club club);
 
-    public void deleteClub(Long id);
+    void deleteClub(Long id);
 }
