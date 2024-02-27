@@ -20,17 +20,17 @@ public class Player extends User{
     @Column(name = "player_id")
     private Long playerId;
 
-    @Column(name = "player_position", nullable = true, unique = false)
-    private Long playerPosition;
-
-    @Column(name = "player_image", nullable = false, unique = false)
-    private String playerImage;
+//    @Column(name = "player_position", nullable = true, unique = false)
+//    private Long playerPosition;
+//
+//    @Column(name = "player_image", nullable = false, unique = false)
+//    private String playerImage;
 
     @Column(name = "player_birthdate", nullable = false, unique = false)
     private String playerBirthdate;
 
-    @Column(name = "player_feePaid", nullable = false, unique = false)
-    private Boolean playerFeePaid;
+//    @Column(name = "player_feePaid", nullable = false, unique = false)
+//    private Boolean playerFeePaid;
 
 
     /*@Column(name = "member_ChangePassword", nullable = false, unique = false)
