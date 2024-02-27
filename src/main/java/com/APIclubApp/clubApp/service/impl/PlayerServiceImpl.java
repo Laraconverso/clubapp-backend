@@ -4,7 +4,6 @@ import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.repository.PlayerRepository;
 import com.APIclubApp.clubApp.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,10 +35,10 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player updatePlayer(Player updatedPlayer) {
-        if (playerRepository.existsById(updatedPlayer.getIdPlayer())) {
+        if (playerRepository.existsById(updatedPlayer.getPlayerId())) {
             return playerRepository.save(updatedPlayer);
         } else {
-            throw new RuntimeException("Player not found with id: " + updatedPlayer.getIdPlayer());
+            throw new RuntimeException("Player not found with id: " + updatedPlayer.getPlayerId());
         }
     }
 

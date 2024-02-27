@@ -1,8 +1,6 @@
 package com.APIclubApp.clubApp.service.impl;
 
-import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.model.Employee;
-import com.APIclubApp.clubApp.repository.ClubRepository;
 import com.APIclubApp.clubApp.repository.EmployeeRepository;
 import com.APIclubApp.clubApp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;

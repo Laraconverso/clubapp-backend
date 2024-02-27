@@ -12,10 +12,10 @@ import java.util.List;
 public class ClubServiceImpl implements ClubService {
 
     @Autowired
-    public ClubRepository clubRepository;
+    private ClubRepository clubRepository;
 
     @Override
-    public List<Club> listAllClubes() {
+    public List<Club> listAllClubs() {
         return clubRepository.findAll();
     }
 
@@ -25,7 +25,9 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public Club getClubById(Long id) {return clubRepository.findById(id).get();}
+    public Club getClubById(Long id) {
+        return clubRepository.findById(id).orElse(null);
+    }
 
     @Override
     public Club updateClub(Club club) {
@@ -37,3 +39,4 @@ public class ClubServiceImpl implements ClubService {
         clubRepository.deleteById(id);
     }
 }
+

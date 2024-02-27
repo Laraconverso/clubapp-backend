@@ -1,11 +1,10 @@
 package com.APIclubApp.clubApp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.HashSet;
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -17,8 +16,8 @@ public class Statistic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id_statistic")
-    private Long idStatistic;
+    @Column(name= "statistic_id")
+    private Long statisticId;
 
     @Column(name= "goal_scored", nullable = false, unique = false)
     private Integer goalScored;
@@ -27,8 +26,9 @@ public class Statistic {
     private Integer goalAssisted;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_team")
+    @JoinColumn(name = "team_id")
     private Team team;
 
-
+    public void setId(Long id) {
+    }
 }

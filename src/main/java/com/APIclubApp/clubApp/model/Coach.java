@@ -2,7 +2,10 @@ package com.APIclubApp.clubApp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,8 +23,11 @@ public class Coach extends User{
     @Column(name="coach_number")
     private Long coachNumber;
 
-    /*@Column(name="coach_dni")
-    private Long coachDni;*/
+//    @Column(name= "coach_name")
+//    private String coachName;
+//
+//    @Column(name="coach_dni")
+//    private Long coachDni;
 
     @OneToMany(mappedBy = "coach", fetch = FetchType.EAGER)
     @JsonIgnore
