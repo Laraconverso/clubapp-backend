@@ -1,8 +1,11 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Team;
 import com.APIclubApp.clubApp.service.TeamService;
+import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +35,7 @@ public class TeamController {
         return ResponseEntity.ok(teamService.saveTeam(team));
     }
 
-    @PutMapping("/update/{id}")
+    /*@PutMapping("/update/{id}")
     public ResponseEntity<Team> updateTeam(@PathVariable Long id, @RequestBody Team team) {
         Team existingTeam = teamService.getTeamById(id);
         if (existingTeam != null) {
@@ -41,6 +44,18 @@ public class TeamController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }*/
+
+    @PutMapping("/update")
+    @PermitAll
+    public ResponseEntity<Team> updateTeam(@RequestBody Team team){
+        ResponseEntity<Team> response;
+        if (team.getTeamId() != null && teamService.getTeamById(team.getTeamId()) != null){
+            response = ResponseEntity.ok(teamService.saveTeam(team));
+        }else{
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return response;
     }
 
     @DeleteMapping("/delete/{id}")

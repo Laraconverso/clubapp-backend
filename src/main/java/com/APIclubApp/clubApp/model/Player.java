@@ -20,26 +20,20 @@ public class Player extends User{
     @Column(name = "player_id")
     private Long playerId;
 
-//    @Column(name = "player_position", nullable = true, unique = false)
-//    private Long playerPosition;
-//
-//    @Column(name = "player_image", nullable = false, unique = false)
-//    private String playerImage;
+    @Column(name = "player_position", nullable = true, unique = false)
+    private String playerPosition;
 
     @Column(name = "player_birthdate", nullable = false, unique = false)
     private String playerBirthdate;
 
-//    @Column(name = "player_feePaid", nullable = false, unique = false)
-//    private Boolean playerFeePaid;
-
-
-    /*@Column(name = "member_ChangePassword", nullable = false, unique = false)
-    private Boolean memberChangePassword;*/
+    @Column(name = "player_feePaid", nullable = true, unique = false)
+    private Boolean playerFeePaid;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "team_id")
-    @JsonIgnore
-    private Team team;
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+
 
 
 }

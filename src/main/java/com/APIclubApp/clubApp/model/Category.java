@@ -22,14 +22,38 @@ public class Category {
     @Column(name= "category_id")
     private Long categoryId;
 
+    //se llamara de acuerdo al año de nacimiento de los jugadores
     @Column(name= "category_name")
     private String categoryName;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "coach_number")
+    private Coach coach;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    @Column(name = "category_schedule", nullable = false, unique = false)
+    private String categorySchedule;
+
+    @Column(name = "category_daytraining", nullable = false, unique = false)
+    private String categoryDaytraining;
+
+    @Column(name = "category_fee", nullable = false, unique = false)
+    private String categoryFee;
+
+    @OneToMany(mappedBy= "category", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<Player> playersTeam= new HashSet<Player>();
+
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<Team> categoryTeams =new HashSet<Team>();
+    private Set<Game> gamesCategory = new HashSet<Game>();
 
-    public Category(String categoryName) {
+
+
+    /*public Category(String categoryName) {
         this.categoryName = categoryName;
     }
 
@@ -40,5 +64,5 @@ public class Category {
 
     public void setId(Long id) {
     }
-
+*/
 }

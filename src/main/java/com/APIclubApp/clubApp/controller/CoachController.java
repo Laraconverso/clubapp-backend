@@ -1,7 +1,9 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Coach;
 import com.APIclubApp.clubApp.service.CoachService;
+import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +41,7 @@ public class CoachController {
         return ResponseEntity.ok(coachService.saveCoach(coach));
     }
 
-    @PutMapping("/update/{id}")
+    /*@PutMapping("/update/{id}")
     public ResponseEntity<Coach> updateCoach(@PathVariable Long id, @RequestBody Coach coach){
         ResponseEntity<Coach> response;
 
@@ -50,6 +52,18 @@ public class CoachController {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
+        return response;
+    }*/
+
+    @PutMapping("/update")
+    @PermitAll
+    public ResponseEntity<Coach> updateCategory(@RequestBody Coach coach){
+        ResponseEntity<Coach> response;
+        if (coach.getCoachNumber() != null && coachService.getCoachById(coach.getCoachNumber()) != null){
+            response = ResponseEntity.ok(coachService.saveCoach(coach));
+        }else{
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         return response;
     }
 
