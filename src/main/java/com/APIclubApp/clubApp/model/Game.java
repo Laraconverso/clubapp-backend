@@ -37,9 +37,9 @@ public class Game {
     @Column(name = "game_rivalgoals", nullable = true, unique = false)
     private Integer gameRivalgoals;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    /*@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="category_id")
-    private Category category;
+    private Category category;*/
 
     //varios equipos
     /*@ManyToMany(cascade = {CascadeType.MERGE})
@@ -48,8 +48,8 @@ public class Game {
 
     //solo un equipo por partido
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_team")
-    private Team team;
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_fixture")

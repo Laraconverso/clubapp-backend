@@ -1,7 +1,9 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Payment;
 import com.APIclubApp.clubApp.service.PaymentService;
+import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,17 +43,15 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.savePayment(payment));
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Payment> updatePayment(@PathVariable Long id, @RequestBody Payment payment) {
+    @PutMapping("/update")
+    @PermitAll
+    public ResponseEntity<Payment> updateCategory(@RequestBody Payment payment){
         ResponseEntity<Payment> response;
-
-        if (paymentService.getPaymentById(id) != null) {
-            payment.setId(id);
+        if (payment.getPaymentId() != null && paymentService.getPaymentById(payment.getPaymentId()) != null){
             response = ResponseEntity.ok(paymentService.savePayment(payment));
-        } else {
+        }else{
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
         return response;
     }
 

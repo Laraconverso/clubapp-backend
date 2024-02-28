@@ -23,15 +23,9 @@ public class Coach extends User{
     @Column(name="coach_number")
     private Long coachNumber;
 
-//    @Column(name= "coach_name")
-//    private String coachName;
-//
-//    @Column(name="coach_dni")
-//    private Long coachDni;
-
-    @OneToMany(mappedBy = "coach", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "coach", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<Team> assignedTeams =new HashSet<Team>();
+    private Category category;
 
 
 }

@@ -33,17 +33,14 @@ public class Club {
 
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER)
     @JsonIgnore
-    //private List<User> usersClub;
     private Set<Coach> coaches =new HashSet<Coach>();
 
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER)
     @JsonIgnore
-    //private List<User> usersClub;
     private Set<Player> players =new HashSet<Player>();
 
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER)
     @JsonIgnore
-    //private List<User> usersClub;
     private Set<Employee> employees =new HashSet<Employee>();
 
 

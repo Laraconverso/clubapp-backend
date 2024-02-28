@@ -26,6 +26,6 @@ public class Payment {
     @PrimaryKeyJoinColumn(name = "player_id")
     private Player player;
 
-    public void setId(Long id) {
-    }
+    /*public void setId(Long id) {
+    }*/
 }
