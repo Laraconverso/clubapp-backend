@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.PlayerDTO;
 import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.service.PlayerService;
 import jakarta.annotation.security.PermitAll;
@@ -54,7 +55,7 @@ public class PlayerController {
 
     @PostMapping("/save")
     @PermitAll
-    public ResponseEntity<Player> savePlayer(@RequestBody Player player){
+    public ResponseEntity<Player> savePlayer(@RequestBody PlayerDTO player){
         //ROL
         //Role role = roleRepository.findByNombre("User");
         //player.setRole(role);

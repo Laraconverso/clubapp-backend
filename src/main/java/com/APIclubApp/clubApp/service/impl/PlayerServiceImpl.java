@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.service.impl;
 
+import com.APIclubApp.clubApp.dto.PlayerDTO;
 import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.repository.PlayerRepository;
 import com.APIclubApp.clubApp.service.PlayerService;
@@ -23,8 +24,16 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Player savePlayer(Player player) {
-        return playerRepository.save(player);
+    public Player savePlayer(PlayerDTO player) {
+        Player p = new Player();
+        p.setPlayerId(player.getPlayerId());
+        p.setPlayerPosition(player.getPlayerPosition());
+        p.setPlayerBirthdate(player.getPlayerBirthdate());
+        p.setPlayerFeePaid(player.getPlayerFeePaid());
+
+
+        //p.setCategory(player.getCategoryId());
+        return playerRepository.save(p);
     }
 
     @Override
