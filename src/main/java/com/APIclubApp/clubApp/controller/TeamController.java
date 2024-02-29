@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.TeamDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Team;
 import com.APIclubApp.clubApp.service.TeamService;
@@ -31,7 +32,7 @@ public class TeamController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Team> saveTeam(@RequestBody Team team) {
+    public ResponseEntity<Team> saveTeam(@RequestBody TeamDTO team) {
         return ResponseEntity.ok(teamService.saveTeam(team));
     }
 
@@ -48,7 +49,7 @@ public class TeamController {
 
     @PutMapping("/update")
     @PermitAll
-    public ResponseEntity<Team> updateTeam(@RequestBody Team team){
+    public ResponseEntity<Team> updateTeam(@RequestBody TeamDTO team){
         ResponseEntity<Team> response;
         if (team.getTeamId() != null && teamService.getTeamById(team.getTeamId()) != null){
             response = ResponseEntity.ok(teamService.saveTeam(team));

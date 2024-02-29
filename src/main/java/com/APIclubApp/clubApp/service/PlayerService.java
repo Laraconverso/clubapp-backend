@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.service;
 import com.APIclubApp.clubApp.dto.PlayerDTO;
+import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.model.Player;
 
 import java.util.List;
@@ -9,6 +10,7 @@ public interface PlayerService {
     List<Player> listAllPlayers();
 
     Player savePlayer(PlayerDTO player);
+    Player savePlayerForm(PlayerFormDTO player);
 
     Player getPlayerById(Long id);
 

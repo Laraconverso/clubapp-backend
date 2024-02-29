@@ -1,6 +1,7 @@
 package com.APIclubApp.clubApp.service.impl;
 
 import com.APIclubApp.clubApp.dto.PlayerDTO;
+import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.repository.PlayerRepository;
 import com.APIclubApp.clubApp.service.PlayerService;
@@ -12,6 +13,7 @@ import java.util.List;
 public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepository;
+    //private final RoleRepository roleRepository;
 
     @Autowired
     public PlayerServiceImpl(PlayerRepository playerRepository) {
@@ -32,9 +34,31 @@ public class PlayerServiceImpl implements PlayerService {
         p.setPlayerFeePaid(player.getPlayerFeePaid());
 
 
+        //ROL
+//        Role role = roleRepository.findByNombre("User");
+//        player.setRoleId(role.getRoleId());
         //p.setCategory(player.getCategoryId());
         return playerRepository.save(p);
     }
+
+    @Override
+    public Player savePlayerForm(PlayerFormDTO player) {
+        Player p = new Player();
+        p.setPlayerId(player.getPlayerId());
+
+        //ROL
+//        Role role = roleRepository.findByNombre("User");
+//        player.setRoleId(role.getRoleId());
+        //p.setCategory(player.getCategoryId());
+        return playerRepository.save(p);
+    }
+
+
+    //el normal
+    public Player savePlayer(Player player) {
+        return playerRepository.save(player);
+    }
+
 
     @Override
     public Player getPlayerById(Long id) {

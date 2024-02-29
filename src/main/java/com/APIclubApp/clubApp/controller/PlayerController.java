@@ -2,6 +2,7 @@ package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.dto.PlayerDTO;
 import com.APIclubApp.clubApp.model.Player;
+import com.APIclubApp.clubApp.model.Role;
 import com.APIclubApp.clubApp.service.PlayerService;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,12 +57,10 @@ public class PlayerController {
     @PostMapping("/save")
     @PermitAll
     public ResponseEntity<Player> savePlayer(@RequestBody PlayerDTO player){
-        //ROL
-        //Role role = roleRepository.findByNombre("User");
-        //player.setRole(role);
 //        player.setUserPassword(passwordEncoder.encode(player.getUserPassword()));
         return ResponseEntity.ok(playerService.savePlayer(player));
     }
+
 
     @DeleteMapping("/{id}")
     public void deleteUsuario(@PathVariable Long id){
