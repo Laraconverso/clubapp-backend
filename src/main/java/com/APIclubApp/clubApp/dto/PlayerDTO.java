@@ -21,5 +21,4 @@ public class PlayerDTO {
     private String userPassword;
     private Long roleId;
     private Long clubId;
-    private Long teamId;
 }

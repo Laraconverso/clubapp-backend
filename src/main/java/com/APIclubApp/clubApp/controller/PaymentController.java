@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.PaymentDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Payment;
 import com.APIclubApp.clubApp.service.PaymentService;
@@ -39,13 +40,13 @@ public class PaymentController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Payment> savePayment(@RequestBody Payment payment) {
+    public ResponseEntity<Payment> savePayment(@RequestBody PaymentDTO payment) {
         return ResponseEntity.ok(paymentService.savePayment(payment));
     }
 
     @PutMapping("/update")
     @PermitAll
-    public ResponseEntity<Payment> updateCategory(@RequestBody Payment payment){
+    public ResponseEntity<Payment> updateCategory(@RequestBody PaymentDTO payment){
         ResponseEntity<Payment> response;
         if (payment.getPaymentId() != null && paymentService.getPaymentById(payment.getPaymentId()) != null){
             response = ResponseEntity.ok(paymentService.savePayment(payment));

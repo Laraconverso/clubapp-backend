@@ -1,6 +1,9 @@
 package com.APIclubApp.clubApp.service.impl;
 
+import com.APIclubApp.clubApp.dto.PaymentDTO;
+import com.APIclubApp.clubApp.dto.PlayerDTO;
 import com.APIclubApp.clubApp.model.Payment;
+import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.repository.PaymentRepository;
 import com.APIclubApp.clubApp.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +22,19 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Payment savePayment(Payment payment) {
-        return paymentRepository.save(payment);
+    public Payment savePayment(PaymentDTO payment) {
+        Payment p = new Payment();
+        p.setPaymentId(payment.getPaymentId());
+        p.setAmount(payment.getAmount());
+        Player player = new Player();
+        player.setUserName(payment.getPlayer().getUserName());
+        player.setUserLastname(payment.getPlayer().getUserLastname());
+        player.setUserDni(payment.getPlayer().getUserDni());
+        player.setUserEmail(payment.getPlayer().getUserEmail());
+        player.setUserAddress(payment.getPlayer().getUserAddress());
+        player.setPlayerBirthdate(payment.getPlayer().getPlayerBirthdate());
+        p.setPlayer(player);
+        return paymentRepository.save(p);
     }
 
     @Override
