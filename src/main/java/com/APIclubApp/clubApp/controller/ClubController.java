@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.ClubDTO;
 import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.service.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,13 @@ public class ClubController {
     private ClubService clubService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<Club>> listAllClubs() {
+    public ResponseEntity<List<ClubDTO>> listAllClubs() {
         return ResponseEntity.ok(clubService.listAllClubs());
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Club> getClubById(@PathVariable Long id) {
-        Club club = clubService.getClubById(id);
+    public ResponseEntity<ClubDTO> getClubById(@PathVariable Long id) {
+        ClubDTO club = clubService.getClubById(id);
         if (club != null) {
             return ResponseEntity.ok(club);
         } else {
@@ -33,12 +34,12 @@ public class ClubController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Club> saveClub(@RequestBody Club club) {
+    public ResponseEntity<Club> saveClub(@RequestBody ClubDTO club) {
         return ResponseEntity.ok(clubService.saveClub(club));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Club> updateClub(@PathVariable Long id, @RequestBody Club club) {
+    public ResponseEntity<Club> updateClub(@PathVariable Long id, @RequestBody ClubDTO club) {
         ResponseEntity<Club> response;
         if (clubService.getClubById(id) != null) {
             club.setClubId(id);

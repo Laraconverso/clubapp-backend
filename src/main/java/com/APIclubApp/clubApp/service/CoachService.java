@@ -1,19 +1,20 @@
 package com.APIclubApp.clubApp.service;
 
+import com.APIclubApp.clubApp.dto.CoachDTO;
 import com.APIclubApp.clubApp.model.Coach;
 
 import java.util.List;
 
 public interface CoachService {
-    public List<Coach> listAllCoaches();
+    public List<CoachDTO> listAllCoaches();
 
-    Coach saveCoach(Coach coach);
+    Coach saveCoach(CoachDTO coach);
 
-    Coach getCoachById(Long id);
+    CoachDTO getCoachById(Long id);
 
-    Coach updateCoach(Coach coach);
+    Coach updateCoach(CoachDTO coach);
 
-    Coach updateCoach(Long id, Coach coachDetails);
+
 
     void deleteCoach(Long id);
 }

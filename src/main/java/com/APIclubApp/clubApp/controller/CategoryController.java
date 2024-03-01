@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.CategoryDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.service.CategoryService;
@@ -20,14 +21,14 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<Category>> listAllCategories(){
+    public ResponseEntity<List<CategoryDTO>> listAllCategories(){
         return ResponseEntity.ok(categoryService.listAllCategories());
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable Long id){
+    public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Long id){
 
-        Category category = categoryService.getCategoryById(id);
+        CategoryDTO category = categoryService.getCategoryById(id);
         if (category != null) {
             return ResponseEntity.ok(category);
         } else {
@@ -35,10 +36,10 @@ public class CategoryController {
         }
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<Category> saveCategory(@RequestBody Category category){
+    /*@PostMapping("/save")
+    public ResponseEntity<Category> saveCategory(@RequestBody CategoryDTO category){
         return ResponseEntity.ok(categoryService.saveCategory(category));
-    }
+    }*/
 
     /*@PutMapping("/update/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody Category category){
@@ -52,9 +53,9 @@ public class CategoryController {
         return response;
     }*/
 
-    @PutMapping("/update")
+    /*@PutMapping("/update")
     @PermitAll
-    public ResponseEntity<Category> updateCategory(@RequestBody Category category){
+    public ResponseEntity<Category> updateCategory(@RequestBody CategoryDTO category){
         ResponseEntity<Category> response;
         if (category.getCategoryId() != null && categoryService.getCategoryById(category.getCategoryId()) != null){
             response = ResponseEntity.ok(categoryService.saveCategory(category));
@@ -62,18 +63,8 @@ public class CategoryController {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return response;
-    }
-//andre
-    /*@PutMapping
-    public ResponseEntity<?> editarCategoria(@RequestBody CategoryDTO category) throws ResourceNotFoundException {
-        Optional<CategoryDTO> categoriaBuscada= Optional.ofNullable(categoryService.buscarCategoria(category.getId()));
-        if (categoriaBuscada.isPresent()){
-            logger.info("Se edito la categoria");
-            categoryService.editarCategoria(category);
-            return ResponseEntity.ok(HttpStatus.OK);
-        }
-        else {
-            throw new Reso*/
+    }*/
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id){

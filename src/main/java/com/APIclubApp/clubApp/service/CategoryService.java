@@ -1,17 +1,18 @@
 package com.APIclubApp.clubApp.service;
 
+import com.APIclubApp.clubApp.dto.CategoryDTO;
 import com.APIclubApp.clubApp.model.Category;
 
 import java.util.List;
 
 public interface CategoryService {
-    public List<Category> listAllCategories();
+    List<CategoryDTO> listAllCategories();
 
-    Category saveCategory(Category category);
+    Category saveCategory(CategoryDTO category);
 
-    Category getCategoryById(Long id);
+    CategoryDTO getCategoryById(Long id);
 
-    Category updateCategory(Category category);
+    Category updateCategory(CategoryDTO category);
 
     void deleteCategory(Long id);
 }

@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.CoachDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Coach;
 import com.APIclubApp.clubApp.service.CoachService;
@@ -19,15 +20,15 @@ public class CoachController {
     private CoachService coachService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<Coach>> listAllCoaches(){
+    public ResponseEntity<List<CoachDTO>> listAllCoaches(){
         return ResponseEntity.ok(coachService.listAllCoaches());
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Coach> getCoachById(@PathVariable Long id){
-        ResponseEntity<Coach> response;
+    public ResponseEntity<CoachDTO> getCoachById(@PathVariable Long id){
+        ResponseEntity<CoachDTO> response;
 
-        Coach coach = coachService.getCoachById(id);
+        CoachDTO coach = coachService.getCoachById(id);
         if (coach != null) {
             response = ResponseEntity.ok(coach);
         } else {
@@ -37,7 +38,7 @@ public class CoachController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Coach> saveCoach(@RequestBody Coach coach){
+    public ResponseEntity<Coach> saveCoach(@RequestBody CoachDTO coach){
         return ResponseEntity.ok(coachService.saveCoach(coach));
     }
 
@@ -57,7 +58,7 @@ public class CoachController {
 
     @PutMapping("/update")
     @PermitAll
-    public ResponseEntity<Coach> updateCategory(@RequestBody Coach coach){
+    public ResponseEntity<Coach> updateCategory(@RequestBody CoachDTO coach){
         ResponseEntity<Coach> response;
         if (coach.getCoachNumber() != null && coachService.getCoachById(coach.getCoachNumber()) != null){
             response = ResponseEntity.ok(coachService.saveCoach(coach));

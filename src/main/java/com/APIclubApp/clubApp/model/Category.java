@@ -28,6 +28,7 @@ public class Category {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "coach_number")
+    @JsonIgnore
     private Coach coach;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -52,17 +53,4 @@ public class Category {
     private Set<Game> gamesCategory = new HashSet<Game>();
 
 
-
-    /*public Category(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public Category(String categoryName, Set<Team> categoryTeams) {
-        this.categoryName = categoryName;
-        this.categoryTeams = categoryTeams;
-    }
-
-    public void setId(Long id) {
-    }
-*/
 }

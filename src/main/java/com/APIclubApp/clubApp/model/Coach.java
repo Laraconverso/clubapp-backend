@@ -24,7 +24,7 @@ public class Coach extends User{
     private Long coachNumber;
 
     @OneToOne(mappedBy = "coach", fetch = FetchType.EAGER)
-    @JsonIgnore
+    //@JsonIgnore
     private Category category;
 
 
