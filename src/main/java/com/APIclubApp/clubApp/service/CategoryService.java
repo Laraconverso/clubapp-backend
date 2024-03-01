@@ -6,8 +6,8 @@ import com.APIclubApp.clubApp.model.Category;
 import java.util.List;
 
 public interface CategoryService {
-    List<CategoryDTO> listAllCategories();
-
+   // List<CategoryDTO> listAllCategories();
+   List<Category> listAllCategories();
     Category saveCategory(CategoryDTO category);
 
     CategoryDTO getCategoryById(Long id);

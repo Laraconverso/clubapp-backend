@@ -21,7 +21,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<CategoryDTO>> listAllCategories(){
+    public ResponseEntity<List<Category>> listAllCategories(){
         return ResponseEntity.ok(categoryService.listAllCategories());
     }
 
@@ -36,10 +36,10 @@ public class CategoryController {
         }
     }
 
-    /*@PostMapping("/save")
+    @PostMapping("/save")
     public ResponseEntity<Category> saveCategory(@RequestBody CategoryDTO category){
         return ResponseEntity.ok(categoryService.saveCategory(category));
-    }*/
+    }
 
     /*@PutMapping("/update/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody Category category){

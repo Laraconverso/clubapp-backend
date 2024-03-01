@@ -28,7 +28,7 @@ public class Category {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "coach_number")
-    @JsonIgnore
+//    @JsonIgnore
     private Coach coach;
 
     @ManyToOne(fetch = FetchType.EAGER)
