@@ -1,23 +1,29 @@
 package com.APIclubApp.clubApp.service;
 
+import com.APIclubApp.clubApp.dto.EmployeeDTO;
 import com.APIclubApp.clubApp.model.Employee;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-        public List<Employee> listAllEmployees();
+        //List<EmployeeDTO> listAllEmployees();
+        List<Employee> listAllEmployees();
+        EmployeeDTO saveEmployee(EmployeeDTO employeeDTO);
 
-        public  Employee saveEmployee(Employee employee);
+        Employee getEmployeeById(Long id);
 
-        public Employee getEmployeeById(Long id);
+        EmployeeDTO updateEmployee(EmployeeDTO employeeDTO      );
 
-        public  Employee updateEmployee(Employee employee);
+        void deleteEmployee(Long id);
 
-        public void deleteEmployee(Long id);
+        EmployeeDTO getRole(Long id);
 
-        public  Employee getRole(Long id);
-
-        public Employee getEmployeeByDni(String dni);
+        Employee getEmployeeByDni(String dni);
 
 }
+
+
+
+
+

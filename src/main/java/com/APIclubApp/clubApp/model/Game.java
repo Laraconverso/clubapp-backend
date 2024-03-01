@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -52,8 +53,8 @@ public class Game {
     private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_fixture")
+    @JoinColumn(name = "id_fixture", nullable = true)
+    @JsonIgnore
     private Fixture fixture;
-
 
 }

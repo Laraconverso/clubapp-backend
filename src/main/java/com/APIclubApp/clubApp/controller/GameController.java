@@ -1,5 +1,7 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.FixtureDTO;
+import com.APIclubApp.clubApp.dto.GameDTO;
 import com.APIclubApp.clubApp.model.Game;
 import com.APIclubApp.clubApp.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,20 +35,28 @@ public class GameController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Game> saveGame(@RequestBody Game game) {
-        return ResponseEntity.ok(gameService.saveGame(game));
+    public ResponseEntity<GameDTO> saveGame(@RequestBody GameDTO gameDTO) {
+        //return ResponseEntity.ok(gameService.saveGame(game));
+        GameDTO savedGameDTO = gameService.saveGame(gameDTO);
+        return ResponseEntity.ok(savedGameDTO);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Game> updateGame(@PathVariable Long id, @RequestBody Game game) {
-        ResponseEntity<Game> response;
+    @PutMapping("/update")
+    public ResponseEntity<GameDTO> updateGame( @RequestBody GameDTO gameDTO) {
+        /*ResponseEntity<Game> response;
         if (gameService.getGameById(id) != null) {
             game.setGameId(id);
             response = ResponseEntity.ok(gameService.saveGame(game));
         } else {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return response;
+        return response;*/
+        GameDTO updatedGameDTO = gameService.updateGame(gameDTO);
+        if (updatedGameDTO != null) {
+            return ResponseEntity.ok(updatedGameDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/delete/{id}")

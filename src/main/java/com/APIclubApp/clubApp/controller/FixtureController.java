@@ -1,10 +1,15 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.EmployeeDTO;
+import com.APIclubApp.clubApp.dto.FixtureDTO;
+import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Fixture;
 import com.APIclubApp.clubApp.service.FixtureService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +22,17 @@ public class FixtureController {
     @Autowired
     private FixtureService fixtureService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ModelMapper modelMapper; // Necesitarás una instancia de ModelMapper para convertir entre EmployeeDTO y Employee
+
     @GetMapping("/list")
     public ResponseEntity<List<Fixture>> listAllFixtures() {
         return ResponseEntity.ok(fixtureService.listAllFixtures());
+        /*List<FixtureDTO> fixtureDTOS = fixtureService.listAllFixtures();
+        return ResponseEntity.ok(fixtureDTOS);*/
     }
 
     @GetMapping("/get/{id}")
@@ -34,20 +47,28 @@ public class FixtureController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Fixture> saveFixture(@RequestBody Fixture fixture) {
-        return ResponseEntity.ok(fixtureService.saveFixture(fixture));
+    public ResponseEntity<FixtureDTO> saveFixture(@RequestBody FixtureDTO fixtureDTO) {
+        //return ResponseEntity.ok(fixtureService.saveFixture(fixture));
+        FixtureDTO savedFixtureDTO = fixtureService.saveFixture(fixtureDTO);
+        return ResponseEntity.ok(savedFixtureDTO);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Fixture> updateFixture(@PathVariable Long id, @RequestBody Fixture fixture) {
-        ResponseEntity<Fixture> response;
-        if (fixtureService.getFixtureById(id) != null) {
-            fixture.setFixtureId(id);
+    @PutMapping("/update")
+    public ResponseEntity<FixtureDTO> updateFixture(@RequestBody FixtureDTO fixtureDTO) {
+        /*ResponseEntity<Fixture> response;
+        if (fixture.getFixtureId() != null && fixtureService.getFixtureById(fixture.getFixtureId())) != null){
             response = ResponseEntity.ok(fixtureService.saveFixture(fixture));
-        } else {
+        }else{
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return response;
+        return response;*/
+
+        FixtureDTO updatedFixtureDTO = fixtureService.updateFixture(fixtureDTO);
+        if (updatedFixtureDTO != null) {
+            return ResponseEntity.ok(updatedFixtureDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/delete/{id}")

@@ -1,8 +1,12 @@
 package com.APIclubApp.clubApp.service.impl;
 
+import com.APIclubApp.clubApp.dto.EmployeeDTO;
+import com.APIclubApp.clubApp.dto.GameDTO;
+import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.model.Game;
 import com.APIclubApp.clubApp.repository.GameRepository;
 import com.APIclubApp.clubApp.service.GameService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +18,23 @@ public class GameServiceImpl implements GameService {
     @Autowired
     private GameRepository gameRepository;
 
+    @Autowired
+    //ObjectMapper objectMapper;
+    public ModelMapper modelMapper; // Necesitamos una instancia de ModelMapper
+
     @Override
     public List<Game> listAllGames() {
+
         return gameRepository.findAll();
     }
 
     @Override
-    public Game saveGame(Game game) {
-        return gameRepository.save(game);
+    public GameDTO saveGame(GameDTO gameDT) {
+
+        //return gameRepository.save(game);
+        Game game = modelMapper.map(gameDT, Game.class);
+        game = gameRepository.save(game);
+        return modelMapper.map(game, GameDTO.class);
     }
 
     @Override
@@ -30,8 +43,12 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Game updateGame(Game game) {
-        return gameRepository.save(game);
+    public GameDTO updateGame(GameDTO gameDTO) {
+
+        //return gameRepository.save(game);
+        Game game = modelMapper.map(gameDTO, Game.class);
+        game = gameRepository.save(game);
+        return modelMapper.map(game, GameDTO.class);
     }
 
     @Override
