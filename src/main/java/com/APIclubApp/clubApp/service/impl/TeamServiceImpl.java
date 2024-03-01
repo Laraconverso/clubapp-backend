@@ -5,6 +5,7 @@ import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Team;
 import com.APIclubApp.clubApp.repository.TeamRepository;
 import com.APIclubApp.clubApp.service.TeamService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Override
     public List<Team> listAllTeams() {
         return teamRepository.findAll();
@@ -25,10 +29,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public Team saveTeam(TeamDTO team) {
-        Team t = new Team();
-        t.setTeamId(team.getTeamId());
-        t.setTeamDescription(team.getTeamDescription());
-        t.setTeamName(team.getTeamName());
+        Team t = objectMapper.convertValue(team, Team.class);
         return teamRepository.save(t);
     }
 

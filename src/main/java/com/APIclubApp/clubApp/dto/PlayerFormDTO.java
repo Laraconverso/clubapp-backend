@@ -13,5 +13,4 @@ public class PlayerFormDTO {
     private String userEmail;
     private String userAddress;
     private String playerBirthdate;
-
 }

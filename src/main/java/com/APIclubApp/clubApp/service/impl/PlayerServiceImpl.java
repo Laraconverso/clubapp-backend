@@ -8,8 +8,10 @@ import com.APIclubApp.clubApp.repository.ClubRepository;
 import com.APIclubApp.clubApp.repository.PlayerRepository;
 import com.APIclubApp.clubApp.repository.TeamRepository;
 import com.APIclubApp.clubApp.service.PlayerService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 @Service
@@ -19,6 +21,9 @@ public class PlayerServiceImpl implements PlayerService {
     //private final RoleRepository roleRepository;
     private final CategoryRepository categoryRepository;
     private final ClubRepository clubRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
 
     @Autowired
@@ -35,28 +40,13 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player savePlayer(PlayerDTO player) {
-        Player p = new Player();
-        p.setPlayerId(player.getPlayerId());
-        p.setPlayerPosition(player.getPlayerPosition());
-        p.setPlayerBirthdate(player.getPlayerBirthdate());
-        p.setPlayerFeePaid(player.getPlayerFeePaid());
-
-
-        //ROL
-//        Role role = roleRepository.findByNombre("User");
-//        player.setRoleId(role.getRoleId());
-        //p.setCategory(player.getCategoryId());
+        Player p = modelMapper.map(player, Player.class);
         return playerRepository.save(p);
     }
 
     @Override
     public Player savePlayerForm(PlayerFormDTO player) {
-        Player p = new Player();
-        p.setUserName(player.getUserName());
-        p.setUserLastname(player.getUserLastname());
-        p.setUserDni(player.getUserDni());
-        p.setUserEmail(player.getUserEmail());
-        p.setPlayerBirthdate(player.getPlayerBirthdate());
+        Player p = modelMapper.map(player,Player.class);
         //ROL
 //        Role role = roleRepository.findByNombre("User");
 //        player.setRoleId(role.getRoleId());
