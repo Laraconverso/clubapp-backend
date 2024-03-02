@@ -41,18 +41,10 @@ public class CategoryServiceImpl implements CategoryService {
 
 
 
-//    @Override
-//    public Category saveCategory(CategoryDTO category) {
-//        Category newCategory=  objectMapper.convertValue(category, Category.class);
-//        Coach coach= coachRepository.getReferenceById(category.getCoachNumber());
-//        Team team= teamRepository.getReferenceById(category.getTeamId());
-//        newCategory.setCoach(coach);
-//        newCategory.setTeam(team);
-//        return categoryRepository.save(newCategory);
-//    }
+
     @Override
     public Category saveCategory(CategoryDTO categoryDto) {
-        // Map CategoryDTO to Category using ModelMapper
+        // Map CategoryDTO to Category using ObjectMapper
         Category category = objectMapper.convertValue(categoryDto, Category.class);
 
         // Fetch the Coach object from the database by its ID
@@ -72,17 +64,27 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDTO getCategoryById(Long id) {
+    public Category getCategoryById(Long id) {
 
-        //return categoryRepository.findById(id).get();
-        Optional<Category> categoriaBuscada=categoryRepository.findById(id);
-        return objectMapper.convertValue(categoriaBuscada,CategoryDTO.class);
+        return categoryRepository.findById(id).get();
+
     }
 
     @Override
-    public Category updateCategory(CategoryDTO category) {
+    public Category updateCategory(CategoryDTO categoryDto) {
 
-        Category editCategory=  objectMapper.convertValue(category, Category.class);
+        Category editCategory=  objectMapper.convertValue(categoryDto, Category.class);
+        // Fetch the Coach object from the database by its ID
+        Coach coach = coachRepository.findById(categoryDto.getCoachNumber())
+                .orElseThrow(() -> new RuntimeException("Coach not found"));
+
+        // Fetch the Team object from the database by its ID
+        Team team = teamRepository.findById(categoryDto.getTeamId())
+                .orElseThrow(() -> new RuntimeException("Team not found"));
+
+        // Set the fetched Coach and Team objects in the Category object
+        editCategory.setCoach(coach);
+        editCategory.setTeam(team);
         return categoryRepository.save(editCategory);
     }
 

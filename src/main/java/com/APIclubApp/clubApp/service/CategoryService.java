@@ -10,7 +10,7 @@ public interface CategoryService {
    List<Category> listAllCategories();
     Category saveCategory(CategoryDTO category);
 
-    CategoryDTO getCategoryById(Long id);
+    Category getCategoryById(Long id);
 
     Category updateCategory(CategoryDTO category);
 

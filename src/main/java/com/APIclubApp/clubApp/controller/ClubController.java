@@ -38,11 +38,10 @@ public class ClubController {
         return ResponseEntity.ok(clubService.saveClub(club));
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Club> updateClub(@PathVariable Long id, @RequestBody ClubDTO club) {
+    @PutMapping("/update")
+    public ResponseEntity<Club> updateClub(@RequestBody ClubDTO club) {
         ResponseEntity<Club> response;
-        if (clubService.getClubById(id) != null) {
-            club.setClubId(id);
+        if (club.getClubId() != null) {
             response = ResponseEntity.ok(clubService.saveClub(club));
         } else {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();

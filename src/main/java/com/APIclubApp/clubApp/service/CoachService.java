@@ -6,11 +6,11 @@ import com.APIclubApp.clubApp.model.Coach;
 import java.util.List;
 
 public interface CoachService {
-    public List<CoachDTO> listAllCoaches();
+    public List<Coach> listAllCoaches();
 
     Coach saveCoach(CoachDTO coach);
 
-    CoachDTO getCoachById(Long id);
+    Coach getCoachById(Long id);
 
     Coach updateCoach(CoachDTO coach);
 

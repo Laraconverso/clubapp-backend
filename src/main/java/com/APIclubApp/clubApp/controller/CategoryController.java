@@ -26,9 +26,9 @@ public class CategoryController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Long id){
+    public ResponseEntity<Category> getCategoryById(@PathVariable Long id){
 
-        CategoryDTO category = categoryService.getCategoryById(id);
+        Category category = categoryService.getCategoryById(id);
         if (category != null) {
             return ResponseEntity.ok(category);
         } else {
@@ -53,17 +53,17 @@ public class CategoryController {
         return response;
     }*/
 
-    /*@PutMapping("/update")
+    @PutMapping("/update")
     @PermitAll
     public ResponseEntity<Category> updateCategory(@RequestBody CategoryDTO category){
         ResponseEntity<Category> response;
-        if (category.getCategoryId() != null && categoryService.getCategoryById(category.getCategoryId()) != null){
+        if (category.getCategoryId() != null /*&& categoryService.getCategoryById(category.getCategoryId()) != null*/){
             response = ResponseEntity.ok(categoryService.saveCategory(category));
         }else{
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return response;
-    }*/
+    }
 
 
     @DeleteMapping("/delete/{id}")

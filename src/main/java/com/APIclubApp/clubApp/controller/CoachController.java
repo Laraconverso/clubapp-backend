@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -20,15 +21,15 @@ public class CoachController {
     private CoachService coachService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<CoachDTO>> listAllCoaches(){
+    public ResponseEntity<List<Coach>> listAllCoaches(){
         return ResponseEntity.ok(coachService.listAllCoaches());
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<CoachDTO> getCoachById(@PathVariable Long id){
-        ResponseEntity<CoachDTO> response;
+    public ResponseEntity<Coach> getCoachById(@PathVariable Long id){
+        ResponseEntity<Coach> response;
 
-        CoachDTO coach = coachService.getCoachById(id);
+        Coach coach = coachService.getCoachById(id);
         if (coach != null) {
             response = ResponseEntity.ok(coach);
         } else {
@@ -60,7 +61,7 @@ public class CoachController {
     @PermitAll
     public ResponseEntity<Coach> updateCategory(@RequestBody CoachDTO coach){
         ResponseEntity<Coach> response;
-        if (coach.getCoachNumber() != null && coachService.getCoachById(coach.getCoachNumber()) != null){
+        if (coach.getCoachNumber() != null /*&& coachService.getCoachById(coach.getCoachNumber()) != null*/){
             response = ResponseEntity.ok(coachService.saveCoach(coach));
         }else{
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
