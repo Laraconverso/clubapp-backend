@@ -30,39 +30,18 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private ObjectMapper objectMapper;
 
-//    @Override
-//    public Payment savePayment(PaymentDTO payment) {
-//
-//        Payment p = new Payment();
-//        p.setPaymentId(payment.getPaymentId());
-//        p.setAmount(payment.getAmount());
-//        PlayerFormDTO player = payment.getPlayer();
-//        Player player1 =objectMapper.convertValue(player,Player.class);
-//        p.setPlayer(player1);
-//        return paymentRepository.save(p);
-//    }
 
     @Override
     public Payment savePayment(PaymentDTO paymentDto) {
-        // Convert PaymentDTO to Payment using ObjectMapper
         Payment payment = objectMapper.convertValue(paymentDto, Payment.class);
-
-        // Fetch the Player object from the database by its ID
         Player player = playerRepository.findByUserDni(paymentDto.getPlayer().getUserDni());
-                //.orElseThrow(() -> new RuntimeException("Player not found"));
-
-        // Set the fetched Player object in the Payment object
+        if(player==null) throw new RuntimeException("Player not found"); //error 500
         payment.setPlayer(player);
-
-        // Save the Payment object
         return paymentRepository.save(payment);
     }
 
-//    @Override
-//    public Payment savePayment(PaymentDTO paymentDto) {
-//        Payment payment = objectMapper.convertValue(paymentDto, Payment.class);
-//        return paymentRepository.save(payment);
-//    }
+
+
     @Override
     public Payment getPaymentById(Long id) {
         return paymentRepository.findById(id).orElse(null);

@@ -14,4 +14,5 @@ public class TeamDTO {
     private String teamName;
     private String teamDescription;
 //    private Set<Category> categoriesTeam; //consultar como es el form de carga de equipos.
+    //teniendo en cuenta la modificacion realizada en la entidad.
 }

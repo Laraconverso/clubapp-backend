@@ -36,17 +36,6 @@ public class TeamController {
         return ResponseEntity.ok(teamService.saveTeam(team));
     }
 
-    /*@PutMapping("/update/{id}")
-    public ResponseEntity<Team> updateTeam(@PathVariable Long id, @RequestBody Team team) {
-        Team existingTeam = teamService.getTeamById(id);
-        if (existingTeam != null) {
-            team.setId(id);
-            return ResponseEntity.ok(teamService.saveTeam(team));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }*/
-
     @PutMapping("/update")
     @PermitAll
     public ResponseEntity<Team> updateTeam(@RequestBody TeamDTO team){

@@ -20,7 +20,7 @@ public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "team_id")
+    @Column(name = "team_id")
     private Long teamId;
 
     @Column(name = "team_name", nullable = false, unique = false)
@@ -32,8 +32,8 @@ public class Team {
     @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
     @JsonIgnore
     //@JoinColumn(name="category_id")
-    private Set<Category> categoriesTeam= new HashSet<Category>();
-
+    private Set<Category> categoriesTeam = new HashSet<Category>();
+}
 
 /*
     @ManyToOne(fetch = FetchType.EAGER)
@@ -67,4 +67,4 @@ public class Team {
     }*/
 
 
-}
+
