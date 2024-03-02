@@ -35,6 +35,7 @@ public class ClubAppApplication {
 		return new ModelMapper();
 	}
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(ClubAppApplication.class, args);
 	}
