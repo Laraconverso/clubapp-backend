@@ -53,34 +53,54 @@ public class FixtureController {
         }
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<FixtureDTO> saveFixture(@RequestBody FixtureDTO fixtureDTO) {
-        //return ResponseEntity.ok(fixtureService.saveFixture(fixtureDTO));
-        FixtureDTO savedFixtureDTO = fixtureService.saveFixture(fixtureDTO);
-        return ResponseEntity.ok(savedFixtureDTO);
+    @GetMapping("/getWithGames/{id}")
+    public ResponseEntity<Fixture> getFixtureWithGamesById(@PathVariable Long id) {
+        Fixture fixture = fixtureService.getFixtureByIdWithGames(id);
+        if (fixture != null) {
+            return ResponseEntity.ok(fixture);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
+
+    @PostMapping("/save")
+    public ResponseEntity<Fixture> saveFixture(@RequestBody FixtureDTO fixtureDTO) {
+
+        // Llamar al método saveFixture del servicio para guardar el Fixture
+        Fixture savedFixture = fixtureService.saveFixture(fixtureDTO);
+
+        // Verificar si se pudo guardar el Fixture
+        if (savedFixture != null) {
+            // Si se guardó correctamente, devolver una respuesta con el Fixture guardado y el estado HTTP 200 OK
+            return ResponseEntity.ok(savedFixture);
+        } else {
+            // Si no se pudo guardar, devolver una respuesta con el estado HTTP 500 Internal Server Error
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 
 
 
     @PutMapping("/update")
-    public ResponseEntity<FixtureDTO> updateFixture(@RequestBody FixtureDTO fixtureDTO) {
-        /*ResponseEntity<Fixture> response;
-        if (fixture.getFixtureId() != null && fixtureService.getFixtureById(fixture.getFixtureId())) != null){
-            response = ResponseEntity.ok(fixtureService.saveFixture(fixture));
-        }else{
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return response;*/
-
+    public ResponseEntity<Fixture> updateFixture(@RequestBody FixtureDTO fixtureDTO) {
+        ResponseEntity<Fixture> response;
         Fixture updatedFixture = fixtureService.updateFixture(fixtureDTO);
+        if (updatedFixture != null){
+            response = ResponseEntity.ok(updatedFixture);
+        }else{
+            response = ResponseEntity.notFound().build();
+        }
+        return response;
+
+        /*Fixture updatedFixture = fixtureService.updateFixture(fixtureDTO);
         if (updatedFixture != null) {
             FixtureDTO updatedFixtureDTO = modelMapper.map(updatedFixture, FixtureDTO.class);
             return ResponseEntity.ok(updatedFixtureDTO);
         } else {
             return ResponseEntity.notFound().build();
-        }
+        }*/
     }
 
     @DeleteMapping("/delete/{id}")

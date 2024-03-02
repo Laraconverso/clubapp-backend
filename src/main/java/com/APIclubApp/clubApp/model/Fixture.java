@@ -25,9 +25,9 @@ public class Fixture {
     @Column(name = "fixture_name")
     private String fixtureName;
 
-    @OneToMany(mappedBy = "fixture", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fixture", fetch = FetchType.EAGER /*, cascade = CascadeType.ALL*/)
     //@JsonIgnore
-    private Set<Game> fixtureGames = new HashSet<Game>();
+    private Set<Game> fixtureGames = new HashSet<>();
 
     public Fixture(String fixtureName) {
         this.fixtureName = fixtureName;

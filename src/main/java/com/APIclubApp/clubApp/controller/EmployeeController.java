@@ -142,7 +142,7 @@ public class EmployeeController {
 
     @PutMapping("/update")
     @PermitAll
-    public ResponseEntity<EmployeeDTO> updateUser(@RequestBody EmployeeDTO employeeDTO){
+    public ResponseEntity<EmployeeDTO> updateFixture(@RequestBody EmployeeDTO employeeDTO){
         Employee updatedEmployee = employeeService.updateEmployee(employeeDTO);
         if (updatedEmployee != null) {
             EmployeeDTO updatedEmployeeDTO = modelMapper.map(updatedEmployee, EmployeeDTO.class);
@@ -154,7 +154,7 @@ public class EmployeeController {
 
     @DeleteMapping("/delete/{id}")
     @PermitAll
-    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+    public ResponseEntity<String> deleteFixture(@PathVariable Long id){
         employeeService.deleteEmployee(id);
         return ResponseEntity.ok().body("Deleted");
     }

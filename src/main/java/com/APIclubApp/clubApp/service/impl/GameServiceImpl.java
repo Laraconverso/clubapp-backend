@@ -29,12 +29,9 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public GameDTO saveGame(GameDTO gameDT) {
-
-        //return gameRepository.save(game);
-        Game game = modelMapper.map(gameDT, Game.class);
-        game = gameRepository.save(game);
-        return modelMapper.map(game, GameDTO.class);
+    public Game saveGame(GameDTO gameDTO) {
+        Game game = modelMapper.map(gameDTO, Game.class);
+        return gameRepository.save(game);
     }
 
     @Override
@@ -43,12 +40,21 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public GameDTO updateGame(GameDTO gameDTO) {
+    public Game updateGame(GameDTO gameDTO) {
+        // Verificar si el juego a actualizar existe en la base de datos
+        Game existingGame = gameRepository.findById(gameDTO.getGameId()).orElse(null);
 
-        //return gameRepository.save(game);
-        Game game = modelMapper.map(gameDTO, Game.class);
-        game = gameRepository.save(game);
-        return modelMapper.map(game, GameDTO.class);
+        // Si el juego existe, actualizar sus atributos con los del DTO
+        if (existingGame != null) {
+            // Mapear los datos del DTO al juego existente
+            modelMapper.map(gameDTO, existingGame);
+
+            // Guardar el juego actualizado en la base de datos y devolverlo
+            return gameRepository.save(existingGame);
+        } else {
+            // Manejar el caso en que el juego no exista (puedes lanzar una excepción o devolver null, dependiendo de tus requerimientos)
+            return null;
+        }
     }
 
     @Override

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,36 +39,35 @@ public class FixtureServiceImpl implements FixtureService {
                 .map(fixture -> modelMapper.map(fixture, FixtureDTO.class))
                 .collect(Collectors.toList());*/
     }
-    @Override
-    public FixtureDTO saveFixture(FixtureDTO fixtureDTO) {
-        // Crear un mapeo personalizado para la asociación de juegos
-        modelMapper.typeMap(FixtureDTO.class, Fixture.class).addMappings(mapping -> {
-            mapping.skip(Fixture::setFixtureGames); // Saltar el mapeo del campo fixtureGames
-        }).setPostConverter(context -> {
-            FixtureDTO source = context.getSource();
-            Fixture destination = context.getDestination();
-            if (source.getGameIds() != null && !source.getGameIds().isEmpty()) {
-                Set<Game> games = new HashSet<>();
-                for (Long gameId : source.getGameIds()) {
-                    Game game = gameRepository.findById(gameId).orElse(null);
-                    if (game != null) {
-                        games.add(game);
-                    }
-                }
-                destination.setFixtureGames(games); // Asociar los juegos con el fixture
-            }
-            return destination;
-        });
 
-        // Mapear FixtureDTO a Fixture
+    @Override
+    public Fixture getFixtureByIdWithGames(Long id) {
+        return fixtureRepository.findByIdWithGames(id);
+    }
+
+
+    @Override
+    public Fixture saveFixture(FixtureDTO fixtureDTO) {
+
         Fixture fixture = modelMapper.map(fixtureDTO, Fixture.class);
 
-        // Guardar la Fixture en la base de datos
-        fixture = fixtureRepository.save(fixture);
+        // Obtener los IDs de los juegos que se deben agregar al fixture
+        Set<Long> gameIds = fixtureDTO.getGameIds();
 
-        // Mapear Fixture de vuelta a FixtureDTO y devolverlo
-        return modelMapper.map(fixture, FixtureDTO.class);
-    }
+        // Obtener los juegos correspondientes a los IDs
+        List<Game> gamesToAdd = gameRepository.findAllById(gameIds);
+
+        // Establecer la relación en ambos sentidos
+        for (Game game : gamesToAdd) {
+            fixture.getFixtureGames().add(game); // Agregar el juego al conjunto de juegos del fixture
+            game.setFixture(fixture); // Establecer el fixture en el juego
+        }
+
+        // Guardar el fixture (y por ende, también los juegos)
+        return fixtureRepository.save(fixture);
+        }
+
+
 
     @Override
     public Fixture getFixtureById(Long id) {

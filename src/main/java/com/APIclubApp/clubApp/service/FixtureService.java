@@ -9,11 +9,14 @@ import java.util.List;
 public interface FixtureService {
     List<Fixture> listAllFixtures();
 
-    FixtureDTO saveFixture(FixtureDTO fixtureDTO);
+    //FixtureDTO saveFixture(FixtureDTO fixtureDTO);
+    Fixture saveFixture(FixtureDTO fixtureDTO);
 
     Fixture getFixtureById(Long id);
 
     Fixture updateFixture(FixtureDTO fixtureDTO);
+
+    Fixture getFixtureByIdWithGames(Long id);
 
     void deleteFixture(Long id);
 
