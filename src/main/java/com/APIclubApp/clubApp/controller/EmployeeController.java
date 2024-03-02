@@ -139,11 +139,13 @@ public class EmployeeController {
         }
     }
 
+
     @PutMapping("/update")
     @PermitAll
     public ResponseEntity<EmployeeDTO> updateUser(@RequestBody EmployeeDTO employeeDTO){
-        EmployeeDTO updatedEmployeeDTO = employeeService.updateEmployee(employeeDTO);
-        if (updatedEmployeeDTO != null) {
+        Employee updatedEmployee = employeeService.updateEmployee(employeeDTO);
+        if (updatedEmployee != null) {
+            EmployeeDTO updatedEmployeeDTO = modelMapper.map(updatedEmployee, EmployeeDTO.class);
             return ResponseEntity.ok(updatedEmployeeDTO);
         } else {
             return ResponseEntity.notFound().build();

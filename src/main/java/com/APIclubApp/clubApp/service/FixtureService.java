@@ -13,10 +13,9 @@ public interface FixtureService {
 
     Fixture getFixtureById(Long id);
 
-    FixtureDTO updateFixture(FixtureDTO fixtureDTO);
+    Fixture updateFixture(FixtureDTO fixtureDTO);
 
     void deleteFixture(Long id);
 
-    //FixtureDTO getFixtureByName(String fixtureName);
 }
 

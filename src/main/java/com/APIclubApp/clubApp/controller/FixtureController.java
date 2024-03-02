@@ -5,7 +5,9 @@ import com.APIclubApp.clubApp.dto.FixtureDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Fixture;
 import com.APIclubApp.clubApp.service.FixtureService;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,9 @@ import java.util.List;
 @RequestMapping("/fixtures")
 public class FixtureController {
 
+   // private static final Logger logger = (Logger) LoggerFactory.getLogger(FixtureController.class);
+
+
     @Autowired
     private FixtureService fixtureService;
 
@@ -27,6 +32,8 @@ public class FixtureController {
 
     @Autowired
     private ModelMapper modelMapper; // Necesitarás una instancia de ModelMapper para convertir entre EmployeeDTO y Employee
+
+
 
     @GetMapping("/list")
     public ResponseEntity<List<Fixture>> listAllFixtures() {
@@ -48,10 +55,14 @@ public class FixtureController {
 
     @PostMapping("/save")
     public ResponseEntity<FixtureDTO> saveFixture(@RequestBody FixtureDTO fixtureDTO) {
-        //return ResponseEntity.ok(fixtureService.saveFixture(fixture));
+        //return ResponseEntity.ok(fixtureService.saveFixture(fixtureDTO));
         FixtureDTO savedFixtureDTO = fixtureService.saveFixture(fixtureDTO);
         return ResponseEntity.ok(savedFixtureDTO);
+
     }
+
+
+
 
     @PutMapping("/update")
     public ResponseEntity<FixtureDTO> updateFixture(@RequestBody FixtureDTO fixtureDTO) {
@@ -63,8 +74,9 @@ public class FixtureController {
         }
         return response;*/
 
-        FixtureDTO updatedFixtureDTO = fixtureService.updateFixture(fixtureDTO);
-        if (updatedFixtureDTO != null) {
+        Fixture updatedFixture = fixtureService.updateFixture(fixtureDTO);
+        if (updatedFixture != null) {
+            FixtureDTO updatedFixtureDTO = modelMapper.map(updatedFixture, FixtureDTO.class);
             return ResponseEntity.ok(updatedFixtureDTO);
         } else {
             return ResponseEntity.notFound().build();

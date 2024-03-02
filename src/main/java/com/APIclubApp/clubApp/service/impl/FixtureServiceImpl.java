@@ -38,23 +38,29 @@ public class FixtureServiceImpl implements FixtureService {
                 .map(fixture -> modelMapper.map(fixture, FixtureDTO.class))
                 .collect(Collectors.toList());*/
     }
-
     @Override
     public FixtureDTO saveFixture(FixtureDTO fixtureDTO) {
+        // Crear un mapeo personalizado para la asociación de juegos
+        modelMapper.typeMap(FixtureDTO.class, Fixture.class).addMappings(mapping -> {
+            mapping.skip(Fixture::setFixtureGames); // Saltar el mapeo del campo fixtureGames
+        }).setPostConverter(context -> {
+            FixtureDTO source = context.getSource();
+            Fixture destination = context.getDestination();
+            if (source.getGameIds() != null && !source.getGameIds().isEmpty()) {
+                Set<Game> games = new HashSet<>();
+                for (Long gameId : source.getGameIds()) {
+                    Game game = gameRepository.findById(gameId).orElse(null);
+                    if (game != null) {
+                        games.add(game);
+                    }
+                }
+                destination.setFixtureGames(games); // Asociar los juegos con el fixture
+            }
+            return destination;
+        });
+
         // Mapear FixtureDTO a Fixture
         Fixture fixture = modelMapper.map(fixtureDTO, Fixture.class);
-
-        // Obtener los juegos asociados por sus IDs y asociarlos con la Fixture
-        if (fixtureDTO.getGameIds() != null && !fixtureDTO.getGameIds().isEmpty()) {
-            Set<Game> games = new HashSet<>();
-            for (Long gameId : fixtureDTO.getGameIds()) {
-                Game game = gameRepository.findById(gameId).orElse(null);
-                if (game != null) {
-                    games.add(game);
-                }
-            }
-            fixture.setFixtureGames(games);
-        }
 
         // Guardar la Fixture en la base de datos
         fixture = fixtureRepository.save(fixture);
@@ -72,11 +78,10 @@ public class FixtureServiceImpl implements FixtureService {
     }
 
     @Override
-    public FixtureDTO updateFixture(FixtureDTO fixtureDTO) {
-        //return fixtureRepository.save(fixture);
+    public Fixture updateFixture(FixtureDTO fixtureDTO) {
+
         Fixture fixture = modelMapper.map(fixtureDTO, Fixture.class);
-        fixture = fixtureRepository.save(fixture);
-        return modelMapper.map(fixture, FixtureDTO.class);
+        return fixtureRepository.save(fixture);
     }
 
     @Override
