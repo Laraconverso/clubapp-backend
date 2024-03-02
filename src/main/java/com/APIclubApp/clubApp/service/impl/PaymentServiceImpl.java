@@ -9,6 +9,7 @@ import com.APIclubApp.clubApp.repository.PaymentRepository;
 import com.APIclubApp.clubApp.repository.PlayerRepository;
 import com.APIclubApp.clubApp.service.PaymentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +29,12 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private ModelMapper modelMapper;
 
 
     @Override
     public Payment savePayment(PaymentDTO paymentDto) {
-        Payment payment = objectMapper.convertValue(paymentDto, Payment.class);
+        Payment payment = modelMapper.map(paymentDto, Payment.class);
         Player player = playerRepository.findByUserDni(paymentDto.getPlayer().getUserDni());
         if(player==null) throw new RuntimeException("Player not found"); //error 500
         payment.setPlayer(player);

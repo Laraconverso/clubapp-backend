@@ -19,6 +19,6 @@ public class PlayerDTO {
     private String userEmail;
     private String userAddress;
     private String userPassword;
-    private Long roleId;
+    //private Long roleId;
     private Long clubId;
 }

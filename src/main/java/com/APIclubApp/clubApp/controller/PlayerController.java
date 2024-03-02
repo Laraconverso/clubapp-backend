@@ -61,17 +61,23 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.savePlayer(player));
     }
 
+    @PostMapping("/save/form")
+    @PermitAll
+    public ResponseEntity<Player> savePlayerForm(@RequestBody PlayerFormDTO player){
+        return ResponseEntity.ok(playerService.savePlayerForm(player));
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteUsuario(@PathVariable Long id){
+    public ResponseEntity<String> deletePlayer(@PathVariable Long id){
         if (playerService.getPlayerById(Long.valueOf(id))!=null){
            playerService.deletePlayer(Long.valueOf(id));
+            return ResponseEntity.ok().body("Deleted");
         }else {
-            System.out.println("Player does not exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
-    @PutMapping()
+    @PutMapping("update")
     public ResponseEntity<Player> updatePlayer(@RequestBody PlayerDTO player){
         Player player1 = playerService.getPlayerById(player.getPlayerId());
         if ( player1!= null && player1.getPlayerId() != null)
@@ -80,5 +86,15 @@ public class PlayerController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
     }
+
+//    @PutMapping("/update/form")
+//    public ResponseEntity<Player> updatePlayerForm(@RequestBody PlayerFormDTO player){
+//        Player player1 = playerService.getPlayerByDNI(player.getUserDni());
+//        if (player1!= null && player1.getPlayerId() != null)
+//            return ResponseEntity.ok(playerService.updatePlayerForm(player));
+//        else
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//
+//    }
 
 }

@@ -15,6 +15,7 @@ public interface PlayerService {
     Player getPlayerById(Long id);
 
     Player updatePlayer(PlayerDTO player);
+    Player updatePlayerForm(PlayerFormDTO player);
 
     void deletePlayer(Long id);
 
