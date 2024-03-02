@@ -12,6 +12,10 @@ public class PlayerFormDTO {
     private String userDni;
     private String userEmail;
     private String userAddress;
+    private String userPassword;
     private String playerBirthdate;
-    private Long categoryId; //cualquier cosa comentar
+    private String categoryName;
 }
+
+
+

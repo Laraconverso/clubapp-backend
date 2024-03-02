@@ -72,9 +72,11 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Player savePlayerForm(PlayerFormDTO player) {
         Player p = objectMapper.convertValue(player, Player.class);
-        Category category = categoryRepository.findById(player.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+        Category category = categoryRepository.findByCategoryName(player.getCategoryName());
+        if(category == null ) throw new RuntimeException("Category not found");
         p.setCategory(category);
+        p.setPlayerFeePaid(false);
+        p.setPlayerPasswordChanged(false);
         return playerRepository.save(p);
     }
 

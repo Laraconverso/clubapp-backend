@@ -54,14 +54,14 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.listAllPlayers());
     }
 
-    @PostMapping("/save")
-    @PermitAll
-    public ResponseEntity<Player> savePlayer(@RequestBody PlayerDTO player){
-//        player.setUserPassword(passwordEncoder.encode(player.getUserPassword()));
-        return ResponseEntity.ok(playerService.savePlayer(player));
-    }
+//    @PostMapping("/save")
+//    @PermitAll
+//    public ResponseEntity<Player> savePlayer(@RequestBody PlayerDTO player){
+////        player.setUserPassword(passwordEncoder.encode(player.getUserPassword()));
+//        return ResponseEntity.ok(playerService.savePlayer(player));
+//    }
 
-    @PostMapping("/save/form")
+    @PostMapping("/save")
     @PermitAll
     public ResponseEntity<Player> savePlayerForm(@RequestBody PlayerFormDTO player){
         return ResponseEntity.ok(playerService.savePlayerForm(player));

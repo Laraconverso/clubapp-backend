@@ -12,6 +12,7 @@ public class PlayerDTO {
     private String playerPosition;
     private String playerBirthdate;
     private Boolean playerFeePaid;
+    private Boolean playerPasswordChanged;
     private Long categoryId;
     private String userName;
     private String userLastname;
