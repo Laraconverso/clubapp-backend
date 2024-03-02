@@ -40,9 +40,14 @@ public class FixtureServiceImpl implements FixtureService {
                 .collect(Collectors.toList());*/
     }
 
-    @Override
+    /*@Override
     public Fixture getFixtureByIdWithGames(Long id) {
         return fixtureRepository.findByIdWithGames(id);
+    }*/
+
+    @Override
+    public List<Object[]> listAllFixtureIdAndName() {
+        return fixtureRepository.findAllFixtureIdAndName();
     }
 
 

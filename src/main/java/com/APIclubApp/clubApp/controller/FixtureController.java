@@ -31,7 +31,7 @@ public class FixtureController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private ModelMapper modelMapper; // Necesitarás una instancia de ModelMapper para convertir entre EmployeeDTO y Employee
+    private ModelMapper modelMapper; // instancia de ModelMapper para convertir entre EmployeeDTO y Employee
 
 
 
@@ -53,7 +53,7 @@ public class FixtureController {
         }
     }
 
-    @GetMapping("/getWithGames/{id}")
+    /*@GetMapping("/getWithGames/{id}")
     public ResponseEntity<Fixture> getFixtureWithGamesById(@PathVariable Long id) {
         Fixture fixture = fixtureService.getFixtureByIdWithGames(id);
         if (fixture != null) {
@@ -61,6 +61,12 @@ public class FixtureController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }*/
+
+    @GetMapping("/listIdName")
+    public ResponseEntity<List<Object[]>> listAllFixtureIdAndName() {
+        List<Object[]> fixtureIdAndNameList = fixtureService.listAllFixtureIdAndName();
+        return ResponseEntity.ok(fixtureIdAndNameList);
     }
 
 
@@ -81,8 +87,6 @@ public class FixtureController {
     }
 
 
-
-
     @PutMapping("/update")
     public ResponseEntity<Fixture> updateFixture(@RequestBody FixtureDTO fixtureDTO) {
         ResponseEntity<Fixture> response;
@@ -94,13 +98,6 @@ public class FixtureController {
         }
         return response;
 
-        /*Fixture updatedFixture = fixtureService.updateFixture(fixtureDTO);
-        if (updatedFixture != null) {
-            FixtureDTO updatedFixtureDTO = modelMapper.map(updatedFixture, FixtureDTO.class);
-            return ResponseEntity.ok(updatedFixtureDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }*/
     }
 
     @DeleteMapping("/delete/{id}")

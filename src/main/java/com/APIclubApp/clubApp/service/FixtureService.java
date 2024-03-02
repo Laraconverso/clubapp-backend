@@ -16,7 +16,9 @@ public interface FixtureService {
 
     Fixture updateFixture(FixtureDTO fixtureDTO);
 
-    Fixture getFixtureByIdWithGames(Long id);
+    //Fixture getFixtureByIdWithGames(Long id);
+
+    List<Object[]> listAllFixtureIdAndName();
 
     void deleteFixture(Long id);
 
