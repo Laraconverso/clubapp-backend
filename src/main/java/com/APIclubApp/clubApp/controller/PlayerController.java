@@ -1,6 +1,9 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.PlayerDTO;
+import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.model.Player;
+import com.APIclubApp.clubApp.model.Role;
 import com.APIclubApp.clubApp.service.PlayerService;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +40,6 @@ public class PlayerController {
     @PermitAll
     public ResponseEntity<Player> getPlayerById(@PathVariable String dni){
         ResponseEntity<Player> response;
-
         if (playerService.getPlayerByDNI(String.valueOf(dni))!=null){
             response = ResponseEntity.ok(playerService.getPlayerByDNI(String.valueOf(dni)));
         }else {
@@ -52,27 +54,31 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.listAllPlayers());
     }
 
+//    @PostMapping("/save")
+//    @PermitAll
+//    public ResponseEntity<Player> savePlayer(@RequestBody PlayerDTO player){
+////        player.setUserPassword(passwordEncoder.encode(player.getUserPassword()));
+//        return ResponseEntity.ok(playerService.savePlayer(player));
+//    }
+
     @PostMapping("/save")
     @PermitAll
-    public ResponseEntity<Player> savePlayer(@RequestBody Player player){
-        //ROL
-        //Role role = roleRepository.findByNombre("User");
-        //player.setRole(role);
-//        player.setUserPassword(passwordEncoder.encode(player.getUserPassword()));
-        return ResponseEntity.ok(playerService.savePlayer(player));
+    public ResponseEntity<Player> savePlayerForm(@RequestBody PlayerFormDTO player){
+        return ResponseEntity.ok(playerService.savePlayerForm(player));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUsuario(@PathVariable Long id){
+    public ResponseEntity<String> deletePlayer(@PathVariable Long id){
         if (playerService.getPlayerById(Long.valueOf(id))!=null){
            playerService.deletePlayer(Long.valueOf(id));
+            return ResponseEntity.ok().body("Deleted");
         }else {
-            System.out.println("Player does not exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
-    @PutMapping()
-    public ResponseEntity<Player> updatePlayer(@RequestBody Player player){
+    @PutMapping("update")
+    public ResponseEntity<Player> updatePlayer(@RequestBody PlayerDTO player){
         Player player1 = playerService.getPlayerById(player.getPlayerId());
         if ( player1!= null && player1.getPlayerId() != null)
             return ResponseEntity.ok(playerService.updatePlayer(player));
@@ -80,5 +86,15 @@ public class PlayerController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
     }
+
+//    @PutMapping("/update/form")
+//    public ResponseEntity<Player> updatePlayerForm(@RequestBody PlayerFormDTO player){
+//        Player player1 = playerService.getPlayerByDNI(player.getUserDni());
+//        if (player1!= null && player1.getPlayerId() != null)
+//            return ResponseEntity.ok(playerService.updatePlayerForm(player));
+//        else
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//
+//    }
 
 }

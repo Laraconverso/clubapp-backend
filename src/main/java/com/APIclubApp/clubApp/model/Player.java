@@ -33,7 +33,7 @@ public class Player extends User{
     @JoinColumn(name = "category_id")
     private Category category;
 
-
-
+    @Column(name = "player_passwordChanged")
+    private Boolean playerPasswordChanged;
 
 }

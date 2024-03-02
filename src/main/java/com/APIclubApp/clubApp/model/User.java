@@ -27,7 +27,7 @@ public abstract class User {
     @Column(name = "user_lastname", nullable = true, unique = true)
     private String userLastname;
 
-    @Column(name = "user_dni", nullable = true, unique = false)
+    @Column(name = "user_dni", nullable = true, unique = true)
     private String userDni;
 
     @Column(name = "user_email", nullable = true, unique = false)
@@ -41,7 +41,7 @@ public abstract class User {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
-    //@JsonIgnore
+//    @JsonIgnore
     private Role role;
 
     @ManyToOne(fetch = FetchType.EAGER)
