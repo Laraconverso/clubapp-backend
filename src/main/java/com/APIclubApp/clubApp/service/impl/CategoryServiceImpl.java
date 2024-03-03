@@ -59,9 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
         category.setCoach(coach);
         category.setTeam(team);
 
-        // Save the Category object
-        return categoryRepository.save(category);
-    }
+   
 
     @Override
     public Category getCategoryById(Long id) {

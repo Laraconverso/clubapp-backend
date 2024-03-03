@@ -24,10 +24,10 @@ public abstract class User {
     @Column(name= "user_name", nullable = true, unique = false)
     private String userName;
 
-    @Column(name = "user_lastname", nullable = true, unique = false)
+    @Column(name = "user_lastname", nullable = true, unique = true)
     private String userLastname;
 
-    @Column(name = "user_dni", nullable = true, unique = false)
+    @Column(name = "user_dni", nullable = true, unique = true)
     private String userDni;
 
     @Column(name = "user_email", nullable = true, unique = false)
