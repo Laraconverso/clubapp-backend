@@ -23,7 +23,7 @@ public class Category {
     private Long categoryId;
 
     //se llamara de acuerdo al año de nacimiento de los jugadores
-    @Column(name= "category_name")
+    @Column(name= "category_name") // Este Id como id
     private String categoryName;
 
     @OneToOne(fetch = FetchType.EAGER)
