@@ -2,56 +2,55 @@ package com.APIclubApp.clubApp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="categories")
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id_category")
-    private Long idCategory;
+    @Column(name= "category_id")
+    private Long categoryId;
 
-    @Column(name= "category_name")
+    //se llamara de acuerdo al año de nacimiento de los jugadores
+    @Column(name= "category_name") // Este Id como id
     private String categoryName;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "coach_number")
+//    @JsonIgnore
+    private Coach coach;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    @Column(name = "category_schedule", nullable = false, unique = false)
+    private String categorySchedule;
+
+    @Column(name = "category_daytraining", nullable = false, unique = false)
+    private String categoryDaytraining;
+
+    @Column(name = "category_fee", nullable = false, unique = false)
+    private String categoryFee;
+
+    @OneToMany(mappedBy= "category", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<Player> playersTeam= new HashSet<Player>();
 
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<Team> categoryTeams =new HashSet<Team>();
+    private Set<Game> gamesCategory = new HashSet<Game>();
 
-    public Category() {
-    }
 
-    public Category(Long idCategory, String categoryName, Set<Team> categoryTeams) {
-        this.idCategory = idCategory;
-        this.categoryName = categoryName;
-        this.categoryTeams = categoryTeams;
-    }
-
-    public Long getIdCategory() {
-        return idCategory;
-    }
-
-    public void setIdCategory(Long idCategory) {
-        this.idCategory = idCategory;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public Set<Team> getCategoryTeams() {
-        return categoryTeams;
-    }
-
-    public void setCategoryTeams(Set<Team> categoryTeams) {
-        this.categoryTeams = categoryTeams;
-    }
 }

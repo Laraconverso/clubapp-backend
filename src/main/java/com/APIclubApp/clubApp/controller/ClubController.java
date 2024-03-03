@@ -1,6 +1,6 @@
 package com.APIclubApp.clubApp.controller;
 
-
+import com.APIclubApp.clubApp.dto.ClubDTO;
 import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.service.ClubService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin
-//@CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/clubes")
+@RequestMapping("/clubs")
 public class ClubController {
 
     @Autowired
     private ClubService clubService;
+
 
     @Operation(summary = "Guardar un club")
     @PostMapping("/save")
@@ -31,26 +31,41 @@ public class ClubController {
 
     @Operation(summary = "Listar todos los clubes")
     @GetMapping("/list")
-    @PermitAll
-    public ResponseEntity<List<Club>> listAllClubes(){
-        return ResponseEntity.ok(clubService.listAllClubes());
+    public ResponseEntity<List<ClubDTO>> listAllClubs() {
+        return ResponseEntity.ok(clubService.listAllClubs());
     }
 
     @Operation(summary = "Obtener un club por su ID")
     @GetMapping("/get/{id}")
-    @PermitAll
-    public ResponseEntity<Club> getClubById(@PathVariable Long id){
-        ResponseEntity<Club> response;
+    public ResponseEntity<ClubDTO> getClubById(@PathVariable Long id) {
+        ClubDTO club = clubService.getClubById(id);
+        if (club != null) {
+            return ResponseEntity.ok(club);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
-        if (clubService.getClubById(Long.valueOf(id))!=null){
-            response = ResponseEntity.ok(clubService.getClubById(Long.valueOf(id))) ;
-        }else
-        {
+    @PostMapping("/save")
+    public ResponseEntity<Club> saveClub(@RequestBody ClubDTO club) {
+        return ResponseEntity.ok(clubService.saveClub(club));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Club> updateClub(@RequestBody ClubDTO club) {
+        ResponseEntity<Club> response;
+        if (club.getClubId() != null) {
+            response = ResponseEntity.ok(clubService.saveClub(club));
+        } else {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
         return response;
     }
 
-
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteClub(@PathVariable Long id) {
+        clubService.deleteClub(id);
+        return ResponseEntity.ok().body("Deleted");
+    }
 }
+

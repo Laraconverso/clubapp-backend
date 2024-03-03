@@ -15,40 +15,39 @@ import lombok.Setter;
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 //@Table(name="users")
 public abstract class User {
-  
+
     //@Id
     /*@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
     private Long idUser;*/
   
-    @Column(name= "user_name", nullable = false, unique = false)
+    @Column(name= "user_name", nullable = true, unique = false)
     private String userName;
 
-    @Column(name = "user_lastname", nullable = false, unique = false)
+    @Column(name = "user_lastname", nullable = true, unique = true)
     private String userLastname;
 
-    @Column(name = "user_dni", nullable = false, unique = false)
+    @Column(name = "user_dni", nullable = true, unique = true)
     private String userDni;
 
-    @Column(name = "user_email", nullable = false, unique = false)
+    @Column(name = "user_email", nullable = true, unique = false)
     private String userEmail;
 
-    @Column(name = "user_address", nullable = false, unique = false)
+    @Column(name = "user_address", nullable = true, unique = false)
     private String userAddress;
 
-    @Column(name = "user_password", nullable = false, unique = false)
+    @Column(name = "user_password", nullable = true, unique = false)
     private String userPassword;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_role")
-    @JsonIgnore
+    @JoinColumn(name = "role_id")
+    //@JsonIgnore
     private Role role;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="id_club")
-    @JsonIgnore
+    @JoinColumn(name="club_id")
+    //@JsonIgnore
     private Club club;
-
 
 
 

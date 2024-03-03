@@ -19,8 +19,8 @@ import java.util.Set;
 public class Club {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id_club")
-    private Long idClub;
+    @Column(name="club_id")
+    private Long clubId;
 
     @Column(name = "club_name", nullable = false, unique = true)
     private String clubName;
@@ -33,17 +33,14 @@ public class Club {
 
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER)
     @JsonIgnore
-    //private List<User> usersClub;
     private Set<Coach> coaches =new HashSet<Coach>();
 
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER)
     @JsonIgnore
-    //private List<User> usersClub;
     private Set<Player> players =new HashSet<Player>();
 
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER)
     @JsonIgnore
-    //private List<User> usersClub;
     private Set<Employee> employees =new HashSet<Employee>();
 
 

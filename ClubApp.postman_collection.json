@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "af54c227-360a-4fff-aa8b-c974394d187d",
+		"name": "ClubApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18573401"
+	},
+	"item": [
+		{
+			"name": "Players",
+			"item": [
+				{
+					"name": "GET all players",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/players/listAll",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"listAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET player by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "root",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "password",
+								"value": "4e0661fe-1d58-4dac-a54f-9023ab6d3d9b",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/players/get/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"get",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET player by DNI",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/players/getByDni/214512412",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"getByDni",
+								"214512412"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST player",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\": \"John\",\n    \"userLastname\": \"Doe\",\n    \"userDni\": \"214512412\",\n    \"userEmail\": \"john@example1.com\",\n    \"userAddress\": \"123 Main St\",\n    \"userPassword\": \"password123\",\n    \"idPlayer\": 1,\n    \"playerPosition\": 5,\n    \"playerImage\": \"john.jpg\",\n    \"playerBirthdate\": \"21-12-2001\",\n    \"playerFeePaid\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/players/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE player by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"idUser\": 4,\n        \"userName\": \"borrar\",\n        \"userLastname\": \"prueba\",\n        \"userDni\": \"21341241\",\n        \"userEmail\": \"ex@example.com\",\n        \"userAddress\": \"789 Oak St\",\n        \"userPassword\": \"pass\",\n        \"idPlayer\": 4,\n        \"playerPosition\": 4,\n        \"playerImage\": \"uno.jpg\",\n        \"playerFeePaid\": false\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/players/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT player",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\": \"vos\",\n    \"userLastname\": \"sos\",\n    \"userDni\": \"23512451\",\n    \"userEmail\": \"john@example1.com\",\n    \"userAddress\": \"123 Main St\",\n    \"userPassword\": \"password123\",\n    \"idPlayer\": 4,\n    \"playerPosition\": 5,\n    \"playerImage\": \"john.jpg\",\n    \"playerBirthdate\": \"21-12-2001\",\n    \"playerFeePaid\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/players",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Team",
+			"item": []
+		},
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "getAllEmployees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/employees/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employees",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveEmployee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"userName\": \"Michael\",\r\n        \"userLastname\": \"Clark\",\r\n        \"userDni\": \"123456\",\r\n        \"userEmail\": \"clarkg@example.com\",\r\n        \"userAddress\": \"124 Main St\",\r\n        \"userPassword\": \"password123\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/employees/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employees",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByIdEmployee",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/employees/get/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employees",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmployee",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"userName\": \"John\",\r\n        \"userLastname\": \"Doe\",\r\n        \"userDni\": \"123456789\",\r\n        \"userEmail\": \"john@example.com\",\r\n        \"userAddress\": \"1414 Main St\",\r\n        \"userPassword\": \"password123\",\r\n        \"employeeNumber\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/employees/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employees",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteEmployee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/employees/delete/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employees",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmployeeByDni",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/employees/getByDni/123456",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employees",
+								"getByDni",
+								"123456"
+							],
+							"query": [
+								{
+									"key": "dni",
+									"value": "123456",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Club",
+			"item": [
+				{
+					"name": "saveClub",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n           \r\n            \"clubName\": \"Clube\",\r\n            \"clubLogo\":  \"097\",\r\n            \"clubDescription\": \"el mejor club de todos\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/clubes/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clubes",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllClubes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/clubes/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clubes",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

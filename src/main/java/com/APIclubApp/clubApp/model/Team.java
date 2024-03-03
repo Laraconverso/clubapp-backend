@@ -2,10 +2,12 @@ package com.APIclubApp.clubApp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -18,20 +20,26 @@ public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id_team")
-    private Long idTeam;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn(name = "coach_number")
-   // @JoinColumn(name="coach_number")
-    private Coach coach;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="id_category")
-    private Category category;
+    @Column(name = "team_id")
+    private Long teamId;
 
     @Column(name = "team_name", nullable = false, unique = false)
     private String teamName;
+
+    @Column(name = "team_description", nullable = false, unique = false)
+    private String teamDescription;
+
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
+    @JsonIgnore
+    //@JoinColumn(name="category_id")
+    private Set<Category> categoriesTeam = new HashSet<Category>();
+}
+
+/*
+    @ManyToOne(fetch = FetchType.EAGER)
+    @PrimaryKeyJoinColumn(name = "coach_number")
+    // @JoinColumn(name="coach_number")
+    private Coach coach;
 
     @Column(name = "team_schedule", nullable = false, unique = false)
     private String teamSchedule;
@@ -42,9 +50,7 @@ public class Team {
     @Column(name = "team_fee", nullable = false, unique = false)
     private String teamFee;
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
-    @JsonIgnore
-    private Set<Player> playersTeam = new HashSet<Player>();
+
 
     @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
     @JsonIgnore
@@ -55,4 +61,10 @@ public class Team {
     private Statistic statistic;
 
 
-}
+ */
+
+    /*public void setId(Long id) {
+    }*/
+
+
+
