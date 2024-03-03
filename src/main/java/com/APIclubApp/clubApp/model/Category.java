@@ -23,11 +23,12 @@ public class Category {
     private Long categoryId;
 
     //se llamara de acuerdo al año de nacimiento de los jugadores
-    @Column(name= "category_name")
+    @Column(name= "category_name") // Este Id como id
     private String categoryName;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "coach_number")
+//    @JsonIgnore
     private Coach coach;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -52,17 +53,4 @@ public class Category {
     private Set<Game> gamesCategory = new HashSet<Game>();
 
 
-
-    /*public Category(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public Category(String categoryName, Set<Team> categoryTeams) {
-        this.categoryName = categoryName;
-        this.categoryTeams = categoryTeams;
-    }
-
-    public void setId(Long id) {
-    }
-*/
 }

@@ -41,7 +41,7 @@ public abstract class User {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
-//    @JsonIgnore
+    //@JsonIgnore
     private Role role;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -50,6 +50,5 @@ public abstract class User {
     private Club club;
 
 
-    //public void setId(Long id) {
-    //}
+
 }

@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.CoachDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Coach;
 import com.APIclubApp.clubApp.service.CoachService;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -37,7 +39,7 @@ public class CoachController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Coach> saveCoach(@RequestBody Coach coach){
+    public ResponseEntity<Coach> saveCoach(@RequestBody CoachDTO coach){
         return ResponseEntity.ok(coachService.saveCoach(coach));
     }
 
@@ -57,9 +59,9 @@ public class CoachController {
 
     @PutMapping("/update")
     @PermitAll
-    public ResponseEntity<Coach> updateCategory(@RequestBody Coach coach){
+    public ResponseEntity<Coach> updateCategory(@RequestBody CoachDTO coach){
         ResponseEntity<Coach> response;
-        if (coach.getCoachNumber() != null && coachService.getCoachById(coach.getCoachNumber()) != null){
+        if (coach.getCoachNumber() != null /*&& coachService.getCoachById(coach.getCoachNumber()) != null*/){
             response = ResponseEntity.ok(coachService.saveCoach(coach));
         }else{
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();

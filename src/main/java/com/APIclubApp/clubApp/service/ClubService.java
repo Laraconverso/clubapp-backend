@@ -1,17 +1,18 @@
 package com.APIclubApp.clubApp.service;
 
+import com.APIclubApp.clubApp.dto.ClubDTO;
 import com.APIclubApp.clubApp.model.Club;
 
 import java.util.List;
 
 public interface ClubService {
-    List<Club> listAllClubs();
+    List<ClubDTO> listAllClubs();
 
-    Club saveClub(Club club);
+    Club saveClub(ClubDTO club);
 
-    Club getClubById(Long id);
+    ClubDTO getClubById(Long id);
 
-    Club updateClub(Club club);
+    Club updateClub(ClubDTO club);
 
     void deleteClub(Long id);
 }
