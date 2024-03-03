@@ -4,6 +4,7 @@ import com.APIclubApp.clubApp.dto.FixtureDTO;
 import com.APIclubApp.clubApp.dto.GameDTO;
 import com.APIclubApp.clubApp.model.Game;
 import com.APIclubApp.clubApp.service.GameService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,12 +22,15 @@ public class GameController {
     private GameService gameService;
     @Autowired
     private ModelMapper modelMapper; // Necesitamos una instancia de ModelMapper para convertir entre GameDTO y Game
+
+    @Operation(summary = "Lista todos los partidos")
     @GetMapping("/list")
     public ResponseEntity<List<Game>> listAllGames() {
         return ResponseEntity.ok(gameService.listAllGames());
     }
 
 
+    @Operation(summary = "Obtener un partido por ID")
     @GetMapping("/get/{id}")
     public ResponseEntity<Game> getGameById(@PathVariable Long id) {
         Game game = gameService.getGameById(id);
@@ -37,6 +41,7 @@ public class GameController {
         }
     }
 
+    @Operation(summary = "Crear un partido")
     @PostMapping("/save")
     public ResponseEntity<Game> saveGame(@RequestBody GameDTO gameDTO) {
 // Mapear GameDTO a Game
@@ -56,6 +61,7 @@ public class GameController {
 
     }
 
+    @Operation(summary = "Actualizar un partido")
     @PutMapping("/update")
     public ResponseEntity<Game> updateGame( @RequestBody GameDTO gameDTO) {
         /*ResponseEntity<Game> response;
@@ -82,6 +88,7 @@ public class GameController {
         }
     }
 
+    @Operation(summary = "Eliminar un partido por ID")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteGame(@PathVariable Long id) {
         gameService.deleteGame(id);

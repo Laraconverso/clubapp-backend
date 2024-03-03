@@ -4,6 +4,7 @@ import com.APIclubApp.clubApp.dto.TeamDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Team;
 import com.APIclubApp.clubApp.service.TeamService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,22 +21,26 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
+    @Operation(summary = "Listar todos los equipos")
     @GetMapping("/list")
     public ResponseEntity<List<Team>> listAllTeams() {
         return ResponseEntity.ok(teamService.listAllTeams());
     }
 
+    @Operation(summary = "Obtener un equipo por su ID")
     @GetMapping("/get/{id}")
     public ResponseEntity<Team> getTeamById(@PathVariable Long id) {
         Team team = teamService.getTeamById(id);
         return team != null ? ResponseEntity.ok(team) : ResponseEntity.notFound().build();
     }
 
+    @Operation(summary = "Crear un equipo ")
     @PostMapping("/save")
     public ResponseEntity<Team> saveTeam(@RequestBody TeamDTO team) {
         return ResponseEntity.ok(teamService.saveTeam(team));
     }
 
+    @Operation(summary = "Actualizar un equipo")
     @PutMapping("/update")
     @PermitAll
     public ResponseEntity<Team> updateTeam(@RequestBody TeamDTO team){
@@ -48,6 +53,7 @@ public class TeamController {
         return response;
     }
 
+    @Operation(summary = "Borrar un equipo por su ID")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteTeam(@PathVariable Long id) {
         teamService.deleteTeam(id);

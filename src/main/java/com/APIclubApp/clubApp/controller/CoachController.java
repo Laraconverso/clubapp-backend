@@ -4,6 +4,7 @@ import com.APIclubApp.clubApp.dto.CoachDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Coach;
 import com.APIclubApp.clubApp.service.CoachService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,14 @@ public class CoachController {
     @Autowired
     private CoachService coachService;
 
+    @Operation(summary = "Listar todos los coaches/dts")
     @GetMapping("/list")
     public ResponseEntity<List<Coach>> listAllCoaches(){
         return ResponseEntity.ok(coachService.listAllCoaches());
     }
 
+
+    @Operation(summary = "Obtener un coach/dt por su ID")
     @GetMapping("/get/{id}")
     public ResponseEntity<Coach> getCoachById(@PathVariable Long id){
         ResponseEntity<Coach> response;
@@ -38,6 +42,7 @@ public class CoachController {
         return response;
     }
 
+    @Operation(summary = "Crear un coach")
     @PostMapping("/save")
     public ResponseEntity<Coach> saveCoach(@RequestBody CoachDTO coach){
         return ResponseEntity.ok(coachService.saveCoach(coach));
@@ -57,6 +62,7 @@ public class CoachController {
         return response;
     }*/
 
+    @Operation(summary = "Actualizar un coach")
     @PutMapping("/update")
     @PermitAll
     public ResponseEntity<Coach> updateCategory(@RequestBody CoachDTO coach){
@@ -69,6 +75,7 @@ public class CoachController {
         return response;
     }
 
+    @Operation(summary = "Eliminar un coach/dt por su ID")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCoach(@PathVariable Long id){
         coachService.deleteCoach(id);

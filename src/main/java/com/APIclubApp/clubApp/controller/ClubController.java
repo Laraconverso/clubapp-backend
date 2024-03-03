@@ -20,15 +20,6 @@ public class ClubController {
     @Autowired
     private ClubService clubService;
 
-
-    @Operation(summary = "Guardar un club")
-    @PostMapping("/save")
-    //no tenia el permitAll
-    @PermitAll
-    public ResponseEntity<Club> saveClub(@RequestBody Club club){
-        return ResponseEntity.ok(clubService.saveClub(club));
-    }
-
     @Operation(summary = "Listar todos los clubes")
     @GetMapping("/list")
     public ResponseEntity<List<ClubDTO>> listAllClubs() {
@@ -45,12 +36,13 @@ public class ClubController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-
+    @Operation(summary = "Guardar un club")
     @PostMapping("/save")
     public ResponseEntity<Club> saveClub(@RequestBody ClubDTO club) {
         return ResponseEntity.ok(clubService.saveClub(club));
     }
 
+    @Operation(summary = "Actualizar un club")
     @PutMapping("/update")
     public ResponseEntity<Club> updateClub(@RequestBody ClubDTO club) {
         ResponseEntity<Club> response;
@@ -62,6 +54,7 @@ public class ClubController {
         return response;
     }
 
+    @Operation(summary = "Borrar un club por su id")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteClub(@PathVariable Long id) {
         clubService.deleteClub(id);

@@ -24,7 +24,7 @@ public class PlayerController {
 
     //private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @Operation(summary = "Obtener jugador por ID")
+    @Operation(summary = "Obtiene un jugador por su ID")
     @GetMapping("/get/{id}")
     @PermitAll
     public ResponseEntity<Player> getPlayerById(@PathVariable Long id){
@@ -38,7 +38,7 @@ public class PlayerController {
         return response;
     }
 
-    @Operation(summary = "Obtener jugador por DNI")
+    @Operation(summary = "Obtiene un jugador por su ID")
     @GetMapping("/getByDni/{dni}")
     @PermitAll
     public ResponseEntity<Player> getPlayerById(@PathVariable String dni){
@@ -51,16 +51,12 @@ public class PlayerController {
         return response;
     }
 
-
-    @Operation(summary = "Listar todos los jugadores")
+    @Operation(summary = "Obtiene un jugador por su ID")
     @GetMapping("/list")
     @PermitAll
     public ResponseEntity<List<Player>> getAllPlayers(){
         return ResponseEntity.ok(playerService.listAllPlayers());
     }
-
-
-   
 
 //    @PostMapping("/save")
 //    @PermitAll
@@ -69,32 +65,29 @@ public class PlayerController {
 //        return ResponseEntity.ok(playerService.savePlayer(player));
 //    }
 
-    @Operation(summary = "Guardar un jugador")
+    @Operation(summary = "Crea un jugador")
     @PostMapping("/save")
     @PermitAll
     public ResponseEntity<Player> savePlayerForm(@RequestBody PlayerFormDTO player){
         return ResponseEntity.ok(playerService.savePlayerForm(player));
     }
 
-    @Operation(summary = "Eliminar un jugador por ID")
+    @Operation(summary = "Elimina un jugador por su ID")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePlayer(@PathVariable Long id){
         if (playerService.getPlayerById(Long.valueOf(id))!=null){
-           playerService.deletePlayer(Long.valueOf(id));
+            playerService.deletePlayer(Long.valueOf(id));
             return ResponseEntity.ok().body("Deleted");
         }else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
-
-
-    @Operation(summary = "Actualizar un jugador")
+    @Operation(summary = "Actualiza un jugador")
     @PutMapping("update")
     public ResponseEntity<Player> updatePlayer(@RequestBody PlayerDTO player){
         Player player1 = playerService.getPlayerById(player.getPlayerId());
         if ( player1!= null && player1.getPlayerId() != null)
-
             return ResponseEntity.ok(playerService.updatePlayer(player));
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

@@ -4,6 +4,7 @@ import com.APIclubApp.clubApp.dto.CategoryDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.service.CategoryService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,12 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @Operation(summary = "Listar categorias")
     @GetMapping("/list")
     public ResponseEntity<List<Category>> listAllCategories(){
         return ResponseEntity.ok(categoryService.listAllCategories());
     }
-
+    @Operation(summary = "Obtener una categoria por su ID")
     @GetMapping("/get/{id}")
     public ResponseEntity<Category> getCategoryById(@PathVariable Long id){
 
@@ -36,6 +38,7 @@ public class CategoryController {
         }
     }
 
+    @Operation(summary = "Crear categoria")
     @PostMapping("/save")
     public ResponseEntity<Category> saveCategory(@RequestBody CategoryDTO category){
         return ResponseEntity.ok(categoryService.saveCategory(category));
@@ -53,6 +56,7 @@ public class CategoryController {
         return response;
     }*/
 
+    @Operation(summary = "Actualizar categoria")
     @PutMapping("/update")
     @PermitAll
     public ResponseEntity<Category> updateCategory(@RequestBody CategoryDTO category){
@@ -65,7 +69,7 @@ public class CategoryController {
         return response;
     }
 
-
+    @Operation(summary = "Borrar categoria por id")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id){
         categoryService.deleteCategory(id);
