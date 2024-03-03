@@ -5,6 +5,7 @@ import com.APIclubApp.clubApp.model.Coach;
 import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.service.EmployeeService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.security.PermitAll;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class EmployeeController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     @Autowired
     private ModelMapper modelMapper; // Necesitamos una instancia de ModelMapper para convertir entre EmployeeDTO y Employee
 
@@ -37,12 +39,14 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.saveEmployee(employee));
     }
 
+    @Operation(summary = "Listar todos los empleados")
     @GetMapping("/list")
     @PermitAll
     public ResponseEntity<List<Employee>> listAllEmployee(){
         return ResponseEntity.ok(employeeService.listAllEmployees());
     }
 
+    @Operation(summary = "Obtener un empleado por su ID")
     @GetMapping("/get/{id}")
     @PermitAll
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id){
@@ -58,6 +62,7 @@ public class EmployeeController {
         return response;
     }
 
+    @Operation(summary = "Obtener un empleado por su DNI")
     @GetMapping("/getByDni/{dni}")
     @PermitAll
     public ResponseEntity<Employee> getEmployeeByDni(@PathVariable String dni){
@@ -73,6 +78,7 @@ public class EmployeeController {
         return response;
     }
 
+    @Operation(summary = "Actualizar un empleado")
     @PutMapping("/update")
     @PermitAll
     public ResponseEntity<Employee> updateUser(@RequestBody Employee employee){
@@ -85,6 +91,7 @@ public class EmployeeController {
         return response;
     }
 
+    @Operation(summary = "Eliminar un empleado por su ID")
     @DeleteMapping("/delete/{id}")
     @PermitAll
     public ResponseEntity<String> deleteUser(@PathVariable Long id){
@@ -92,6 +99,8 @@ public class EmployeeController {
         return ResponseEntity.ok().body("Deleted");
     }*/
 
+  
+    @Operation(summary = "Guardar un empleado")
     @PostMapping("/save")
     @PermitAll
     public ResponseEntity<EmployeeDTO> saveEmployee(@RequestBody EmployeeDTO employeeDTO){
@@ -100,7 +109,8 @@ public class EmployeeController {
         EmployeeDTO savedEmployeeDTO = employeeService.saveEmployee(employeeDTO);
         return ResponseEntity.ok(savedEmployeeDTO);
     }
-
+    
+    @Operation(summary = "Listar todos los empleados")
     @GetMapping("/list")
     @PermitAll
     public ResponseEntity<List<Employee>> listAllEmployee(){
@@ -114,7 +124,7 @@ public class EmployeeController {
     }*/
 
 
-
+    @Operation(summary = "Obtener un empleado por su ID")
     @GetMapping("/get/{id}")
     @PermitAll
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id){
@@ -128,6 +138,7 @@ public class EmployeeController {
         return response;
     }
 
+    @Operation(summary = "Obtener un empleado por su DNI")
     @GetMapping("/getByDni/{dni}")
     @PermitAll
     public ResponseEntity<Employee> getEmployeeByDni(@PathVariable String dni){
@@ -139,7 +150,7 @@ public class EmployeeController {
         }
     }
 
-
+    @Operation(summary = "Actualizar un empleado")
     @PutMapping("/update")
     @PermitAll
     public ResponseEntity<EmployeeDTO> updateFixture(@RequestBody EmployeeDTO employeeDTO){
@@ -152,6 +163,7 @@ public class EmployeeController {
         }
     }
 
+    @Operation(summary = "Eliminar un empleado por su ID")
     @DeleteMapping("/delete/{id}")
     @PermitAll
     public ResponseEntity<String> deleteFixture(@PathVariable Long id){
