@@ -29,7 +29,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> listAllCategories() {
-        return categoryRepository.findAll();}
+        return categoryRepository.findAll();
+    }
 //        List<Category> allCategories = categoryRepository.findAll();
 //        List<CategoryDTO> allCategoriesDTO = new ArrayList<>();// preguntar a Lara pq da error con Hashset
 //        for(Category category: allCategories)
@@ -37,8 +38,6 @@ public class CategoryServiceImpl implements CategoryService {
 //
 //        return allCategoriesDTO;
 //        }
-
-
 
 
 
@@ -58,8 +57,9 @@ public class CategoryServiceImpl implements CategoryService {
         // Set the fetched Coach and Team objects in the Category object
         category.setCoach(coach);
         category.setTeam(team);
+        return category;
+    }
 
-   
 
     @Override
     public Category getCategoryById(Long id) {
