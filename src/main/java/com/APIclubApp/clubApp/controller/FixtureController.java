@@ -5,6 +5,7 @@ import com.APIclubApp.clubApp.dto.FixtureDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Fixture;
 import com.APIclubApp.clubApp.service.FixtureService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public class FixtureController {
     private ModelMapper modelMapper; // instancia de ModelMapper para convertir entre EmployeeDTO y Employee
 
 
-
+    @Operation(summary = "Listar todos los fixtures")
     @GetMapping("/list")
     public ResponseEntity<List<Fixture>> listAllFixtures() {
         return ResponseEntity.ok(fixtureService.listAllFixtures());
@@ -42,6 +43,7 @@ public class FixtureController {
         return ResponseEntity.ok(fixtureDTOS);*/
     }
 
+    @Operation(summary = "Obtener un fixture por ID")
     @GetMapping("/get/{id}")
     public ResponseEntity<Fixture> getFixtureById(@PathVariable Long id){
 
@@ -63,13 +65,14 @@ public class FixtureController {
         }
     }*/
 
+    @Operation(summary = "Obtener un fixture ID y Nombre")
     @GetMapping("/listIdName")
     public ResponseEntity<List<Object[]>> listAllFixtureIdAndName() {
         List<Object[]> fixtureIdAndNameList = fixtureService.listAllFixtureIdAndName();
         return ResponseEntity.ok(fixtureIdAndNameList);
     }
 
-
+    @Operation(summary = "Crear un fixture")
     @PostMapping("/save")
     public ResponseEntity<Fixture> saveFixture(@RequestBody FixtureDTO fixtureDTO) {
 
@@ -86,7 +89,7 @@ public class FixtureController {
         }
     }
 
-
+    @Operation(summary = "Actualizar un fixture")
     @PutMapping("/update")
     public ResponseEntity<Fixture> updateFixture(@RequestBody FixtureDTO fixtureDTO) {
         ResponseEntity<Fixture> response;
@@ -100,6 +103,7 @@ public class FixtureController {
 
     }
 
+    @Operation(summary = "Eliminar un fixture por ID")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteFixture(@PathVariable Long id) {
         fixtureService.deleteFixture(id);
