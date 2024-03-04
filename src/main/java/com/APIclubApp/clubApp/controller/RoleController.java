@@ -1,6 +1,7 @@
 package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.dto.RoleDTO;
+import com.APIclubApp.clubApp.exception.RoleNotFoundException;
 import com.APIclubApp.clubApp.model.Role;
 import com.APIclubApp.clubApp.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,55 +28,40 @@ public class RoleController {
 
     @Operation(summary = "Obtiene un rol por su ID")
     @GetMapping("/get/{id}")
-    public ResponseEntity<Role> getRoleById(@PathVariable Long id) {
-        Role role = roleService.getRoleById(id);
-        if (role != null) {
-            return ResponseEntity.ok(role);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<?> getRoleById(@PathVariable Long id) {
+        try {
+            Role role = roleService.getRoleById(id);
+            return ResponseEntity.ok().body(role);
+        } catch (RoleNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
     @Operation(summary = "Crea un rol")
     @PostMapping("/save")
     public ResponseEntity<Role> saveRole(@RequestBody RoleDTO roleDTO) {
-        Role role = new Role();
-        role.setRoleId(roleDTO.getRoleId());
-        role.setRoleName(roleDTO.getRoleName());
-
-        Role savedRole = roleService.saveRole(roleDTO);
-
-        if (savedRole != null) {
-            return ResponseEntity.ok(savedRole);
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        return ResponseEntity.ok(roleService.saveRole(roleDTO));
     }
 
     @Operation(summary = "Actualiza un rol")
     @PutMapping("/update")
-    public ResponseEntity<Role> updateRole(@RequestBody RoleDTO roleDTO) {
-        Role role = new Role();
-        role.setRoleId(roleDTO.getRoleId());
-        role.setRoleName(roleDTO.getRoleName());
-
-        Role updatedRole = roleService.updateRole(role);
-
-        if (updatedRole != null) {
+    public ResponseEntity<?> updateRole(@RequestBody RoleDTO roleDTO) {
+        try {
+            Role updatedRole = roleService.updateRole(roleDTO);
             return ResponseEntity.ok(updatedRole);
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (RoleNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
     @Operation(summary = "Elimina un rol por su ID")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteRole(@PathVariable Long id) {
-        if (roleService.getRoleById(id) != null) {
+        try {
             roleService.deleteRoleById(id);
-            return ResponseEntity.ok().body("Role was deleted successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.ok().body("Role deleted successfully");
+        } catch (RoleNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }

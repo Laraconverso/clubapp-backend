@@ -1,6 +1,7 @@
 package com.APIclubApp.clubApp.service.impl;
 
 import com.APIclubApp.clubApp.dto.RoleDTO;
+import com.APIclubApp.clubApp.exception.RoleNotFoundException;
 import com.APIclubApp.clubApp.model.Role;
 import com.APIclubApp.clubApp.repository.RoleRepository;
 import com.APIclubApp.clubApp.service.RoleService;
@@ -21,7 +22,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role getRoleById(Long id) {
-        return roleRepository.findById(id).orElse(null);
+        return roleRepository.findById(id)
+                .orElseThrow(() -> new RoleNotFoundException("Role not found with ID: " + id));
     }
 
     @Override
@@ -33,13 +35,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role updateRole(Role role) {
-        Role existingRole = roleRepository.findById(role.getRoleId()).orElse(null);
+    public Role updateRole(RoleDTO roleDTO) {
+        Role existingRole = roleRepository.findById(roleDTO.getRoleId()).orElse(null);
         if (existingRole != null) {
-            existingRole.setRoleName(role.getRoleName());
+            existingRole.setRoleName(roleDTO.getRoleName());
             return roleRepository.save(existingRole);
         } else {
-            return null;
+            throw new RoleNotFoundException("Role not found with ID: " + roleDTO.getRoleId());
         }
     }
 
@@ -48,7 +50,7 @@ public class RoleServiceImpl implements RoleService {
         if (roleRepository.existsById(id)) {
             roleRepository.deleteById(id);
         } else {
-            throw new RuntimeException("No Role found with id: " + id);
+            throw new RoleNotFoundException("Role not found with ID: " + id);
         }
     }
 }
