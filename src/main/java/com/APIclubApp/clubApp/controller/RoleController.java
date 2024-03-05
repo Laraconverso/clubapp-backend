@@ -32,8 +32,7 @@ public class RoleController {
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getRoleById(@PathVariable Long id) {
         try {
-            Role role = roleService.getRoleById(id);
-            return ResponseEntity.ok().body(role);
+            return ResponseEntity.ok(roleService.getRoleById(id));
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
@@ -44,7 +43,6 @@ public class RoleController {
     public ResponseEntity<?> saveRole(@RequestBody RoleDTO roleDTO) {
         try {
             return ResponseEntity.ok(roleService.saveRole(roleDTO));
-
         } catch (AlreadyExistsException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
@@ -55,7 +53,6 @@ public class RoleController {
     public ResponseEntity<?> updateRole(@RequestBody RoleDTO roleDTO) {
         try {
             return ResponseEntity.ok(roleService.updateRole(roleDTO));
-
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (NoChangesException e) {
