@@ -54,8 +54,8 @@ public class RoleController {
     @PutMapping("/update")
     public ResponseEntity<?> updateRole(@RequestBody RoleDTO roleDTO) {
         try {
-            Role updatedRole = roleService.updateRole(roleDTO);
-            return ResponseEntity.ok(updatedRole);
+            return ResponseEntity.ok(roleService.updateRole(roleDTO));
+
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (NoChangesException e) {
