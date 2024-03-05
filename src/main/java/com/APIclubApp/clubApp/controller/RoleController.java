@@ -1,7 +1,9 @@
 package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.dto.RoleDTO;
-import com.APIclubApp.clubApp.exception.RoleNotFoundException;
+import com.APIclubApp.clubApp.exception.NoChangesException;
+import com.APIclubApp.clubApp.exception.AlreadyExistsException;
+import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Role;
 import com.APIclubApp.clubApp.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,27 +32,31 @@ public class RoleController {
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getRoleById(@PathVariable Long id) {
         try {
-            Role role = roleService.getRoleById(id);
-            return ResponseEntity.ok().body(role);
-        } catch (RoleNotFoundException e) {
+            return ResponseEntity.ok(roleService.getRoleById(id));
+        } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
     @Operation(summary = "Crea un rol")
     @PostMapping("/save")
-    public ResponseEntity<Role> saveRole(@RequestBody RoleDTO roleDTO) {
-        return ResponseEntity.ok(roleService.saveRole(roleDTO));
+    public ResponseEntity<?> saveRole(@RequestBody RoleDTO roleDTO) {
+        try {
+            return ResponseEntity.ok(roleService.saveRole(roleDTO));
+        } catch (AlreadyExistsException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "Actualiza un rol")
     @PutMapping("/update")
     public ResponseEntity<?> updateRole(@RequestBody RoleDTO roleDTO) {
         try {
-            Role updatedRole = roleService.updateRole(roleDTO);
-            return ResponseEntity.ok(updatedRole);
-        } catch (RoleNotFoundException e) {
+            return ResponseEntity.ok(roleService.updateRole(roleDTO));
+        } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (NoChangesException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -60,7 +66,7 @@ public class RoleController {
         try {
             roleService.deleteRoleById(id);
             return ResponseEntity.ok().body("Role deleted successfully");
-        } catch (RoleNotFoundException e) {
+        } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
