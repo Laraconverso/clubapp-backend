@@ -38,19 +38,18 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryListAllDTO> listAllCategories() {
         //return categoryRepository.findAll();
 
-          List<Category> allCategories = categoryRepository.findAll();
-          List<CategoryListAllDTO> allCategoriesDTO = new ArrayList<>();// preguntar a Lara pq da error con Hashset
-          CategoryListAllDTO categoryListAllDTO = null;
-            for(Category category: allCategories) {
+        List<Category> allCategories = categoryRepository.findAll();
+        List<CategoryListAllDTO> allCategoriesDTO = new ArrayList<>();// preguntar a Lara pq da error con Hashset
+        CategoryListAllDTO categoryListAllDTO = null;
+        for (Category category : allCategories) {
 
-                categoryListAllDTO = objectMapper.convertValue(category, CategoryListAllDTO.class);
+            categoryListAllDTO = objectMapper.convertValue(category, CategoryListAllDTO.class);
 
-                categoryListAllDTO.setPlayers(playersByCategory(categoryListAllDTO.getCategoryId()));
-                allCategoriesDTO.add(categoryListAllDTO);
-            }
-              return allCategoriesDTO;
+            categoryListAllDTO.setPlayers(playersByCategory(categoryListAllDTO.getCategoryId()));
+            allCategoriesDTO.add(categoryListAllDTO);
         }
-
+        return allCategoriesDTO;
+    }
 
 
     @Override
@@ -85,8 +84,8 @@ public class CategoryServiceImpl implements CategoryService {
     public List<PlayerFormDTO> playersByCategory(Long id) {
         List<Player> allPlayerByCategory = playerRepository.findAllByCategoryId(id);
         List<PlayerFormDTO> allPlayersDTOByCategory = new ArrayList<>();
-        for(Player player: allPlayerByCategory)
-            allPlayersDTOByCategory.add(objectMapper.convertValue(player,PlayerFormDTO.class));
+        for (Player player : allPlayerByCategory)
+            allPlayersDTOByCategory.add(objectMapper.convertValue(player, PlayerFormDTO.class));
 
         return allPlayersDTOByCategory;
 
@@ -96,7 +95,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category updateCategory(CategoryDTO categoryDto) {
 
-        Category editCategory=  objectMapper.convertValue(categoryDto, Category.class);
+        Category editCategory = objectMapper.convertValue(categoryDto, Category.class);
         // Fetch the Coach object from the database by its ID
         Coach coach = coachRepository.findById(categoryDto.getCoachNumber())
                 .orElseThrow(() -> new RuntimeException("Coach not found"));
@@ -114,6 +113,20 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategory(Long id) {
         categoryRepository.deleteById(id);
+    }
+//  agregado
+
+    @Override
+    public CategoryListAllDTO getCategoryByName(String categoryName) {
+        Category category = categoryRepository.findByCategoryName(categoryName);
+        if (category == null) {
+            return null; // O lanzar una excepción si prefieres manejar el caso de categoría no encontrada de esa manera
+        }
+
+        CategoryListAllDTO categoryDTO = objectMapper.convertValue(category, CategoryListAllDTO.class);
+        categoryDTO.setPlayers(playersByCategory(categoryDTO.getCategoryId()));
+
+        return categoryDTO;
     }
 }
 

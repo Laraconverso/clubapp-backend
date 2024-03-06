@@ -45,8 +45,8 @@ public class CoachServiceImpl implements CoachService {
     public Coach saveCoach(CoachDTO coach) {
         Coach newCoach = objectMapper.convertValue(coach, Coach.class);
         // Fetch the Category object from the database by its ID
-        Category category = categoryRepository.findById(coach.getCategoryId())
-                .orElseThrow(()->new RuntimeException("Category not found"));
+        //Category category = categoryRepository.findById(coach.getCategoryId())
+                //.orElseThrow(()->new RuntimeException("Category not found"));
         //Fetch the Club object from the dataase by its ID
         Club club = clubRepository.findById(coach.getClubId())
                 .orElseThrow(()->new RuntimeException("Club not found"));
@@ -54,7 +54,7 @@ public class CoachServiceImpl implements CoachService {
         Role role = roleRepository.findById(coach.getRoleId())
                 .orElseThrow(()->new RuntimeException("Role not found"));*/
 
-        newCoach.setCategory(category);
+        //newCoach.setCategory(category);
         newCoach.setClub(club);
         //newCoach.setRole(role);
 

@@ -18,4 +18,6 @@ public interface CategoryService {
     Category updateCategory(CategoryDTO category);
 
     void deleteCategory(Long id);
+    //agregado
+    CategoryListAllDTO getCategoryByName(String categoryName);
 }

@@ -1,106 +1,63 @@
 {
 	"info": {
-		"_postman_id": "af54c227-360a-4fff-aa8b-c974394d187d",
+		"_postman_id": "d1210059-0f99-412e-801d-101d8829e387",
 		"name": "ClubApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "18573401"
+		"_exporter_id": "18554443"
 	},
 	"item": [
 		{
-			"name": "Players",
+			"name": "Category",
 			"item": [
 				{
-					"name": "GET all players",
+					"name": "GET all Categories",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/players/listAll",
+							"raw": "http://localhost:8080/categories/list",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"players",
-								"listAll"
+								"categories",
+								"list"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GET player by ID",
+					"name": "GET category by ID",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "username",
-								"value": "root",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "password",
-								"value": "4e0661fe-1d58-4dac-a54f-9023ab6d3d9b",
-								"type": "text",
-								"disabled": true
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "localhost:8080/players/get/2",
+							"raw": "http://localhost:8080/categories/get/1",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"players",
+								"categories",
 								"get",
-								"2"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GET player by DNI",
+					"name": "POST category",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/players/getByDni/214512412",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"players",
-								"getByDni",
-								"214512412"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "POST player",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"userName\": \"John\",\n    \"userLastname\": \"Doe\",\n    \"userDni\": \"214512412\",\n    \"userEmail\": \"john@example1.com\",\n    \"userAddress\": \"123 Main St\",\n    \"userPassword\": \"password123\",\n    \"idPlayer\": 1,\n    \"playerPosition\": 5,\n    \"playerImage\": \"john.jpg\",\n    \"playerBirthdate\": \"21-12-2001\",\n    \"playerFeePaid\": true\n}\n",
+							"raw": "\n    {\n        \"categoryId\": 2002,\n        \"categoryName\": \"2002\",\n        \"categorySchedule\": \"Lunes y Viernes\",\n        \"categoryDaytraining\": \"14:00 - 16:00\",\n        \"categoryFee\": \"1000 USD\"\n    }\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -108,13 +65,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/players/save",
+							"raw": "http://localhost:8080/categories/save",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"players",
+								"categories",
 								"save"
 							]
 						}
@@ -122,16 +80,13 @@
 					"response": []
 				},
 				{
-					"name": "DELETE player by ID",
+					"name": "PUT category",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"idUser\": 4,\n        \"userName\": \"borrar\",\n        \"userLastname\": \"prueba\",\n        \"userDni\": \"21341241\",\n        \"userEmail\": \"ex@example.com\",\n        \"userAddress\": \"789 Oak St\",\n        \"userPassword\": \"pass\",\n        \"idPlayer\": 4,\n        \"playerPosition\": 4,\n        \"playerImage\": \"uno.jpg\",\n        \"playerFeePaid\": false\n    }",
+							"raw": "{\n    \"categoryDescription\": \"torneo amateur \"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -139,44 +94,58 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/players/4",
+							"raw": "http://localhost:8080/categories/update/2",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"players",
-								"4"
+								"categories",
+								"update",
+								"2"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "PUT player",
+					"name": "DELETE category",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"userName\": \"vos\",\n    \"userLastname\": \"sos\",\n    \"userDni\": \"23512451\",\n    \"userEmail\": \"john@example1.com\",\n    \"userAddress\": \"123 Main St\",\n    \"userPassword\": \"password123\",\n    \"idPlayer\": 4,\n    \"playerPosition\": 5,\n    \"playerImage\": \"john.jpg\",\n    \"playerBirthdate\": \"21-12-2001\",\n    \"playerFeePaid\": true\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/players",
+							"raw": "http://localhost:8080/categories/delete/5",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"players"
+								"categories",
+								"delete",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByCategoryName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categories/search/2017",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"search",
+								"2017"
 							]
 						}
 					},
@@ -185,8 +154,121 @@
 			]
 		},
 		{
-			"name": "Team",
-			"item": []
+			"name": "Club",
+			"item": [
+				{
+					"name": "GET all club",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/clubs/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clubs",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST club",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n           \r\n            \"clubName\": \"Clube\",\r\n            \"clubLogo\":  \"097\",\r\n            \"clubDescription\": \"el mejor club de todos\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/clubes/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clubes",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Coach",
+			"item": [
+				{
+					"name": "coachSave",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"userName\": \"Moros\",\r\n    \"userLastname\": \"Lucas\",\r\n    \"userDni\": \"456978\",\r\n    \"userEmail\": \"parker@example.com\",\r\n    \"userAddress\": \"12356 Main St\",\r\n    \"userPassword\": \"password12\",\r\n    \"roleId\":6,\r\n    \"clubId\": 1\r\n   // \"categoryId\":1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/coaches/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"coaches",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByIdCoach",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/coaches/get/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"coaches",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCoach",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Employee",
@@ -218,7 +300,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"userName\": \"Michael\",\r\n        \"userLastname\": \"Clark\",\r\n        \"userDni\": \"123456\",\r\n        \"userEmail\": \"clarkg@example.com\",\r\n        \"userAddress\": \"124 Main St\",\r\n        \"userPassword\": \"password123\"\r\n    }",
+							"raw": "{\r\n        \"userName\": \"Barbie\",\r\n        \"userLastname\": \"Ken\",\r\n        \"userDni\": \"12345689\",\r\n        \"userEmail\": \"barbieg@example.com\",\r\n        \"userAddress\": \"123 Main St\",\r\n        \"userPassword\": \"password1234\",\r\n        \"clubId\": 1,\r\n        \"roleId\": 1\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -342,16 +424,68 @@
 			]
 		},
 		{
-			"name": "Club",
+			"name": "Fixture",
 			"item": [
 				{
-					"name": "saveClub",
+					"name": "GET all fixtures",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/fixtures/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fixtures",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET fixture by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/fixtures/get/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fixtures",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getWithGames",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveFixture",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n           \r\n            \"clubName\": \"Clube\",\r\n            \"clubLogo\":  \"097\",\r\n            \"clubDescription\": \"el mejor club de todos\"\r\n    }",
+							"raw": "{\r\n    \"fixtureName\": \"Fixture 71\",\r\n    \"gameIds\": [2]\r\n}\r\n    ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -359,14 +493,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/clubes/save",
+							"raw": "http://localhost:8080/fixtures/save",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"clubes",
+								"fixtures",
 								"save"
 							]
 						}
@@ -374,20 +508,802 @@
 					"response": []
 				},
 				{
-					"name": "getAllClubes",
+					"name": "updateFixture",
 					"request": {
-						"method": "GET",
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFixture",
+					"request": {
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/clubes/list",
+							"raw": "http://localhost:8080/fixtures/delete/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"clubes",
+								"fixtures",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AllFixtureOnlyIdAndName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/fixtures/listIdName",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fixtures",
+								"listIdName"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Game",
+			"item": [
+				{
+					"name": "GET all games",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/games/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"games",
 								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET game by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/games/get/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"games",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST game",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"gameDay\": \"2024-05-06\",\r\n    \"gameTime\": \"15:00\",\r\n    \"gameIslocal\": false,\r\n    \"gameTeamrival\": \"Equipo Rival5\",\r\n    \"gameLocalgoals\": 0,\r\n    \"gameRivalgoals\": 1,\r\n    \"categoryId\": 2,\r\n    \"fixtureId\":37\r\n        \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/games/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"games",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT game",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gameId\": 4,\r\n    \"gameDay\": \"2024-05-30\",\r\n    \"gameTime\": \"15:00\",\r\n    \"gameIslocal\": false,\r\n    \"gameTeamrival\": \"Equipo Rival5\",\r\n    \"gameLocalgoals\": 1,\r\n    \"gameRivalgoals\": 1,\r\n        \"categoryId\": 2,\r\n    \"fixtureId\":35\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/games/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"games",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "GET all payments",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/payments/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET payment by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "root",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "password",
+								"value": "4e0661fe-1d58-4dac-a54f-9023ab6d3d9b",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/payments/get/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"get",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST payment",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"amount\": 3000,\n        \"player\": {\n            \"userName\": \"John\",\n            \"userLastname\": \"Doe\",\n            \"userDni\": \"12341\",\n            \"userEmail\": \"john@example.com\",\n            \"userAddress\": \"123 Main St\"\n        }\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/payments/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE payment by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"idUser\": 4,\n        \"userName\": \"borrar\",\n        \"userLastname\": \"prueba\",\n        \"userDni\": \"21341241\",\n        \"userEmail\": \"ex@example.com\",\n        \"userAddress\": \"789 Oak St\",\n        \"userPassword\": \"pass\",\n        \"idPlayer\": 4,\n        \"playerPosition\": 4,\n        \"playerImage\": \"uno.jpg\",\n        \"playerFeePaid\": false\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/payments/delete/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT payment",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"paymentId\": 9,\n        \"amount\": 1008,\n        \"player\": {\n            \"userName\": \"John\",\n            \"userLastname\": \"Doe\",\n            \"userDni\": \"123456789\",\n            \"userEmail\": \"john@example.com\",\n            \"userAddress\": \"123 Main St\"\n        }\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/payments/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Player",
+			"item": [
+				{
+					"name": "GET all players",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/players/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET player by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "root",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "password",
+								"value": "4e0661fe-1d58-4dac-a54f-9023ab6d3d9b",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/players/get/8",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"get",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET player by DNI",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/players/getByDni/214512412",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"getByDni",
+								"214512412"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST player",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"playerBirthdate\": \"2018-12-21\", \n    \"userName\": \"prueba\",\n    \"userLastname\": \"prueba\",\n    \"userDni\": \"0012310\",\n    \"userEmail\": \"prn@example1.com\",\n    \"userAddress\": \"123 Main St\",\n    \"userPassword\": \"password123\",\n    \"categoryName\":2018 \n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/players/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE player by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/players/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT player",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"playerPosition\": \"defender\",\n    \"playerBirthdate\": \"2001-12-21\", \n    \"playerFeePaid\": true,\n    \"playerPasswordChanged\": false,\n    \"categoryId\" : 9,\n    \"userName\": \"cambio\",\n    \"userLastname\": \"prueba\",\n    \"userDni\": \"12341\",\n    \"userEmail\": \"prn@example1.com\",\n    \"userAddress\": \"123 Main St\",\n    \"userPassword\": \"password123\",\n    \"clubId\" : 1,\n    \"playerId\" : 3\n    \n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/players/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rol",
+			"item": [
+				{
+					"name": "GET all roles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/roles/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"list"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET role by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/roles/get/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"roleName\": \"USER_TESTER\"\r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/roles/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"save"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roleId\":1,\r\n    \"roleName\": \"USER_TESTER_2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/roles/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"update"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE role",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/roles/delete/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"delete",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Team",
+			"item": [
+				{
+					"name": "GET all teams",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/teams/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teams",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET team by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "root",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "password",
+								"value": "4e0661fe-1d58-4dac-a54f-9023ab6d3d9b",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/teams/get/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teams",
+								"get",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST team",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"teamName\": \"ultimo Equipo de prieba\",\n        \"teamDescription\": \"prueba\"\n    }\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/teams/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teams",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT team",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"teamId\": 2,\n    \"teamName\": \"ultimo Equipo de prueba\",\n    \"teamDescription\": \"esta es la nueva descripcion\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/teams/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teams",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE team by ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"idUser\": 4,\n        \"userName\": \"borrar\",\n        \"userLastname\": \"prueba\",\n        \"userDni\": \"21341241\",\n        \"userEmail\": \"ex@example.com\",\n        \"userAddress\": \"789 Oak St\",\n        \"userPassword\": \"pass\",\n        \"idPlayer\": 4,\n        \"playerPosition\": 4,\n        \"playerImage\": \"uno.jpg\",\n        \"playerFeePaid\": false\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/teams/delete/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teams",
+								"delete",
+								"2"
 							]
 						}
 					},
