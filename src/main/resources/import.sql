@@ -42,7 +42,7 @@ INSERT INTO employees (user_name, user_lastname, user_dni, user_email, user_addr
 INSERT INTO fixtures (fixture_name) VALUES ('Fixture 1');
 
 -- GAMES
-INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-02-28', '15:00', 1, 'Equipo Rival', 2, 1, 2, 1);
+INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-02-28', '15:00', 1, 'Equipo Rival', 2, 1, 2016, 1);
 
 -- PAYMENTS
 INSERT INTO payments (amount, player_player_id) VALUES ('100', '1');
