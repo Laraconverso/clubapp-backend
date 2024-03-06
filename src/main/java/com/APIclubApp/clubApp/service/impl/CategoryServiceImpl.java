@@ -1,21 +1,26 @@
 package com.APIclubApp.clubApp.service.impl;
 
 import com.APIclubApp.clubApp.dto.CategoryDTO;
+import com.APIclubApp.clubApp.dto.CategoryListAllDTO;
+import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Coach;
+import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.model.Team;
 import com.APIclubApp.clubApp.repository.CategoryRepository;
 import com.APIclubApp.clubApp.repository.CoachRepository;
+import com.APIclubApp.clubApp.repository.PlayerRepository;
 import com.APIclubApp.clubApp.repository.TeamRepository;
 import com.APIclubApp.clubApp.service.CategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Qualifier("CategoryServiceImpl")
 @Service
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
@@ -26,18 +31,25 @@ public class CategoryServiceImpl implements CategoryService {
     private CoachRepository coachRepository;
     @Autowired
     private TeamRepository teamRepository;
+    @Autowired
+    private PlayerRepository playerRepository;
 
     @Override
-    public List<Category> listAllCategories() {
-        return categoryRepository.findAll();
-    }
-//        List<Category> allCategories = categoryRepository.findAll();
-//        List<CategoryDTO> allCategoriesDTO = new ArrayList<>();// preguntar a Lara pq da error con Hashset
-//        for(Category category: allCategories)
-//            allCategoriesDTO.add(objectMapper.convertValue(category,CategoryDTO.class));
-//
-//        return allCategoriesDTO;
-//        }
+    public List<CategoryListAllDTO> listAllCategories() {
+        //return categoryRepository.findAll();
+
+          List<Category> allCategories = categoryRepository.findAll();
+          List<CategoryListAllDTO> allCategoriesDTO = new ArrayList<>();// preguntar a Lara pq da error con Hashset
+          CategoryListAllDTO categoryListAllDTO = null;
+            for(Category category: allCategories) {
+
+                categoryListAllDTO = objectMapper.convertValue(category, CategoryListAllDTO.class);
+
+                categoryListAllDTO.setPlayers(playersByCategory(categoryListAllDTO.getCategoryId()));
+                allCategoriesDTO.add(categoryListAllDTO);
+            }
+              return allCategoriesDTO;
+        }
 
 
 
@@ -57,7 +69,8 @@ public class CategoryServiceImpl implements CategoryService {
         // Set the fetched Coach and Team objects in the Category object
         category.setCoach(coach);
         category.setTeam(team);
-        return category;
+        // Save the category to the database
+        return categoryRepository.save(category);
     }
 
 
@@ -65,6 +78,18 @@ public class CategoryServiceImpl implements CategoryService {
     public Category getCategoryById(Long id) {
 
         return categoryRepository.findById(id).get();
+
+    }
+
+    @Override
+    public List<PlayerFormDTO> playersByCategory(Long id) {
+        List<Player> allPlayerByCategory = playerRepository.findAllByCategoryId(id);
+        List<PlayerFormDTO> allPlayersDTOByCategory = new ArrayList<>();
+        for(Player player: allPlayerByCategory)
+            allPlayersDTOByCategory.add(objectMapper.convertValue(player,PlayerFormDTO.class));
+
+        return allPlayersDTOByCategory;
+
 
     }
 
@@ -91,3 +116,5 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.deleteById(id);
     }
 }
+
+

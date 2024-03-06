@@ -1,6 +1,7 @@
 package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.dto.CategoryDTO;
+import com.APIclubApp.clubApp.dto.CategoryListAllDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.service.CategoryService;
@@ -23,7 +24,7 @@ public class CategoryController {
 
     @Operation(summary = "Listar categorias")
     @GetMapping("/list")
-    public ResponseEntity<List<Category>> listAllCategories(){
+    public ResponseEntity<List<CategoryListAllDTO>> listAllCategories(){
         return ResponseEntity.ok(categoryService.listAllCategories());
     }
     @Operation(summary = "Obtener una categoria por su ID")
