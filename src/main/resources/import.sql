@@ -19,14 +19,14 @@ INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_addres
 INSERT INTO team (team_name, team_description) VALUES ('Los dragones', 'Vuelan alto y veloz');
 
 -- CATEGORIES
-INSERT INTO categories (category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES ('2018', 'Martes', '16:00 - 18:00', '100 USD',1,1);
-INSERT INTO categories (category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES ('2017', 'Viernes', '17:00 - 19:00', '100 USD',2,1);
-INSERT INTO categories (category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES ('2016', 'Lunes', '16:00 - 18:00', '100 USD',3,1);
-INSERT INTO categories (category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES ('2015', 'Jueves', '17:00 - 19:00', '100 USD',4,1);
-INSERT INTO categories (category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES ('2014', 'Martes', '19:00 - 21:00', '100 USD',5,1);
-INSERT INTO categories (category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES ('2013', 'Jueves', '19:00 - 21:00', '100 USD',6,1);
-INSERT INTO categories (category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES ('2012', 'Lunes', '19:00 - 21:00', '100 USD',7,1);
-INSERT INTO categories (category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES ('2011', 'Viernes', '19:00 - 21:00', '100 USD',8,1);
+INSERT INTO categories (category_id, category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES (2018,'2018', 'Martes', '16:00 - 18:00', '100 USD',1,1);
+INSERT INTO categories (category_id, category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES (2017, '2017', 'Viernes', '17:00 - 19:00', '100 USD',2,1);
+INSERT INTO categories (category_id, category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES (2016, '2016', 'Lunes', '16:00 - 18:00', '100 USD',3,1);
+INSERT INTO categories (category_id, category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES (2015, '2015', 'Jueves', '17:00 - 19:00', '100 USD',4,1);
+INSERT INTO categories (category_id, category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES (2014, '2014', 'Martes', '19:00 - 21:00', '100 USD',5,1);
+INSERT INTO categories (category_id, category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES (2013, '2013', 'Jueves', '19:00 - 21:00', '100 USD',6,1);
+INSERT INTO categories (category_id, category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES (2012, '2012', 'Lunes', '19:00 - 21:00', '100 USD',7,1);
+INSERT INTO categories (category_id, category_name, category_schedule, category_daytraining, category_fee, coach_number, team_id) VALUES (2011, '2011', 'Viernes', '19:00 - 21:00', '100 USD',8,1);
 
 -- PLAYERS
 INSERT INTO players (player_fee_paid, player_password_changed, category_id, club_id, role_id, player_birthdate, player_position, user_address, user_dni, user_email, user_lastname, user_name, user_password) VALUES (1, 1, 1, 1, 2, '1995-05-15', 'Defensor', '123 Main St', '123456789A', 'player1@example.com', 'Doe', 'John', 'password1');
