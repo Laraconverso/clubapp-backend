@@ -22,7 +22,7 @@ public class CoachDTO {
     //private RolDTO rol;
     private Long clubId;
     //private ClubDTO club;
-    private Long categoryId;
+    //private Long categoryId;
     //private CategoryDTO category;
 
 }

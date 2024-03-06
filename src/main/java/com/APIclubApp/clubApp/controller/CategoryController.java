@@ -2,6 +2,7 @@ package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.dto.CategoryDTO;
 import com.APIclubApp.clubApp.dto.CategoryListAllDTO;
+import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.service.CategoryService;
@@ -76,6 +77,18 @@ public class CategoryController {
         categoryService.deleteCategory(id);
         return ResponseEntity.ok().body("Deleted");
     }
+
+    //agregado
+    @GetMapping("/search/{categoryName}")
+    public ResponseEntity<CategoryListAllDTO> getCategoryByName(@PathVariable String categoryName) {
+        CategoryListAllDTO categoryDTO = categoryService.getCategoryByName(categoryName);
+        if (categoryDTO == null) {
+            return ResponseEntity.notFound().build(); // Devolver 404 si la categoría no se encuentra
+        }
+        return ResponseEntity.ok(categoryDTO);
+    }
+
+
 }
 
 
