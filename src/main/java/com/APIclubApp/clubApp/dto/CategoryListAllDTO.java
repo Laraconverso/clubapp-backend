@@ -12,7 +12,7 @@ import java.util.List;
 public class CategoryListAllDTO {
     private Long categoryId;
     private String categoryName;
-    private Long coachNumber;
+    private CoachSimpleDTO coach;
     private List<PlayerFormDTO> players= new ArrayList<>();
 }
 

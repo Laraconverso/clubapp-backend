@@ -42,7 +42,9 @@ public class CategoryServiceImpl implements CategoryService {
           List<CategoryListAllDTO> allCategoriesDTO = new ArrayList<>();// preguntar a Lara pq da error con Hashset
           CategoryListAllDTO categoryListAllDTO = null;
             for(Category category: allCategories)
+
                 categoryListAllDTO = objectMapper.convertValue(category, CategoryListAllDTO.class);
+
                 categoryListAllDTO.setPlayers(playersByCategory(categoryListAllDTO.getCategoryId()));
                 allCategoriesDTO.add(categoryListAllDTO);
 
