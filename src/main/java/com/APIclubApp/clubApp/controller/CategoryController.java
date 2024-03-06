@@ -62,7 +62,7 @@ public class CategoryController {
     public ResponseEntity<Category> updateCategory(@RequestBody CategoryDTO category){
         ResponseEntity<Category> response;
         if (category.getCategoryId() != null /*&& categoryService.getCategoryById(category.getCategoryId()) != null*/){
-            response = ResponseEntity.ok(categoryService.saveCategory(category));
+            response = ResponseEntity.ok(categoryService.updateCategory(category));
         }else{
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

@@ -23,8 +23,8 @@ public class Coach extends User{
     @Column(name="coach_number")
     private Long coachNumber;
 
-    @OneToOne(mappedBy = "coach", fetch = FetchType.EAGER)
-    @JsonIgnore
+    @OneToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
     private Category category;
 
 

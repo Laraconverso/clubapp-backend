@@ -16,20 +16,14 @@ import java.util.Set;
 @Entity
 @Table(name="categories")
 public class Category {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name= "category_id")
     private Long categoryId;
 
     //se llamara de acuerdo al año de nacimiento de los jugadores
     @Column(name= "category_name") // Este Id como id
     private String categoryName;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "coach_number")
-//    @JsonIgnore
-    private Coach coach;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "team_id")

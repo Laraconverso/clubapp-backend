@@ -29,7 +29,7 @@ public class Player extends User{
     @Column(name = "player_feePaid", nullable = true, unique = false)
     private Boolean playerFeePaid;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 

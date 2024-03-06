@@ -12,10 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,24 +50,18 @@ public class FixtureServiceImpl implements FixtureService {
 
     @Override
     public Fixture saveFixture(FixtureDTO fixtureDTO) {
-
         Fixture fixture = modelMapper.map(fixtureDTO, Fixture.class);
 
-        // Obtener los IDs de los juegos que se deben agregar al fixture
         Set<Long> gameIds = fixtureDTO.getGameIds();
 
-        // Obtener los juegos correspondientes a los IDs
-        List<Game> gamesToAdd = gameRepository.findAllById(gameIds);
+        List<Long> gameIdList = new ArrayList<>(gameIds);
 
-        // Establecer la relación en ambos sentidos
-        for (Game game : gamesToAdd) {
-            fixture.getFixtureGames().add(game); // Agregar el juego al conjunto de juegos del fixture
-            game.setFixture(fixture); // Establecer el fixture en el juego
-        }
+        List<Game> gamesToAdd = gameRepository.findAllById(gameIdList);
 
-        // Guardar el fixture (y por ende, también los juegos)
+        fixture.setFixtureGames(new HashSet<>(gamesToAdd));
+
         return fixtureRepository.save(fixture);
-        }
+    }
 
 
 

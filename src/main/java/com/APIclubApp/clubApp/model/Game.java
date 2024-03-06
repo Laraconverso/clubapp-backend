@@ -52,5 +52,4 @@ public class Game {
     @JoinColumn(name = "id_fixture", nullable = true)
     @JsonIgnore
     private Fixture fixture;
-
 }

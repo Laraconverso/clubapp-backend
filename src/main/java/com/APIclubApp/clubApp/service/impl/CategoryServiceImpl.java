@@ -2,10 +2,9 @@ package com.APIclubApp.clubApp.service.impl;
 
 import com.APIclubApp.clubApp.dto.CategoryDTO;
 import com.APIclubApp.clubApp.model.Category;
-import com.APIclubApp.clubApp.model.Coach;
+import com.APIclubApp.clubApp.model.Role;
 import com.APIclubApp.clubApp.model.Team;
 import com.APIclubApp.clubApp.repository.CategoryRepository;
-import com.APIclubApp.clubApp.repository.CoachRepository;
 import com.APIclubApp.clubApp.repository.TeamRepository;
 import com.APIclubApp.clubApp.service.CategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,8 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
     @Autowired
     ObjectMapper objectMapper;
-    @Autowired
-    private CoachRepository coachRepository;
+
     @Autowired
     private TeamRepository teamRepository;
 
@@ -46,18 +44,16 @@ public class CategoryServiceImpl implements CategoryService {
         // Map CategoryDTO to Category using ObjectMapper
         Category category = objectMapper.convertValue(categoryDto, Category.class);
 
-        // Fetch the Coach object from the database by its ID
-        Coach coach = coachRepository.findById(categoryDto.getCoachNumber())
-                .orElseThrow(() -> new RuntimeException("Coach not found"));
-
         // Fetch the Team object from the database by its ID
         Team team = teamRepository.findById(categoryDto.getTeamId())
                 .orElseThrow(() -> new RuntimeException("Team not found"));
+        Category category1 = new Category();
 
-        // Set the fetched Coach and Team objects in the Category object
-        category.setCoach(coach);
+        // Set the fetched  Team objects in the Category object
+        category.setCategoryId(categoryDto.getCategoryId());
+        category.setCategoryName(category.getCategoryName());
         category.setTeam(team);
-        return category;
+        return categoryRepository.save(category);
     }
 
 
@@ -72,16 +68,12 @@ public class CategoryServiceImpl implements CategoryService {
     public Category updateCategory(CategoryDTO categoryDto) {
 
         Category editCategory=  objectMapper.convertValue(categoryDto, Category.class);
-        // Fetch the Coach object from the database by its ID
-        Coach coach = coachRepository.findById(categoryDto.getCoachNumber())
-                .orElseThrow(() -> new RuntimeException("Coach not found"));
 
         // Fetch the Team object from the database by its ID
         Team team = teamRepository.findById(categoryDto.getTeamId())
                 .orElseThrow(() -> new RuntimeException("Team not found"));
 
-        // Set the fetched Coach and Team objects in the Category object
-        editCategory.setCoach(coach);
+        // Set the fetched  Team objects in the Category object
         editCategory.setTeam(team);
         return categoryRepository.save(editCategory);
     }
