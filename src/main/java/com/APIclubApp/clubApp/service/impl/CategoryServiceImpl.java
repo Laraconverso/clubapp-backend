@@ -69,7 +69,8 @@ public class CategoryServiceImpl implements CategoryService {
         // Set the fetched Coach and Team objects in the Category object
         category.setCoach(coach);
         category.setTeam(team);
-        return category;
+        // Save the category to the database
+        return categoryRepository.save(category);
     }
 
 

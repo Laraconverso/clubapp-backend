@@ -21,7 +21,7 @@ public class CategoryDTO {
     private String categorySchedule;
     private String categoryDaytraining;
     private String categoryFee;
-    //private Set<PlayerDTO> playersDtoTeam= new HashSet<PlayerDTO>(); VER CON LARA
-    //private Set<GameDTO> gamesDtoCategory = new HashSet<GameDTO>(); VER CON LARA*/
+
+
 
 }
