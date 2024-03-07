@@ -5,21 +5,22 @@ import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.model.Player;
+import com.APIclubApp.clubApp.model.Role;
 import com.APIclubApp.clubApp.repository.CategoryRepository;
 import com.APIclubApp.clubApp.repository.ClubRepository;
 import com.APIclubApp.clubApp.repository.PlayerRepository;
+import com.APIclubApp.clubApp.repository.RoleRepository;
 import com.APIclubApp.clubApp.service.PlayerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.modelmapper.ModelMapper;
 
 import java.util.List;
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepository;
-    //private final RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
     private final CategoryRepository categoryRepository;
     private final ClubRepository clubRepository;
 
@@ -31,8 +32,9 @@ public class PlayerServiceImpl implements PlayerService {
 
 
     @Autowired
-    public PlayerServiceImpl(PlayerRepository playerRepository, CategoryRepository categoryRepository, ClubRepository clubRepository) {
+    public PlayerServiceImpl(PlayerRepository playerRepository, RoleRepository roleRepository, CategoryRepository categoryRepository, ClubRepository clubRepository) {
         this.playerRepository = playerRepository;
+        this.roleRepository = roleRepository;
         this.categoryRepository = categoryRepository;
         this.clubRepository = clubRepository;
     }
@@ -46,13 +48,13 @@ public class PlayerServiceImpl implements PlayerService {
         Player player = objectMapper.convertValue(playerDto, Player.class);
         Category category = categoryRepository.findById(playerDto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
-//        Role role = roleRepository.findById(playerDto.getRoleId())
-//                .orElseThrow(() -> new RuntimeException("Role not found"));
+        Role role = roleRepository.findByRoleName("Player")
+                .orElseThrow(()->new RuntimeException("Role not found"));
         Club club = clubRepository.findById(playerDto.getClubId())
                 .orElseThrow(() -> new RuntimeException("Club not found"));
 
         player.setCategory(category);
-//        player.setRole(role);
+        player.setRole(role);
         player.setClub(club);
 
         return playerRepository.save(player);
@@ -74,6 +76,9 @@ public class PlayerServiceImpl implements PlayerService {
         Player p = objectMapper.convertValue(player, Player.class);
         Category category = categoryRepository.findByCategoryName(player.getCategoryName());
         if(category == null ) throw new RuntimeException("Category not found");
+        Role role = roleRepository.findByRoleName("Player")
+                .orElseThrow(()->new RuntimeException("Role not found"));
+        p.setRole(role);
         p.setCategory(category);
         p.setPlayerFeePaid(false);
         p.setPlayerPasswordChanged(false);

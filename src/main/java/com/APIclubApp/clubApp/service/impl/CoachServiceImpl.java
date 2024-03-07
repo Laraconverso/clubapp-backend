@@ -4,9 +4,11 @@ import com.APIclubApp.clubApp.dto.CoachDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.model.Coach;
+import com.APIclubApp.clubApp.model.Role;
 import com.APIclubApp.clubApp.repository.CategoryRepository;
 import com.APIclubApp.clubApp.repository.ClubRepository;
 import com.APIclubApp.clubApp.repository.CoachRepository;
+import com.APIclubApp.clubApp.repository.RoleRepository;
 import com.APIclubApp.clubApp.service.CoachService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,8 @@ public class CoachServiceImpl implements CoachService {
     private ClubRepository clubRepository;
     @Autowired
     private CategoryRepository categoryRepository;
-    /*@Autowired
-    private RoleRepository roleRepository;*/
+    @Autowired
+    private RoleRepository roleRepository;
 
 
     @Override
@@ -50,13 +52,13 @@ public class CoachServiceImpl implements CoachService {
         //Fetch the Club object from the dataase by its ID
         Club club = clubRepository.findById(coach.getClubId())
                 .orElseThrow(()->new RuntimeException("Club not found"));
-        /*Fetch the Role object from the dataase by its ID
-        Role role = roleRepository.findById(coach.getRoleId())
-                .orElseThrow(()->new RuntimeException("Role not found"));*/
+        //Fetch the Role object from the dataase by its ID
+        Role role = roleRepository.findByRoleName("Coach")
+                .orElseThrow(()->new RuntimeException("Role not found"));
 
         //newCoach.setCategory(category);
         newCoach.setClub(club);
-        //newCoach.setRole(role);
+        newCoach.setRole(role);
 
         return coachRepository.save(newCoach);
     }
