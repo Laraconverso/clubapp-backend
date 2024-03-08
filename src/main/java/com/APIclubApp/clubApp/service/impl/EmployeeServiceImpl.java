@@ -6,6 +6,7 @@ import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.model.Role;
 import com.APIclubApp.clubApp.repository.ClubRepository;
 import com.APIclubApp.clubApp.repository.EmployeeRepository;
+import com.APIclubApp.clubApp.repository.RoleRepository;
 import com.APIclubApp.clubApp.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
@@ -27,8 +28,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private ClubRepository clubRepository;
 
-    //@Autowired
-    //private RoleRepository roleRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     //ObjectMapper objectMapper;
@@ -47,6 +48,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         /*Employee newEmployee=  objectMapper.convertValue(employee, Employee.class);*/
         //return employeeRepository.save(newEmployee);
         Employee employee = modelMapper.map(employeeDTO, Employee.class);
+        Role role = roleRepository.findByRoleName("Admin")
+                .orElseThrow(()->new RuntimeException("Role not found"));
+        employee.setRole(role);
         employee = employeeRepository.save(employee);
         return modelMapper.map(employee, EmployeeDTO.class);
     }
