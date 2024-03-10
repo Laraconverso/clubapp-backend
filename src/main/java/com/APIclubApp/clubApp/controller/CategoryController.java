@@ -46,17 +46,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.saveCategory(category));
     }
 
-    /*@PutMapping("/update/{id}")
-    public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody Category category){
-        ResponseEntity<Category> response;
-        if (categoryService.getCategoryById(id) != null){
-            category.setId(id);
-            response = ResponseEntity.ok(categoryService.saveCategory(category));
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return response;
-    }*/
+
 
     @Operation(summary = "Actualizar categoria")
     @PutMapping("/update")
@@ -64,7 +54,7 @@ public class CategoryController {
     public ResponseEntity<Category> updateCategory(@RequestBody CategoryDTO category){
         ResponseEntity<Category> response;
         if (category.getCategoryId() != null /*&& categoryService.getCategoryById(category.getCategoryId()) != null*/){
-            response = ResponseEntity.ok(categoryService.saveCategory(category));
+            response = ResponseEntity.ok(categoryService.updateCategory(category));
         }else{
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
