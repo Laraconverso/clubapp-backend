@@ -86,7 +86,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"categoryDescription\": \"torneo amateur \"\n}",
+							"raw": "{\n        \"categoryId\": 2017,\n        \"categoryName\": \"2017\",\n        \"coach\": {\n            \"coachNumber\": 2,\n            \"userName\": \"Silvina\",\n            \"userLastname\": \"Boggi\"\n        },\n        \"players\": []\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -94,12 +94,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/categories/update/2",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/categories/update/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"categories",
 								"update",
@@ -264,7 +266,21 @@
 					"name": "getAllCoach",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "https://clubapp-backend-production.up.railway.app/coaches/list",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"coaches",
+								"list"
+							]
+						}
 					},
 					"response": []
 				}
@@ -279,12 +295,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/employees/list",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/employees/list",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"employees",
 								"list"
@@ -300,7 +318,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"userName\": \"Barbie\",\r\n        \"userLastname\": \"Ken\",\r\n        \"userDni\": \"12345689\",\r\n        \"userEmail\": \"barbieg@example.com\",\r\n        \"userAddress\": \"123 Main St\",\r\n        \"userPassword\": \"password1234\",\r\n        \"clubId\": 1,\r\n        \"roleId\": 1\r\n    }",
+							"raw": "{\r\n        \"userName\": \"Barbie\",\r\n        \"userLastname\": \"Laker\",\r\n        \"userDni\": \"12345689\",\r\n        \"userEmail\": \"barbieg@example.com\",\r\n        \"userAddress\": \"123 Main St\",\r\n        \"userPassword\": \"password1234\",\r\n        \"clubId\": 1,\r\n        \"roleId\": 1\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -308,12 +326,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/employees/save",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/employees/save",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"employees",
 								"save"
@@ -328,16 +348,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/employees/get/1",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/employees/get/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"employees",
 								"get",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -350,7 +372,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"userName\": \"John\",\r\n        \"userLastname\": \"Doe\",\r\n        \"userDni\": \"123456789\",\r\n        \"userEmail\": \"john@example.com\",\r\n        \"userAddress\": \"1414 Main St\",\r\n        \"userPassword\": \"password123\",\r\n        \"employeeNumber\": 1\r\n    }",
+							"raw": "{\r\n        \"userName\": \"Barbie\",\r\n        \"userLastname\": \"Lakeri\",\r\n        \"userDni\": \"12345689\",\r\n        \"userEmail\": \"barbieg@example.com\",\r\n        \"userAddress\": \"123 Main St\",\r\n        \"userPassword\": \"$2a$10$hmVhKf.RLxysFDSnuJ9j3egt57IuybCpVSNNcne4JGyAx.FpcnpKy\",\r\n        \"role\": {\r\n            \"roleId\": 1,\r\n            \"roleName\": \"Admin\"\r\n        },\r\n        \"club\": {\r\n            \"clubId\": 1,\r\n            \"clubName\": \"The Best Club\",\r\n            \"clubLogo\": \"logo_url\",\r\n            \"clubDescription\": \"El mejor Club\"\r\n        },\r\n        \"employeeNumber\": 2\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -358,12 +380,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/employees/update",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/employees/update",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"employees",
 								"update"
@@ -378,12 +402,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/employees/delete/2",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/employees/delete/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"employees",
 								"delete",
@@ -399,16 +425,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/employees/getByDni/123456",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/employees/getByDni/12345689",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"employees",
 								"getByDni",
-								"123456"
+								"12345689"
 							],
 							"query": [
 								{
@@ -432,12 +460,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/fixtures/list",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/fixtures/list",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"fixtures",
 								"list"
@@ -452,28 +482,41 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/fixtures/get/1",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/fixtures/get/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"fixtures",
 								"get",
-								"1"
+								"2"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "getWithGames",
+					"name": "getAllFixtureNameAndId",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "https://clubapp-backend-production.up.railway.app/fixtures/listIdName",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"fixtures",
+								"listIdName"
+							]
 						}
 					},
 					"response": []
@@ -485,7 +528,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fixtureName\": \"Fixture 71\",\r\n    \"gameIds\": [2]\r\n}\r\n    ",
+							"raw": "{\r\n    \"fixtureName\": \"Torneo de Otoño\",\r\n    \"gameIds\": [2]\r\n}\r\n    ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -493,12 +536,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/fixtures/save",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/fixtures/save",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"fixtures",
 								"save"
@@ -533,16 +578,18 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/fixtures/delete/",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/fixtures/delete/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"fixtures",
 								"delete",
-								""
+								"2"
 							]
 						}
 					},
@@ -554,12 +601,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/fixtures/listIdName",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/fixtures/listIdName",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"fixtures",
 								"listIdName"
@@ -575,16 +624,30 @@
 			"item": [
 				{
 					"name": "GET all games",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/games/list",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/games/list",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"games",
 								"list"
@@ -621,7 +684,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n    \"gameDay\": \"2024-05-06\",\r\n    \"gameTime\": \"15:00\",\r\n    \"gameIslocal\": false,\r\n    \"gameTeamrival\": \"Equipo Rival5\",\r\n    \"gameLocalgoals\": 0,\r\n    \"gameRivalgoals\": 1,\r\n    \"categoryId\": 2,\r\n    \"fixtureId\":37\r\n        \r\n}",
+							"raw": "{\r\n    \r\n    \"gameDay\": \"2024-05-06\",\r\n    \"gameTime\": \"15:00\",\r\n    \"gameIslocal\": false,\r\n    \"gameTeamrival\": \"Equipo Rival5\",\r\n    \"gameLocalgoals\": 0,\r\n    \"gameRivalgoals\": 1,\r\n    \"categoryId\": 2015,\r\n    \"fixtureId\":1\r\n        \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -629,12 +692,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/games/save",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/games/save",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"games",
 								"save"
@@ -671,6 +736,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "deleteGame",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -686,12 +759,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/payments/list",
+							"raw": "https://clubapp-backend-production.up.railway.app/games/list/payments/list",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
+								"games",
+								"list",
 								"payments",
 								"list"
 							]
@@ -721,11 +799,14 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/payments/get/2",
+							"raw": "https://clubapp-backend-production.up.railway.app/payments/get/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"payments",
 								"get",
@@ -745,7 +826,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"amount\": 3000,\n        \"player\": {\n            \"userName\": \"John\",\n            \"userLastname\": \"Doe\",\n            \"userDni\": \"12341\",\n            \"userEmail\": \"john@example.com\",\n            \"userAddress\": \"123 Main St\"\n        }\n    }",
+							"raw": "{\n        \"amount\": 100,\n        \"player\": {\n           /* \"userName\": \"John\",\n            \"userLastname\": \"Doe\",\n            \"userDni\": \"12341\",\n            \"userEmail\": \"john@example.com\",\n            \"userAddress\": \"123 Main St\"*/\n            \"userName\": \"Alice\",\n            \"userLastname\": \"Smith\",\n            \"userDni\": \"987654321\",\n            \"userEmail\": \"player2@example.com\",\n            \"userAddress\": \"456 Elm St\"\n        \n        }\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -753,11 +834,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/payments/save",
+							"raw": "https://clubapp-backend-production.up.railway.app/payments/save",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"payments",
 								"save"
@@ -843,11 +927,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/players/list",
+							"raw": "https://clubapp-backend-production.up.railway.app/players/list",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"players",
 								"list"
@@ -878,15 +965,18 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/players/get/8",
+							"raw": "https://clubapp-backend-production.up.railway.app/players/get/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"players",
 								"get",
-								"8"
+								"1"
 							]
 						}
 					},
@@ -1022,11 +1112,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/roles/list",
+							"raw": "https://clubapp-backend-production.up.railway.app/roles/list",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"roles",
 								"list"
