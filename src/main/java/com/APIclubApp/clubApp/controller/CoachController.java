@@ -1,7 +1,6 @@
 package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.dto.CoachDTO;
-import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Coach;
 import com.APIclubApp.clubApp.service.CoachService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,6 +8,7 @@ import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +20,9 @@ import java.util.Optional;
 public class CoachController {
     @Autowired
     private CoachService coachService;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Operation(summary = "Listar todos los coaches/dts")
     @GetMapping("/list")
@@ -45,6 +48,8 @@ public class CoachController {
     @Operation(summary = "Crear un coach")
     @PostMapping("/save")
     public ResponseEntity<Coach> saveCoach(@RequestBody CoachDTO coach){
+        String passWEncrypt= passwordEncoder.encode(coach.getUserPassword());
+        coach.setUserPassword(passWEncrypt);
         return ResponseEntity.ok(coachService.saveCoach(coach));
     }
 

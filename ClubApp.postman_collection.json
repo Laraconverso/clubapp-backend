@@ -247,16 +247,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/coaches/get/1",
-							"protocol": "http",
+							"raw": "https://clubapp-backend-production.up.railway.app/coaches/get/10",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"coaches",
 								"get",
-								"1"
+								"10"
 							]
 						}
 					},
@@ -1068,7 +1070,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"playerPosition\": \"defender\",\n    \"playerBirthdate\": \"2001-12-21\", \n    \"playerFeePaid\": true,\n    \"playerPasswordChanged\": false,\n    \"categoryId\" : 9,\n    \"userName\": \"cambio\",\n    \"userLastname\": \"prueba\",\n    \"userDni\": \"12341\",\n    \"userEmail\": \"prn@example1.com\",\n    \"userAddress\": \"123 Main St\",\n    \"userPassword\": \"password123\",\n    \"clubId\" : 1,\n    \"playerId\" : 3\n    \n}\n",
+							"raw": "{\n        \"playerId\": 1,\n        \"playerPosition\": \"Defensor\",\n        \"playerBirthdate\": \"1995-05-15\",\n        \"playerFeePaid\": true,\n        \"playerPasswordChanged\": true,\n        \"categoryId\": 2011,\n        \"userName\": \"John\",\n        \"userLastname\": \"Dominguez\",\n        \"userDni\": \"123456789\",\n        \"userEmail\": \"player1@example.com\",\n        \"userAddress\": \"123 Main St\",\n        \"userPassword\": \"password1\",\n        \"clubId\": 1\n        \n    }\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1076,11 +1078,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/players/update",
+							"raw": "https://clubapp-backend-production.up.railway.app/players/update",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"players",
 								"update"
