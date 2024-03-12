@@ -26,7 +26,7 @@ public class ClubAppApplication {
 	}
 
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 

@@ -10,11 +10,13 @@ import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8080")
+//@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin
 @RestController
 @RequestMapping("/players")
 public class PlayerController {
@@ -22,7 +24,8 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
-    //private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Operation(summary = "Obtiene un jugador por su ID")
     @GetMapping("/get/{id}")
@@ -58,17 +61,21 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.listAllPlayers());
     }
 
-//    @PostMapping("/save")
-//    @PermitAll
-//    public ResponseEntity<Player> savePlayer(@RequestBody PlayerDTO player){
-////        player.setUserPassword(passwordEncoder.encode(player.getUserPassword()));
-//        return ResponseEntity.ok(playerService.savePlayer(player));
-//    }
+   @PostMapping("/saveComplete")
+    @PermitAll
+    public ResponseEntity<Player> savePlayer(@RequestBody PlayerDTO player){
+        player.setUserPassword(passwordEncoder.encode(player.getUserPassword()));
+        return ResponseEntity.ok(playerService.savePlayer(player));
+    }
 
     @Operation(summary = "Crea un jugador")
     @PostMapping("/save")
     @PermitAll
     public ResponseEntity<Player> savePlayerForm(@RequestBody PlayerFormDTO player){
+        String passWEncrypt= passwordEncoder.encode(player.getUserPassword());
+        player.setUserPassword(passWEncrypt);
+        //PlayerFormDTO savedPlayer= playerService.savePlayerForm(player);
+
         return ResponseEntity.ok(playerService.savePlayerForm(player));
     }
 
