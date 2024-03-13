@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.PlayerChangePasswordDTO;
 import com.APIclubApp.clubApp.dto.PlayerDTO;
 import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.model.Player;
@@ -91,7 +92,7 @@ public class PlayerController {
     }
 
     @Operation(summary = "Actualiza un jugador")
-    @PutMapping("update")
+    @PutMapping("/update")
     public ResponseEntity<Player> updatePlayer(@RequestBody PlayerDTO player){
         Player player1 = playerService.getPlayerById(player.getPlayerId());
         if ( player1!= null && player1.getPlayerId() != null)
@@ -101,14 +102,25 @@ public class PlayerController {
 
     }
 
-//    @PutMapping("/update/form")
-//    public ResponseEntity<Player> updatePlayerForm(@RequestBody PlayerFormDTO player){
-//        Player player1 = playerService.getPlayerByDNI(player.getUserDni());
-//        if (player1!= null && player1.getPlayerId() != null)
-//            return ResponseEntity.ok(playerService.updatePlayerForm(player));
-//        else
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//
-//    }
+/*@PutMapping("/update/form") public ResponseEntity<Player> updatePlayerForm(@RequestBody PlayerFormDTO player){
+        Player player1 = playerService.getPlayerByDNI(player.getUserDni());
+        if (player1!= null && player1.getPlayerId() != null)
+            return ResponseEntity.ok(playerService.updatePlayerForm(player));
+        else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+  }*/
+    @Operation(summary = "modificar contraseña de usuario jugador")
+    @PutMapping("/update/password") public ResponseEntity<Player> updatePlayerChangePassword(@RequestBody PlayerChangePasswordDTO player){
+        String passWEncrypt= passwordEncoder.encode(player.getUserPassword());
+        player.setUserPassword(passWEncrypt);
+        //player.setClubId(player.getClubId());
+        Player updatedPlayer = playerService.updatePlayerPassword(player);
+        if (updatedPlayer != null) {
+            return ResponseEntity.ok(updatedPlayer);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+    }
 
 }

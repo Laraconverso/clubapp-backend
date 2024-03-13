@@ -993,11 +993,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/players/getByDni/214512412",
+							"raw": "https://clubapp-backend-production.up.railway.app/players/getByDni/214512412",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"players",
 								"getByDni",
@@ -1017,7 +1020,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"playerBirthdate\": \"2018-12-21\", \n    \"userName\": \"prueba\",\n    \"userLastname\": \"prueba\",\n    \"userDni\": \"0012310\",\n    \"userEmail\": \"prn@example1.com\",\n    \"userAddress\": \"123 Main St\",\n    \"userPassword\": \"password123\",\n    \"categoryName\":2018 \n}\n\n",
+							"raw": "{\n    \"playerBirthdate\": \"2018-11-19\", \n    \"userName\": \"pedros\",\n    \"userLastname\": \"Fernandez\",\n    \"userDni\": \"1965063798\",\n    \"userEmail\": \"pedror@example.com\",\n    \"userAddress\": \"1234 Main St\",\n    \"userPassword\": \"14256\",\n    \"categoryName\":2016\n}\n\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1025,11 +1028,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/players/save",
+							"raw": "https://clubapp-backend-production.up.railway.app/players/save",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
 							],
-							"port": "8080",
 							"path": [
 								"players",
 								"save"
@@ -1089,6 +1095,38 @@
 							"path": [
 								"players",
 								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePasswordPlayer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"playerId\": 6,\r\n        \"userPassword\": \"password26\",\r\n        \r\n        \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://clubapp-backend-production.up.railway.app/players/update/password",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"players",
+								"update",
+								"password"
 							]
 						}
 					},
