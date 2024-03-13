@@ -42,7 +42,7 @@ public class PlayerController {
         return response;
     }
 
-    @Operation(summary = "Obtiene un jugador por su ID")
+    @Operation(summary = "Obtiene un jugador por su DNI")
     @GetMapping("/getByDni/{dni}")
     @PermitAll
     public ResponseEntity<Player> getPlayerById(@PathVariable String dni){
@@ -55,7 +55,7 @@ public class PlayerController {
         return response;
     }
 
-    @Operation(summary = "Obtiene un jugador por su ID")
+    @Operation(summary = "Obtiene una lista de jugadores")
     @GetMapping("/list")
     @PermitAll
     public ResponseEntity<List<Player>> getAllPlayers(){
@@ -110,7 +110,8 @@ public class PlayerController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
   }*/
     @Operation(summary = "modificar contraseña de usuario jugador")
-    @PutMapping("/update/password") public ResponseEntity<Player> updatePlayerChangePassword(@RequestBody PlayerChangePasswordDTO player){
+    @PutMapping("/update/password")
+    public ResponseEntity<Player> updatePlayerChangePassword(@RequestBody PlayerChangePasswordDTO player){
         String passWEncrypt= passwordEncoder.encode(player.getUserPassword());
         player.setUserPassword(passWEncrypt);
         //player.setClubId(player.getClubId());
@@ -122,5 +123,17 @@ public class PlayerController {
         }
 
     }
+
+    @Operation(summary = "Obtiene un booleano que le indica si la contraseña ha sido modificada")
+    @GetMapping("/getPasswordChanged/{dni}")
+    public ResponseEntity<Object> getPlayerPasswordChanged(@PathVariable String dni){
+        if (playerService.getPlayerByDNI(String.valueOf(dni))!=null){
+            return ResponseEntity.ok(playerService.getPlayerPasswordChanged(String.valueOf(dni)));
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+    }
+
 
 }
