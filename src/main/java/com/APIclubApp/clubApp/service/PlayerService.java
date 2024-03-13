@@ -1,4 +1,5 @@
 package com.APIclubApp.clubApp.service;
+import com.APIclubApp.clubApp.dto.PlayerChangePasswordDTO;
 import com.APIclubApp.clubApp.dto.PlayerDTO;
 import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.model.Player;
@@ -20,4 +21,6 @@ public interface PlayerService {
     void deletePlayer(Long id);
 
     Player getPlayerByDNI(String dni);
+
+    Player updatePlayerPassword(PlayerChangePasswordDTO player);
 }

@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.service.impl;
 
+import com.APIclubApp.clubApp.dto.PlayerChangePasswordDTO;
 import com.APIclubApp.clubApp.dto.PlayerDTO;
 import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.model.Category;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
@@ -113,4 +116,20 @@ public class PlayerServiceImpl implements PlayerService {
     public Player getPlayerByDNI(String dni) {
         return playerRepository.findByUserDni(dni);
     }
+
+    @Override
+    public Player updatePlayerPassword(PlayerChangePasswordDTO playerChangePasswordDTO) {
+        Optional<Player> optionalPlayer = playerRepository.findById(playerChangePasswordDTO.getPlayerId());
+        if (optionalPlayer.isPresent()) {
+            Player player = optionalPlayer.get();
+
+            player.setUserPassword(playerChangePasswordDTO.getUserPassword()); //cambiamos la contraseña
+            //player.setPlayerPasswordChanged(true); // Marcamos que la contraseña ha sido cambiada
+            return playerRepository.save(player);
+        } else {
+            throw new RuntimeException("Player not found with ID: " + playerChangePasswordDTO.getPlayerId());
+        }
+    }
+
+
 }
