@@ -23,4 +23,6 @@ public interface PlayerService {
     Player getPlayerByDNI(String dni);
 
     Player updatePlayerPassword(PlayerChangePasswordDTO player);
+
+    Boolean getPlayerPasswordChanged(String dni);
 }

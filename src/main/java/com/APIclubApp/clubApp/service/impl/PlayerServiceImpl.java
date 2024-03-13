@@ -131,5 +131,15 @@ public class PlayerServiceImpl implements PlayerService {
         }
     }
 
+    @Override
+    public Boolean getPlayerPasswordChanged(String dni) {
+        Player player = playerRepository.findByUserDni(dni);
+        if(player!=null){
+           return player.getPlayerPasswordChanged();
+        } else{
+            throw new RuntimeException("Player not found with DNI" + dni);
+        }
+    }
+
 
 }
