@@ -3,6 +3,7 @@ package com.APIclubApp.clubApp.service.impl;
 import com.APIclubApp.clubApp.dto.PlayerChangePasswordDTO;
 import com.APIclubApp.clubApp.dto.PlayerDTO;
 import com.APIclubApp.clubApp.dto.PlayerFormDTO;
+import com.APIclubApp.clubApp.dto.PlayerUpdateAdminDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.model.Player;
@@ -26,6 +27,7 @@ public class PlayerServiceImpl implements PlayerService {
     private final RoleRepository roleRepository;
     private final CategoryRepository categoryRepository;
     private final ClubRepository clubRepository;
+
 
 //    @Autowired
 //    private ModelMapper modelMapper;
@@ -89,12 +91,34 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Player updatePlayerForm(PlayerFormDTO updatedPlayer) {
-        Player player = playerRepository.findByUserDni(updatedPlayer.getUserDni());
-        if (player != null) {
-           return savePlayerForm(updatedPlayer);
+    public Player updatePlayerAdmin(PlayerUpdateAdminDTO updatedPlayer) {
+        // Convertimos el objeto DTO actualizado a un objeto Player
+        Player player = objectMapper.convertValue(updatedPlayer, Player.class);
+
+        // Buscamos al jugador en el repositorio por su ID
+        Optional<Player> playerOptional = playerRepository.findById(updatedPlayer.getPlayerId());
+
+        if (playerOptional.isPresent()) {
+            // Si encontramos al jugador, actualizamos sus datos
+            Player existingPlayer = playerOptional.get();
+            // Actualizamos solo los campos que deben actualizarse
+            if (updatedPlayer.getUserName() != null) {
+                existingPlayer.setUserName(updatedPlayer.getUserName());
+            }
+            if (updatedPlayer.getUserLastname() != null) {
+                existingPlayer.setUserLastname(updatedPlayer.getUserLastname());
+            }
+            if (updatedPlayer.getUserEmail() != null) {
+                existingPlayer.setUserEmail(updatedPlayer.getUserEmail());
+            }
+            if (updatedPlayer.getUserAddress() != null) {
+                existingPlayer.setUserAddress(updatedPlayer.getUserAddress());
+            }
+            // Guardamos el jugador actualizado en el repositorio
+            return playerRepository.save(existingPlayer);
         } else {
-            throw new RuntimeException("Player not found with DNI: " + updatedPlayer.getUserDni());
+            // Si no encontramos al jugador, lanzamos una excepción
+            throw new RuntimeException("Player not found with ID: " + updatedPlayer.getPlayerId());
         }
     }
 

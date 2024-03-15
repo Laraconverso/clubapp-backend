@@ -3,6 +3,7 @@ package com.APIclubApp.clubApp.controller;
 import com.APIclubApp.clubApp.dto.PlayerChangePasswordDTO;
 import com.APIclubApp.clubApp.dto.PlayerDTO;
 import com.APIclubApp.clubApp.dto.PlayerFormDTO;
+import com.APIclubApp.clubApp.dto.PlayerUpdateAdminDTO;
 import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.model.Role;
 import com.APIclubApp.clubApp.service.PlayerService;
@@ -101,14 +102,21 @@ public class PlayerController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
     }
+    @Operation(summary = "modificar datos basicos de usuario jugador por parte del admin")
+    @PutMapping("/update/form") public ResponseEntity<Player> updatePlayerAdmin(@RequestBody PlayerUpdateAdminDTO player){
+        // Obtener el jugador existente por su ID
+        Player player1 = playerService.getPlayerById(player.getPlayerId());
 
-/*@PutMapping("/update/form") public ResponseEntity<Player> updatePlayerForm(@RequestBody PlayerFormDTO player){
-        Player player1 = playerService.getPlayerByDNI(player.getUserDni());
-        if (player1!= null && player1.getPlayerId() != null)
-            return ResponseEntity.ok(playerService.updatePlayerForm(player));
-        else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-  }*/
+        if (player1 != null && player1.getPlayerId() != null) {
+            // Si se encuentra el jugador, llamar al servicio para actualizarlo
+            Player updatedPlayer = playerService.updatePlayerAdmin(player);
+            // Devolver una respuesta con el jugador actualizado y código HTTP 200
+            return ResponseEntity.ok(updatedPlayer);
+        } else {
+            // Si el jugador no se encuentra, devolver una respuesta HTTP 404 con un mensaje de error
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Se podría añadir un mensaje de error en el cuerpo
+        }
+  }
     @Operation(summary = "modificar contraseña de usuario jugador")
     @PutMapping("/update/password")
     public ResponseEntity<Player> updatePlayerChangePassword(@RequestBody PlayerChangePasswordDTO player){

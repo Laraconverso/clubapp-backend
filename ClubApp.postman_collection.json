@@ -1131,6 +1131,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "updatePayerByAdmin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"playerId\": 1,\r\n    \"userName\": \"Lucas\",\r\n    \"userLastname\": \"Fernandez\",\r\n    \"userEmail\": \"lucasfer123@example.com\",\r\n    \"userAddress\": \"123456 Main St\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://clubapp-backend-production.up.railway.app/players/update/form",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"players",
+								"update",
+								"form"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
