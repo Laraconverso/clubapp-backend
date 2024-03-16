@@ -86,7 +86,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"categoryId\": 2017,\n        \"categoryName\": \"2017\",\n        \"coach\": {\n            \"coachNumber\": 2,\n            \"userName\": \"Silvina\",\n            \"userLastname\": \"Boggi\"\n        },\n        \"players\": []\n    }",
+							"raw": "{\n        \"categoryId\": 2019,\n        \"categoryName\": \"2022\",\n\n            \"coachNumber\": 11,\n            \"teamId\":1,\n            \"categorySchedule\":\"Lunes\",\n            \"categoryDaytraining\":\"14:00\",\n            \"categoryFee\": \"1000U SD\"\n\n\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -94,7 +94,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://clubapp-backend-production.up.railway.app/categories/update/2",
+							"raw": "https://clubapp-backend-production.up.railway.app/categories/update",
 							"protocol": "https",
 							"host": [
 								"clubapp-backend-production",
@@ -104,8 +104,7 @@
 							],
 							"path": [
 								"categories",
-								"update",
-								"2"
+								"update"
 							]
 						}
 					},
@@ -283,6 +282,37 @@
 								"list"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCoach",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://clubapp-backend-production.up.railway.app/coaches/delete/10",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"coaches",
+								"delete",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCoach",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}

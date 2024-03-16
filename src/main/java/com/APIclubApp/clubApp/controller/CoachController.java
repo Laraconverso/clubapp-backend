@@ -48,8 +48,9 @@ public class CoachController {
     @Operation(summary = "Crear un coach")
     @PostMapping("/save")
     public ResponseEntity<Coach> saveCoach(@RequestBody CoachDTO coach){
-        String passWEncrypt= passwordEncoder.encode(coach.getUserPassword());
-        coach.setUserPassword(passWEncrypt);
+        //descomentar para encriptar
+        //String passWEncrypt= passwordEncoder.encode(coach.getUserPassword());
+        //coach.setUserPassword(passWEncrypt);
         return ResponseEntity.ok(coachService.saveCoach(coach));
     }
 
@@ -70,7 +71,7 @@ public class CoachController {
     @Operation(summary = "Actualizar un coach")
     @PutMapping("/update")
     @PermitAll
-    public ResponseEntity<Coach> updateCategory(@RequestBody CoachDTO coach){
+    public ResponseEntity<Coach> updateCoach(@RequestBody CoachDTO coach){
         ResponseEntity<Coach> response;
         if (coach.getCoachNumber() != null /*&& coachService.getCoachById(coach.getCoachNumber()) != null*/){
             response = ResponseEntity.ok(coachService.saveCoach(coach));
