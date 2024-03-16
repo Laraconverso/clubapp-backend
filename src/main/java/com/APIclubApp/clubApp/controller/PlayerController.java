@@ -74,9 +74,10 @@ public class PlayerController {
     @PostMapping("/save")
     @PermitAll
     public ResponseEntity<Player> savePlayerForm(@RequestBody PlayerFormDTO player){
-        String passWEncrypt= passwordEncoder.encode(player.getUserPassword());
-        player.setUserPassword(passWEncrypt);
-        //PlayerFormDTO savedPlayer= playerService.savePlayerForm(player);
+        //descomentar para encriptar
+        //String passWEncrypt= passwordEncoder.encode(player.getUserPassword());
+        //player.setUserPassword(passWEncrypt);
+
 
         return ResponseEntity.ok(playerService.savePlayerForm(player));
     }
