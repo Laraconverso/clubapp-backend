@@ -121,8 +121,6 @@ public class PlayerController {
         } catch (NotFoundException e) {
             // Si el jugador no se encuentra, devolver una respuesta HTTP 404 con un mensaje de error
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (AlreadyExistsException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
   }
     @Operation(summary = "modificar contraseña de usuario jugador")
