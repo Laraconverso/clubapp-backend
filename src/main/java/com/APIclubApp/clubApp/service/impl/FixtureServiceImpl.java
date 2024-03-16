@@ -2,6 +2,7 @@ package com.APIclubApp.clubApp.service.impl;
 
 import com.APIclubApp.clubApp.dto.EmployeeDTO;
 import com.APIclubApp.clubApp.dto.FixtureDTO;
+import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.model.Fixture;
 import com.APIclubApp.clubApp.model.Game;
@@ -76,7 +77,8 @@ public class FixtureServiceImpl implements FixtureService {
 
     @Override
     public Fixture getFixtureById(Long id) {
-        return fixtureRepository.findById(id).orElse(null);
+        return fixtureRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Fixture not found with ID: " + id));
 
         /*Fixture fixture = fixtureRepository.findById(id).orElse(null);
         return modelMapper.map(fixture, FixtureDTO.class);*/
@@ -84,6 +86,8 @@ public class FixtureServiceImpl implements FixtureService {
 
     @Override
     public Fixture updateFixture(FixtureDTO fixtureDTO) {
+        Fixture existingFixture = fixtureRepository.findById(fixtureDTO.getFixtureId())
+                .orElseThrow(() -> new NotFoundException("Fixture not found with ID: " + fixtureDTO.getFixtureId()));
 
         Fixture fixture = modelMapper.map(fixtureDTO, Fixture.class);
         return fixtureRepository.save(fixture);
@@ -91,7 +95,10 @@ public class FixtureServiceImpl implements FixtureService {
 
     @Override
     public void deleteFixture(Long id) {
-        fixtureRepository.deleteById(id);
-    }
+        if (fixtureRepository.existsById(id)) {
+            fixtureRepository.deleteById(id);
+        } else {
+            throw new NotFoundException("Fixture not found with ID: " + id);
+        }    }
 }
 

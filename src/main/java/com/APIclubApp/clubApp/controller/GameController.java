@@ -2,6 +2,7 @@ package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.dto.FixtureDTO;
 import com.APIclubApp.clubApp.dto.GameDTO;
+import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Game;
 import com.APIclubApp.clubApp.service.GameService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,24 +27,27 @@ public class GameController {
     @Operation(summary = "Lista todos los partidos")
     @GetMapping("/list")
     public ResponseEntity<List<Game>> listAllGames() {
-        return ResponseEntity.ok(gameService.listAllGames());
-    }
+        List<Game> games= gameService.listAllGames();
+        if (games.isEmpty()){
+            System.out.println("Aún no hay partidos cargados en la base de datos.");
+        }
+        return ResponseEntity.ok(gameService.listAllGames());    }
 
 
     @Operation(summary = "Obtener un partido por ID")
     @GetMapping("/get/{id}")
-    public ResponseEntity<Game> getGameById(@PathVariable Long id) {
+    public ResponseEntity<?> getGameById(@PathVariable Long id) {
         Game game = gameService.getGameById(id);
-        if (game != null) {
+        try {
             return ResponseEntity.ok(game);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
     @Operation(summary = "Crear un partido")
     @PostMapping("/save")
-    public ResponseEntity<Game> saveGame(@RequestBody GameDTO gameDTO) {
+    public ResponseEntity<?> saveGame(@RequestBody GameDTO gameDTO) {
 // Mapear GameDTO a Game
         Game game = modelMapper.map(gameDTO, Game.class);
 
@@ -51,19 +55,14 @@ public class GameController {
         Game savedGame = gameService.saveGame(gameDTO);
 
         // Verificar si se pudo guardar el juego
-        if (savedGame != null) {
-            // Si se guardó correctamente, devolver una respuesta con el juego guardado y el estado HTTP 200 OK
-            return ResponseEntity.ok(savedGame);
-        } else {
-            // Si no se pudo guardar, devolver una respuesta con el estado HTTP 500 Internal Server Error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        // Si se guardó correctamente, devolver una respuesta con el juego guardado y el estado HTTP 200 OK
+        return ResponseEntity.ok(savedGame);
 
     }
 
     @Operation(summary = "Actualizar un partido")
     @PutMapping("/update")
-    public ResponseEntity<Game> updateGame( @RequestBody GameDTO gameDTO) {
+    public ResponseEntity<?> updateGame( @RequestBody GameDTO gameDTO) {
         /*ResponseEntity<Game> response;
         if (gameService.getGameById(id) != null) {
             game.setGameId(id);
@@ -73,26 +72,28 @@ public class GameController {
         }
         return response;*/
         // Mapear GameDTO a Game
-        Game game = modelMapper.map(gameDTO, Game.class);
 
-        // Actualizar el juego en el servicio
-        Game updatedGame = gameService.updateGame(gameDTO);
+        //Game game = modelMapper.map(gameDTO, Game.class);
+        try {
 
-        // Verificar si se pudo actualizar el juego
-        if (updatedGame != null) {
-            // Si se actualizó correctamente, devolver una respuesta con el juego actualizado y el estado HTTP 200 OK
+            // Actualizar el juego en el servicio
+            Game updatedGame = gameService.updateGame(gameDTO);
+
             return ResponseEntity.ok(updatedGame);
-        } else {
-            // Si no se pudo actualizar, devolver una respuesta con el estado HTTP 500 Internal Server Error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
     @Operation(summary = "Eliminar un partido por ID")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteGame(@PathVariable Long id) {
-        gameService.deleteGame(id);
-        return ResponseEntity.ok().body("Deleted");
+        try {
+            gameService.deleteGame(id);
+            return ResponseEntity.ok().body("Game deleted successfully");
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 }
 

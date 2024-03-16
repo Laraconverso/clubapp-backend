@@ -22,4 +22,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleNoChangesException(NoChangesException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
+    @ExceptionHandler(AssociatedCategoriesException.class)
+    public ResponseEntity<Object> handleAssociatedCategoriesException(AssociatedCategoriesException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
 }

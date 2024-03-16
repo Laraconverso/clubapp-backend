@@ -4,10 +4,9 @@ import com.APIclubApp.clubApp.dto.PlayerChangePasswordDTO;
 import com.APIclubApp.clubApp.dto.PlayerDTO;
 import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.dto.PlayerUpdateAdminDTO;
-import com.APIclubApp.clubApp.model.Category;
-import com.APIclubApp.clubApp.model.Club;
-import com.APIclubApp.clubApp.model.Player;
-import com.APIclubApp.clubApp.model.Role;
+import com.APIclubApp.clubApp.exception.AlreadyExistsException;
+import com.APIclubApp.clubApp.exception.NotFoundException;
+import com.APIclubApp.clubApp.model.*;
 import com.APIclubApp.clubApp.repository.CategoryRepository;
 import com.APIclubApp.clubApp.repository.ClubRepository;
 import com.APIclubApp.clubApp.repository.PlayerRepository;
@@ -50,13 +49,18 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     public Player savePlayer(PlayerDTO playerDto) {
+        Player getPlayerByUserDni = playerRepository.findByUserDni(playerDto.getUserDni());
+        if (getPlayerByUserDni != null) {
+            throw new AlreadyExistsException("Player already exists with DNI: " + playerDto.getUserDni());
+        }
+
         Player player = objectMapper.convertValue(playerDto, Player.class);
         Category category = categoryRepository.findById(playerDto.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new NotFoundException("Category not found"));
         Role role = roleRepository.findByRoleName("Player")
-                .orElseThrow(()->new RuntimeException("Role not found"));
+                .orElseThrow(()->new NotFoundException("Role not found"));
         Club club = clubRepository.findById(playerDto.getClubId())
-                .orElseThrow(() -> new RuntimeException("Club not found"));
+                .orElseThrow(() -> new NotFoundException("Club not found"));
 
         player.setCategory(category);
         player.setRole(role);
@@ -80,9 +84,10 @@ public class PlayerServiceImpl implements PlayerService {
     public Player savePlayerForm(PlayerFormDTO player) {
         Player p = objectMapper.convertValue(player, Player.class);
         Category category = categoryRepository.findByCategoryName(player.getCategoryName());
-        if(category == null ) throw new RuntimeException("Category not found");
+        if(category == null ) throw new NotFoundException("Category not found");
+
         Role role = roleRepository.findByRoleName("Player")
-                .orElseThrow(()->new RuntimeException("Role not found"));
+                .orElseThrow(()->new NotFoundException("Role not found"));
         p.setRole(role);
         p.setCategory(category);
         p.setPlayerFeePaid(false);
@@ -118,7 +123,7 @@ public class PlayerServiceImpl implements PlayerService {
             return playerRepository.save(existingPlayer);
         } else {
             // Si no encontramos al jugador, lanzamos una excepción
-            throw new RuntimeException("Player not found with ID: " + updatedPlayer.getPlayerId());
+            throw new NotFoundException("Player not found with ID: " + updatedPlayer.getPlayerId());
         }
     }
 
@@ -126,19 +131,25 @@ public class PlayerServiceImpl implements PlayerService {
         if (playerRepository.existsById(id)) {
             playerRepository.deleteById(id);
         } else {
-            throw new RuntimeException("Player not found with id: " + id);
+            throw new NotFoundException("Player not found with id: " + id);
         }
     }
 
 
     @Override
     public Player getPlayerById(Long id) {
-        return playerRepository.findById(id).get();
+        return playerRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Player not found with ID: " + id));
+
     }
 
     @Override
     public Player getPlayerByDNI(String dni) {
-        return playerRepository.findByUserDni(dni);
+        Player player = playerRepository.findByUserDni(dni);
+        if (player == null) {
+            throw new NotFoundException("Player not found with DNI: " + dni);
+        }
+        return player;
     }
 
     @Override
@@ -151,7 +162,7 @@ public class PlayerServiceImpl implements PlayerService {
             //player.setPlayerPasswordChanged(true); // Marcamos que la contraseña ha sido cambiada
             return playerRepository.save(player);
         } else {
-            throw new RuntimeException("Player not found with ID: " + playerChangePasswordDTO.getPlayerId());
+            throw new NotFoundException("Player not found with ID: " + playerChangePasswordDTO.getPlayerId());
         }
     }
 
@@ -161,7 +172,7 @@ public class PlayerServiceImpl implements PlayerService {
         if(player!=null){
            return player.getPlayerPasswordChanged();
         } else{
-            throw new RuntimeException("Player not found with DNI" + dni);
+            throw new NotFoundException("Player not found with DNI" + dni);
         }
     }
 
