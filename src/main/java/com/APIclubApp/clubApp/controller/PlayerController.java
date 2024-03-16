@@ -105,8 +105,8 @@ public class PlayerController {
     @PutMapping("/update")
     public ResponseEntity<?> updatePlayer(@RequestBody PlayerDTO player){
         try {
-            Player updatedEmployee = playerService.updatePlayer(player);
-            return ResponseEntity.ok(updatedEmployee);
+            Player updatePlayer = playerService.updatePlayer(player);
+            return ResponseEntity.ok(updatePlayer);
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
