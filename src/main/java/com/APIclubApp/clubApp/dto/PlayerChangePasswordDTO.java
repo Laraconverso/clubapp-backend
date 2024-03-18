@@ -12,7 +12,8 @@ import lombok.Setter;
 
 public class PlayerChangePasswordDTO {
 
-    private Long playerId;
+//    private Long playerId;
+    private String userDni;
     private String userPassword;
     //private Long clubId;
 }

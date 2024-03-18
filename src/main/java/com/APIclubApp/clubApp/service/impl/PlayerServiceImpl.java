@@ -76,7 +76,7 @@ public class PlayerServiceImpl implements PlayerService {
         if (playerRepository.existsById(updatedPlayer.getPlayerId())) {
             return savePlayer(updatedPlayer);
         } else {
-            throw new RuntimeException("Player not found with id: " + updatedPlayer.getPlayerId());
+            throw new NotFoundException("Player not found with id: " + updatedPlayer.getPlayerId());
         }
     }
 
@@ -154,15 +154,15 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player updatePlayerPassword(PlayerChangePasswordDTO playerChangePasswordDTO) {
-        Optional<Player> optionalPlayer = playerRepository.findById(playerChangePasswordDTO.getPlayerId());
-        if (optionalPlayer.isPresent()) {
-            Player player = optionalPlayer.get();
-
+//        Optional<Player> optionalPlayer = playerRepository.findByid(playerChangePasswordDTO.getPlayerId());
+        Player player = playerRepository.findByUserDni(playerChangePasswordDTO.getUserDni());
+        if (player != null) {
+//            Player player = optionalPlayer.get();
             player.setUserPassword(playerChangePasswordDTO.getUserPassword()); //cambiamos la contraseña
             //player.setPlayerPasswordChanged(true); // Marcamos que la contraseña ha sido cambiada
             return playerRepository.save(player);
         } else {
-            throw new NotFoundException("Player not found with ID: " + playerChangePasswordDTO.getPlayerId());
+            throw new NotFoundException("Player not found with DNI: " + playerChangePasswordDTO.getUserDni());
         }
     }
 
@@ -175,6 +175,5 @@ public class PlayerServiceImpl implements PlayerService {
             throw new NotFoundException("Player not found with DNI" + dni);
         }
     }
-
 
 }

@@ -127,8 +127,8 @@ public class PlayerController {
     @PutMapping("/update/password")
     public ResponseEntity<?> updatePlayerChangePassword(@RequestBody PlayerChangePasswordDTO player){
         try {
-            String passWEncrypt= passwordEncoder.encode(player.getUserPassword());
-            player.setUserPassword(passWEncrypt);
+//        String passWEncrypt= passwordEncoder.encode(player.getUserPassword());
+//        player.setUserPassword(passWEncrypt);
             //player.setClubId(player.getClubId());
             Player updatedPlayer = playerService.updatePlayerPassword(player);
             return ResponseEntity.ok(updatedPlayer);
