@@ -159,7 +159,7 @@ public class PlayerServiceImpl implements PlayerService {
         if (player != null) {
 //            Player player = optionalPlayer.get();
             player.setUserPassword(playerChangePasswordDTO.getUserPassword()); //cambiamos la contraseña
-            //player.setPlayerPasswordChanged(true); // Marcamos que la contraseña ha sido cambiada
+            player.setPlayerPasswordChanged(true); // Marcamos que la contraseña ha sido cambiada
             return playerRepository.save(player);
         } else {
             throw new NotFoundException("Player not found with DNI: " + playerChangePasswordDTO.getUserDni());
