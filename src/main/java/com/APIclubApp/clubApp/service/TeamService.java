@@ -11,6 +11,7 @@ public interface TeamService {
     Team saveTeam(TeamDTO team);
 
     Team getTeamById(Long id);
+    Team updateTeamById(TeamDTO teamDTO);
 
     void deleteTeam(Long id);
 }

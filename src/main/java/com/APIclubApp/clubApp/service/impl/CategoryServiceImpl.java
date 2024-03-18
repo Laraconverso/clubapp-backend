@@ -3,6 +3,8 @@ package com.APIclubApp.clubApp.service.impl;
 import com.APIclubApp.clubApp.dto.CategoryDTO;
 import com.APIclubApp.clubApp.dto.CategoryListAllDTO;
 import com.APIclubApp.clubApp.dto.PlayerFormDTO;
+import com.APIclubApp.clubApp.exception.AlreadyExistsException;
+import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Coach;
 import com.APIclubApp.clubApp.model.Player;
@@ -54,16 +56,25 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category saveCategory(CategoryDTO categoryDto) {
+        Category existingCategory= categoryRepository.findByCategoryName(categoryDto.getCategoryName());
+        if (existingCategory !=null) {
+            throw new AlreadyExistsException("Category already exists with name: " + categoryDto.getCategoryName());
+        }
+//        Optional<Category> existingCategoryWithSameCoach = categoryRepository.findByCoachNumber(categoryDto.getCoachNumber());
+//        if (existingCategoryWithSameCoach.isPresent()) {
+//            throw new AlreadyExistsException("Coach is already associated with another category.");
+//        }
+
         // Map CategoryDTO to Category using ObjectMapper
         Category category = objectMapper.convertValue(categoryDto, Category.class);
 
         // Fetch the Coach object from the database by its ID
         Coach coach = coachRepository.findById(categoryDto.getCoachNumber())
-                .orElseThrow(() -> new RuntimeException("Coach not found"));
+                .orElseThrow(() -> new NotFoundException("Coach not found"));
 
         // Fetch the Team object from the database by its ID
         Team team = teamRepository.findById(categoryDto.getTeamId())
-                .orElseThrow(() -> new RuntimeException("Team not found"));
+                .orElseThrow(() -> new NotFoundException("Team not found"));
 
         // Set the fetched Coach and Team objects in the Category object
         category.setCoach(coach);
@@ -75,9 +86,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getCategoryById(Long id) {
-
-        return categoryRepository.findById(id).get();
-
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Category not found with ID: " + id));
     }
 
     @Override
@@ -94,35 +104,49 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category updateCategory(CategoryDTO categoryDto) {
+        Category existingCategory = categoryRepository.findById(categoryDto.getCategoryId())
+                .orElseThrow(() -> new NotFoundException("Category not found with ID: " + categoryDto.getCategoryId()));
+
+        Coach coach = coachRepository.findById(categoryDto.getCoachNumber())
+                .orElseThrow(() -> new NotFoundException("Coach not found with ID: " + categoryDto.getCoachNumber()));
+
+        Team team = teamRepository.findById(categoryDto.getTeamId())
+                .orElseThrow(() -> new NotFoundException("Team not found with ID: " + categoryDto.getTeamId()));
+
+
+//        Optional<Category> existingCategoryWithSameCoach = categoryRepository.findByCoachNumber(categoryDto.getCoachNumber());
+//        if (existingCategoryWithSameCoach.isPresent()
+//                && !existingCategoryWithSameCoach.get().equals(existingCategory)) {
+//            throw new AlreadyExistsException("The coach is already associated with another category.");
+//        }
+        Category existingCategoryWithSameName = categoryRepository.findByCategoryName(categoryDto.getCategoryName());
+        if (existingCategoryWithSameName != null && !existingCategoryWithSameName.getCategoryName().equals(existingCategory.getCategoryName())) {
+            throw new AlreadyExistsException("Category with name " + categoryDto.getCategoryName() + "' already exists.");
+        }
 
         Category editCategory = objectMapper.convertValue(categoryDto, Category.class);
-        // Fetch the Coach object from the database by its ID
-        Coach coach = coachRepository.findById(categoryDto.getCoachNumber())
-                .orElseThrow(() -> new RuntimeException("Coach not found"));
 
-        // Fetch the Team object from the database by its ID
-        Team team = teamRepository.findById(categoryDto.getTeamId())
-                .orElseThrow(() -> new RuntimeException("Team not found"));
-
-        // Set the fetched Coach and Team objects in the Category object
-        editCategory.setCoach(coach);
         editCategory.setTeam(team);
+        editCategory.setCoach(coach);
+
         return categoryRepository.save(editCategory);
     }
 
     @Override
     public void deleteCategory(Long id) {
-        categoryRepository.deleteById(id);
-    }
+        if (categoryRepository.existsById(id)) {
+            categoryRepository.deleteById(id);
+        } else {
+            throw new NotFoundException("Category not found with ID: " + id);
+        }    }
 //  agregado
 
     @Override
     public CategoryListAllDTO getCategoryByName(String categoryName) {
         Category category = categoryRepository.findByCategoryName(categoryName);
         if (category == null) {
-            return null; // O lanzar una excepción si prefieres manejar el caso de categoría no encontrada de esa manera
+            throw new NotFoundException("Category not found with name: " + categoryName);
         }
-
         CategoryListAllDTO categoryDTO = objectMapper.convertValue(category, CategoryListAllDTO.class);
         categoryDTO.setPlayers(playersByCategory(categoryDTO.getCategoryId()));
 

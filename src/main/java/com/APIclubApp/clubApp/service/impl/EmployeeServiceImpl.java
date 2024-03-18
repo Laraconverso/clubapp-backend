@@ -1,6 +1,8 @@
 package com.APIclubApp.clubApp.service.impl;
 
 import com.APIclubApp.clubApp.dto.EmployeeDTO;
+import com.APIclubApp.clubApp.exception.AlreadyExistsException;
+import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.model.Role;
@@ -43,36 +45,73 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) {
+    public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) throws AlreadyExistsException, NotFoundException {
+        Employee getEmployeeByUserDni = employeeRepository.getEmployeeByUserDni(employeeDTO.getUserDni());
+        if (getEmployeeByUserDni != null) {
+            throw new AlreadyExistsException("Employee already exists with DNI: " + employeeDTO.getUserDni());
+        }
 
-        /*Employee newEmployee=  objectMapper.convertValue(employee, Employee.class);*/
-        //return employeeRepository.save(newEmployee);
-        Employee employee = modelMapper.map(employeeDTO, Employee.class);
+        Employee getEmployeeByUserEmail = employeeRepository.getEmployeeByUserEmail(employeeDTO.getUserEmail());
+        if (getEmployeeByUserEmail != null) {
+            throw new AlreadyExistsException("Employee already exists with email: " + employeeDTO.getUserEmail());
+        }
+
         Role role = roleRepository.findByRoleName("Admin")
-                .orElseThrow(()->new RuntimeException("Role not found"));
-        employee.setRole(role);
-        employee = employeeRepository.save(employee);
-        return modelMapper.map(employee, EmployeeDTO.class);
+                .orElseThrow(() -> new NotFoundException("Role not found"));
+
+        Club club = clubRepository.findById(employeeDTO.getClubId())
+                .orElseThrow(() -> new NotFoundException("Club not found"));
+
+        Employee newEmployee = modelMapper.map(employeeDTO, Employee.class);
+
+        newEmployee.setRole(role);
+        newEmployee.setClub(club);
+
+        Employee savedEmployee = employeeRepository.save(newEmployee);
+        return modelMapper.map(savedEmployee, EmployeeDTO.class);
     }
 
     @Override
     public Employee getEmployeeById(Long id) {
-        return employeeRepository.findById(id).get();
-        /*Employee employee = employeeRepository.findById(id).orElse(null);
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Employee not found with ID: " + id));        /*Employee employee = employeeRepository.findById(id).orElse(null);
         return modelMapper.map(employee, EmployeeDTO.class);*/
     }
 
     @Override
     public Employee updateEmployee(EmployeeDTO employeeDTO) {
+        Employee existingEmployee = employeeRepository.findById(employeeDTO.getEmployeeNumber())
+                .orElseThrow(() -> new NotFoundException("Employee not found with ID: " + employeeDTO.getEmployeeNumber()));
+
+        Club club = clubRepository.findById(employeeDTO.getClubId())
+                .orElseThrow(() -> new NotFoundException("Club not found with ID: " + employeeDTO.getClubId()));
+
+//        Employee existingEmployeeWithSameDNI = employeeRepository.getEmployeeByUserDni(employeeDTO.getUserDni());
+//        if (existingEmployeeWithSameDNI!=null
+//                && !existingEmployeeWithSameDNI.getUserDni().equals(existingEmployee.getUserDni())) {
+//            throw new AlreadyExistsException("Employee already exists with dni: " + employeeDTO.getUserDni());
+//        }
+        Employee existingEmployeeWithSameEmail = employeeRepository.getEmployeeByUserEmail(employeeDTO.getUserEmail());
+        if (existingEmployeeWithSameEmail!=null
+                && !existingEmployeeWithSameEmail.getUserEmail().equals(existingEmployee.getUserEmail())) {
+            throw new AlreadyExistsException("Employee already exists with email: " + employeeDTO.getUserEmail());
+        }
+
         Employee employee = modelMapper.map(employeeDTO, Employee.class);
+        employee.setClub(club);
+
         employee = employeeRepository.save(employee);
+
         return employee;
     }
 
     @Override
     public void deleteEmployee(Long id) {
-        employeeRepository.deleteById(id);
-    }
+        if(employeeRepository.existsById(id)) {
+            employeeRepository.deleteById(id);
+        } else {
+            throw new NotFoundException("Employee not found with ID: " + id);
+        }    }
 
     @Override
     public EmployeeDTO getRole(Long id) {
@@ -83,7 +122,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployeeByDni(String dni){
-        return employeeRepository.getEmployeeByUserDni(dni);
+        Employee employee = employeeRepository.getEmployeeByUserDni(dni);
+        if (employee == null) {
+            throw new NotFoundException("Employee not found with DNI: " + dni);
+        }
+        return employee;
         /*Employee employee = employeeRepository.getEmployeeByUserDni(dni);
         return modelMapper.map(employee, EmployeeDTO.class);*/
     }

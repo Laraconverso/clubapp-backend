@@ -3,6 +3,8 @@ package com.APIclubApp.clubApp.controller;
 import com.APIclubApp.clubApp.dto.CategoryDTO;
 import com.APIclubApp.clubApp.dto.CategoryListAllDTO;
 import com.APIclubApp.clubApp.dto.PlayerFormDTO;
+import com.APIclubApp.clubApp.exception.AlreadyExistsException;
+import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.service.CategoryService;
@@ -30,20 +32,24 @@ public class CategoryController {
     }
     @Operation(summary = "Obtener una categoria por su ID")
     @GetMapping("/get/{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable Long id){
-
-        Category category = categoryService.getCategoryById(id);
-        if (category != null) {
+    public ResponseEntity<?> getCategoryById(@PathVariable Long id){
+        try {
+            Category category = categoryService.getCategoryById(id);
             return ResponseEntity.ok(category);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
     @Operation(summary = "Crear categoria")
     @PostMapping("/save")
-    public ResponseEntity<Category> saveCategory(@RequestBody CategoryDTO category){
-        return ResponseEntity.ok(categoryService.saveCategory(category));
+    public ResponseEntity<?> saveCategory(@RequestBody CategoryDTO category){
+        try {
+            return ResponseEntity.ok(categoryService.saveCategory(category));
+        }
+        catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
 
@@ -51,31 +57,37 @@ public class CategoryController {
     @Operation(summary = "Actualizar categoria")
     @PutMapping("/update")
     @PermitAll
-    public ResponseEntity<Category> updateCategory(@RequestBody CategoryDTO category){
-        ResponseEntity<Category> response;
-        if (category.getCategoryId() != null /*&& categoryService.getCategoryById(category.getCategoryId()) != null*/){
-            response = ResponseEntity.ok(categoryService.updateCategory(category));
-        }else{
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<?> updateCategory(@RequestBody CategoryDTO category){
+        try {
+            return ResponseEntity.ok(categoryService.updateCategory(category));
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return response;
+//        catch (AlreadyExistsException e) {
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+//        }
     }
 
     @Operation(summary = "Borrar categoria por id")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id){
-        categoryService.deleteCategory(id);
-        return ResponseEntity.ok().body("Deleted");
+        try {
+            categoryService.deleteCategory(id);
+            return ResponseEntity.ok().body("Category deleted successfully");
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     //agregado
     @GetMapping("/search/{categoryName}")
-    public ResponseEntity<CategoryListAllDTO> getCategoryByName(@PathVariable String categoryName) {
-        CategoryListAllDTO categoryDTO = categoryService.getCategoryByName(categoryName);
-        if (categoryDTO == null) {
-            return ResponseEntity.notFound().build(); // Devolver 404 si la categoría no se encuentra
+    public ResponseEntity<?> getCategoryByName(@PathVariable String categoryName) {
+        try {
+            CategoryListAllDTO categoryDTO = categoryService.getCategoryByName(categoryName);
+            return ResponseEntity.ok(categoryDTO);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return ResponseEntity.ok(categoryDTO);
     }
 
 

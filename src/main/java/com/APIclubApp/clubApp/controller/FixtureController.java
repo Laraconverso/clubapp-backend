@@ -2,6 +2,7 @@ package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.dto.EmployeeDTO;
 import com.APIclubApp.clubApp.dto.FixtureDTO;
+import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Fixture;
 import com.APIclubApp.clubApp.service.FixtureService;
@@ -38,6 +39,10 @@ public class FixtureController {
     @Operation(summary = "Listar todos los fixtures")
     @GetMapping("/list")
     public ResponseEntity<List<Fixture>> listAllFixtures() {
+        List<Fixture> fixtures= fixtureService.listAllFixtures();
+        if (fixtures.isEmpty()){
+            System.out.println("Aún no hay fixtures cargados en la base de datos.");
+        }
         return ResponseEntity.ok(fixtureService.listAllFixtures());
         /*List<FixtureDTO> fixtureDTOS = fixtureService.listAllFixtures();
         return ResponseEntity.ok(fixtureDTOS);*/
@@ -45,13 +50,13 @@ public class FixtureController {
 
     @Operation(summary = "Obtener un fixture por ID")
     @GetMapping("/get/{id}")
-    public ResponseEntity<Fixture> getFixtureById(@PathVariable Long id){
-
+    public ResponseEntity<?> getFixtureById(@PathVariable Long id){
         Fixture fixture = fixtureService.getFixtureById(id);
-        if (fixture != null) {
+        try {
+
             return ResponseEntity.ok(fixture);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -67,9 +72,13 @@ public class FixtureController {
 
     @Operation(summary = "Obtener un fixture ID y Nombre")
     @GetMapping("/listIdName")
-    public ResponseEntity<List<Object[]>> listAllFixtureIdAndName() {
+    public ResponseEntity<?> listAllFixtureIdAndName() {
         List<Object[]> fixtureIdAndNameList = fixtureService.listAllFixtureIdAndName();
-        return ResponseEntity.ok(fixtureIdAndNameList);
+        try {
+            return ResponseEntity.ok(fixtureIdAndNameList);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "Crear un fixture")
@@ -91,22 +100,23 @@ public class FixtureController {
 
     @Operation(summary = "Actualizar un fixture")
     @PutMapping("/update")
-    public ResponseEntity<Fixture> updateFixture(@RequestBody FixtureDTO fixtureDTO) {
-        ResponseEntity<Fixture> response;
-        Fixture updatedFixture = fixtureService.updateFixture(fixtureDTO);
-        if (updatedFixture != null){
-            response = ResponseEntity.ok(updatedFixture);
-        }else{
-            response = ResponseEntity.notFound().build();
+    public ResponseEntity<?> updateFixture(@RequestBody FixtureDTO fixtureDTO) {
+        try {
+            Fixture updatedFixture = fixtureService.updateFixture(fixtureDTO);
+            return ResponseEntity.ok(updatedFixture);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return response;
-
     }
 
     @Operation(summary = "Eliminar un fixture por ID")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteFixture(@PathVariable Long id) {
-        fixtureService.deleteFixture(id);
-        return ResponseEntity.ok().body("Deleted");
+        try {
+            fixtureService.deleteFixture(id);
+            return ResponseEntity.ok().body("Fixture deleted successfully");
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 }

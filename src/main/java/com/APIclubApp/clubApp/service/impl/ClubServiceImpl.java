@@ -2,6 +2,8 @@ package com.APIclubApp.clubApp.service.impl;
 
 import com.APIclubApp.clubApp.dto.CategoryDTO;
 import com.APIclubApp.clubApp.dto.ClubDTO;
+import com.APIclubApp.clubApp.exception.AlreadyExistsException;
+import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.repository.ClubRepository;
@@ -37,7 +39,10 @@ public class ClubServiceImpl implements ClubService {
 
     @Override
     public Club saveClub(ClubDTO club) {
-
+        Optional<Club> existingClub= clubRepository.findByClubName(club.getClubName());
+        if (existingClub.isPresent()) {
+            throw new AlreadyExistsException("Club already exists with name: " + club.getClubName());
+        }
         Club newClub=  objectMapper.convertValue(club, Club.class);
         return clubRepository.save(newClub);
     }
@@ -46,19 +51,38 @@ public class ClubServiceImpl implements ClubService {
     public ClubDTO getClubById(Long id) {
 
         //return clubRepository.findById(id).orElse(null);
-        Optional<Club> clubBuscado=clubRepository.findById(id);
-        return objectMapper.convertValue(clubBuscado,ClubDTO.class);
+        Optional<Club> searchedClub=clubRepository.findById(id);
+        Club club = searchedClub.orElseThrow(() -> new NotFoundException("Club not found with ID: " + id));
+        return objectMapper.convertValue(club,ClubDTO.class);
     }
 
     @Override
     public Club updateClub(ClubDTO club) {
+        Club existingClub = clubRepository.findById(club.getClubId())
+                .orElseThrow(() -> new NotFoundException("Club not found with ID: " + club.getClubId()));
+
+        Optional<Club> existingClubWithSameName = clubRepository.findByClubName(club.getClubName());
+        if (existingClubWithSameName.isPresent()
+                && !existingClubWithSameName.get().getClubId().equals(existingClub.getClubId())) {
+            throw new AlreadyExistsException("Club already exists with name: " + club.getClubName());
+        }
+
         Club editClub=  objectMapper.convertValue(club, Club.class);
+
+        existingClub.setClubName(editClub.getClubName());
+        existingClub.setClubDescription(editClub.getClubDescription());
+        existingClub.setClubLogo(editClub.getClubLogo());
+
         return clubRepository.save(editClub);
     }
 
     @Override
     public void deleteClub(Long id) {
-        clubRepository.deleteById(id);
+        if (clubRepository.existsById(id)){
+            clubRepository.deleteById(id);
+        } else {
+            throw new NotFoundException("Club not found with ID: " + id);
+        }
     }
 }
 
