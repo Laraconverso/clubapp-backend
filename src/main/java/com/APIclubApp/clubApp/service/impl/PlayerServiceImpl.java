@@ -1,9 +1,6 @@
 package com.APIclubApp.clubApp.service.impl;
 
-import com.APIclubApp.clubApp.dto.PlayerChangePasswordDTO;
-import com.APIclubApp.clubApp.dto.PlayerDTO;
-import com.APIclubApp.clubApp.dto.PlayerFormDTO;
-import com.APIclubApp.clubApp.dto.PlayerUpdateAdminDTO;
+import com.APIclubApp.clubApp.dto.*;
 import com.APIclubApp.clubApp.exception.AlreadyExistsException;
 import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.*;
@@ -15,7 +12,6 @@ import com.APIclubApp.clubApp.service.PlayerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -175,5 +171,16 @@ public class PlayerServiceImpl implements PlayerService {
             throw new NotFoundException("Player not found with DNI" + dni);
         }
     }
+
+    @Override
+    public List<Object[]> getAllPlayerFeePaid(){
+        List<Object[]> players= playerRepository.playersFeePaid();
+        if(players == null){
+            throw new NotFoundException("Players with paid fee not found " );
+        }
+        return  players;
+    }
+
+
 
 }
