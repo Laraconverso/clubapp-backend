@@ -1,17 +1,17 @@
 package com.APIclubApp.clubApp.controller;
 
-import com.APIclubApp.clubApp.dto.PlayerChangePasswordDTO;
-import com.APIclubApp.clubApp.dto.PlayerDTO;
-import com.APIclubApp.clubApp.dto.PlayerFormDTO;
-import com.APIclubApp.clubApp.dto.PlayerUpdateAdminDTO;
+import com.APIclubApp.clubApp.dto.*;
 import com.APIclubApp.clubApp.exception.AlreadyExistsException;
 import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.service.PlayerService;
+import com.APIclubApp.clubApp.service.impl.ReportService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +26,9 @@ public class PlayerController {
 
     @Autowired
     private PlayerService playerService;
+
+    @Autowired
+    private ReportService reportService;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -147,5 +150,32 @@ public class PlayerController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    @Operation(summary = "Obtiene una lista con los jugadores que han pagado su cuota")
+    @GetMapping("/getPlayersPaidFee")
+    public ResponseEntity<Object> getPlayersPaidFee(){
+        try {
+            List<Object[]> players = playerService.getAllPlayerFeePaid();
+            return ResponseEntity.ok(players);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Obtiene un reporte una lista con los jugadores que han pagado su cuota")
+    @GetMapping("/getPlayersPaidFeeReport")
+    public ResponseEntity<byte[]> getPlayersPaidFeeReport() {
+        List<Object[]> players = playerService.getAllPlayerFeePaid();
+        byte[] pdfBytes = reportService.generatePdfReport(players);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("filename", "players_report.pdf");
+        headers.setContentLength(pdfBytes.length);
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    }
+
+
 
 }
