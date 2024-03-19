@@ -1,6 +1,8 @@
 package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.dto.EmployeeDTO;
+import com.APIclubApp.clubApp.exception.AlreadyExistsException;
+import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Coach;
 import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.model.Player;
@@ -96,19 +98,25 @@ public class EmployeeController {
     @Operation(summary = "Crear un empleado")
     @PostMapping("/save")
     @PermitAll
-    public ResponseEntity<EmployeeDTO> saveEmployee(@RequestBody EmployeeDTO employeeDTO){
-        String passWEncrypt= passwordEncoder.encode(employeeDTO.getUserPassword());
-        employeeDTO.setUserPassword(passWEncrypt);
-        EmployeeDTO savedEmployeeDTO = employeeService.saveEmployee(employeeDTO);
-        return ResponseEntity.ok(savedEmployeeDTO);
+    public ResponseEntity<?> saveEmployee(@RequestBody EmployeeDTO employeeDTO){
+        try {
+            String passWEncrypt= passwordEncoder.encode(employeeDTO.getUserPassword());
+            employeeDTO.setUserPassword(passWEncrypt);
+            return ResponseEntity.ok(employeeService.saveEmployee(employeeDTO));
+        } catch (AlreadyExistsException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "Listar todos los empleados")
     @GetMapping("/list")
     @PermitAll
     public ResponseEntity<List<Employee>> listAllEmployee(){
-
-        return ResponseEntity.ok(employeeService.listAllEmployees());
+        List<Employee> employees= employeeService.listAllEmployees();
+        if (employees.isEmpty()){
+            System.out.println("Aún no hay empleados en la base de datos.");
+        }
+        return ResponseEntity.ok(employees);
     }
     /*public ResponseEntity<List<EmployeeDTO>> listAllEmployee(){
         List<EmployeeDTO> employeeDTOs = employeeService.listAllEmployees();
@@ -120,47 +128,50 @@ public class EmployeeController {
     @Operation(summary = "Obtener un empleado por su ID")
     @GetMapping("/get/{id}")
     @PermitAll
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id){
-        ResponseEntity<Employee> response;
-
-        if (employeeService.getEmployeeById(Long.valueOf(id))!=null){
-            response = ResponseEntity.ok(employeeService.getEmployeeById(Long.valueOf(id))) ;
-        }else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<?> getEmployeeById(@PathVariable Long id){
+        try {
+            Employee employee= employeeService.getEmployeeById(id);
+            return ResponseEntity.ok(employee) ;
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return response;
     }
 
     @Operation(summary = "Obtener un empleado por su DNI")
     @GetMapping("/getByDni/{dni}")
     @PermitAll
-    public ResponseEntity<Employee> getEmployeeByDni(@PathVariable String dni){
-        Employee employee = employeeService.getEmployeeByDni(dni);
-        if (employee != null) {
+    public ResponseEntity<?> getEmployeeByDni(@PathVariable String dni){
+        try {
+            Employee employee = employeeService.getEmployeeByDni(dni);
             return ResponseEntity.ok(employee);
-        } else {
-            return ResponseEntity.notFound().build();
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
     @Operation(summary = "Actualizar un empleado")
     @PutMapping("/update")
     @PermitAll
-    public ResponseEntity<EmployeeDTO> updateFixture(@RequestBody EmployeeDTO employeeDTO){
-        Employee updatedEmployee = employeeService.updateEmployee(employeeDTO);
-        if (updatedEmployee != null) {
-            EmployeeDTO updatedEmployeeDTO = modelMapper.map(updatedEmployee, EmployeeDTO.class);
-            return ResponseEntity.ok(updatedEmployeeDTO);
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> updateEmployee(@RequestBody EmployeeDTO employeeDTO){
+        try {
+            Employee updatedEmployee = employeeService.updateEmployee(employeeDTO);
+            return ResponseEntity.ok(updatedEmployee);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (AlreadyExistsException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
 
     @Operation(summary = "Eliminar un empleado por su ID")
     @DeleteMapping("/delete/{id}")
     @PermitAll
-    public ResponseEntity<String> deleteFixture(@PathVariable Long id){
-        employeeService.deleteEmployee(id);
-        return ResponseEntity.ok().body("Deleted");
+    public ResponseEntity<String> deleteEmployee(@PathVariable Long id){
+        try {
+            employeeService.deleteEmployee(id);
+            return ResponseEntity.ok().body("Employee deleted successfully");
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 }

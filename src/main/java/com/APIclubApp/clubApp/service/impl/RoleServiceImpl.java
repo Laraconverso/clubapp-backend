@@ -1,7 +1,6 @@
 package com.APIclubApp.clubApp.service.impl;
 
 import com.APIclubApp.clubApp.dto.RoleDTO;
-import com.APIclubApp.clubApp.exception.NoChangesException;
 import com.APIclubApp.clubApp.exception.AlreadyExistsException;
 import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Role;
@@ -44,14 +43,16 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role updateRole(RoleDTO roleDTO) {
-        Role existingRole = roleRepository.findById(roleDTO.getRoleId()).orElse(null);
+        Role existingRole = roleRepository.findById(roleDTO.getRoleId())
+                .orElseThrow(() -> new NotFoundException("Role not found with ID: " + roleDTO.getRoleId()));
         if (existingRole == null) {
             throw new NotFoundException("Role not found with ID: " + roleDTO.getRoleId());
         }
-        if (existingRole.getRoleName().equals(roleDTO.getRoleName())) {
-            throw new NoChangesException("No changes were made to the role");
+        Optional<Role> existingRoleWithSameName = roleRepository.findByRoleName(roleDTO.getRoleName());
+        if (existingRoleWithSameName.isPresent()
+                && !existingRoleWithSameName.get().getRoleName().equals(existingRole.getRoleId())) {
+            throw new AlreadyExistsException("Role already exists with name: " + roleDTO.getRoleName());
         }
-
         existingRole.setRoleName(roleDTO.getRoleName());
         return roleRepository.save(existingRole);
     }
