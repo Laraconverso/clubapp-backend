@@ -25,4 +25,6 @@ public interface PlayerService {
     Boolean getPlayerPasswordChanged(String dni);
 
     List<Object[]> getAllPlayerFeePaid();
+
+    PlayersMetricsDTO getPlayersMetrics();
 }

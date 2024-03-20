@@ -181,6 +181,15 @@ public class PlayerServiceImpl implements PlayerService {
         return  players;
     }
 
+    @Override
+    public PlayersMetricsDTO getPlayersMetrics() {
+        Long totalCount = playerRepository.count(); // Total de jugadores
+        int upToDateCount = playerRepository.playersFeePaid().size(); // Cantidad de jugadores que pagaron la cuota
+        Long inDebtCount = totalCount - upToDateCount; // Cantidad de jugadores en deuda
 
-
+        return new PlayersMetricsDTO(totalCount, upToDateCount, inDebtCount);
+    }
 }
+
+
+

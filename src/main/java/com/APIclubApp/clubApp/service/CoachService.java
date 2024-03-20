@@ -14,7 +14,7 @@ public interface CoachService {
 
     Coach updateCoach(CoachDTO coach);
 
-
-
     void deleteCoach(Long id);
+
+    Long getCoachesCount();
 }
