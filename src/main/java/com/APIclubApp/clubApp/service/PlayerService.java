@@ -27,4 +27,7 @@ public interface PlayerService {
     List<Object[]> getAllPlayerFeePaid();
 
     PlayersMetricsDTO getPlayersMetrics();
+
+    List<Object[]> countPlayersByCategory();
+
 }
