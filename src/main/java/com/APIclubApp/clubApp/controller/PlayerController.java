@@ -175,7 +175,11 @@ public class PlayerController {
 
         return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
-
+    @Operation(summary = "Obtiene un metricas de los jugadores como cantidad total y quienes estan al diá con las cuotas")
+    @GetMapping("/metrics")
+    public PlayersMetricsDTO getPlayersMetrics() {
+        return playerService.getPlayersMetrics();
+    }
 
 
 }

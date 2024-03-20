@@ -76,10 +76,13 @@ public class CoachServiceImpl implements CoachService {
         return coachRepository.save(editCoach);
     }
 
-
-
     @Override
     public void deleteCoach(Long id) {
         coachRepository.deleteById(id);
+    }
+
+    @Override
+    public Long getCoachesCount(){
+        return coachRepository.count();
     }
 }

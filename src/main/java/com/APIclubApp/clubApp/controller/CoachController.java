@@ -88,4 +88,11 @@ public class CoachController {
         return ResponseEntity.ok().body("Deleted");
     }
 
+    @Operation(summary = "Contar la cantidad de coaches guardados en la BBDD")
+    @GetMapping("/metrics")
+    public Long getCoachesCount() {
+        return coachService.getCoachesCount();
+    }
+
+
 }

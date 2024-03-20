@@ -318,6 +318,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getCountCoach",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -1222,6 +1230,14 @@
 								"getPlayersPaidFeeReport"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMetricsPlayers",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
