@@ -181,5 +181,11 @@ public class PlayerController {
         return playerService.getPlayersMetrics();
     }
 
+    @Operation(summary = "Obtiene cantidad de jugadores por ")
+    @GetMapping("/metricsByCategory")
+    public List<Object[]> getPlayersMetricsByCategory() {
+        return playerService.countPlayersByCategory();
+    }
+
 
 }

@@ -12,8 +12,8 @@ import com.APIclubApp.clubApp.service.PlayerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
@@ -182,13 +182,49 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    public List<Object[]> countPlayersByCategory(){
+        List<Object[]> players= playerRepository.countPlayersByCategory();
+        if(players == null){
+            throw new NotFoundException("Players with paid fee not found " );
+        }
+        return  players;
+    }
+
+
+
+
+    @Override
     public PlayersMetricsDTO getPlayersMetrics() {
         Long totalCount = playerRepository.count(); // Total de jugadores
+        List<Object[]> playersByCategory = playerRepository.countPlayersByCategory();
+        Map<String, Long> playersByCategoryMap = new HashMap<>();
+
+        // Transformar la lista de objetos en un mapa de categoría a cantidad de jugadores
+        for (Object[] row : playersByCategory) {
+            String categoryName = (String) row[0];
+            Long categoryCount = (Long) row[1];
+            playersByCategoryMap.put(categoryName, categoryCount);
+        }
+
         int upToDateCount = playerRepository.playersFeePaid().size(); // Cantidad de jugadores que pagaron la cuota
         Long inDebtCount = totalCount - upToDateCount; // Cantidad de jugadores en deuda
 
-        return new PlayersMetricsDTO(totalCount, upToDateCount, inDebtCount);
+        return new PlayersMetricsDTO(totalCount, upToDateCount, inDebtCount, new ArrayList<>(playersByCategoryMap.entrySet()));
     }
+        /*Long totalCount = playerRepository.count(); // Total de jugadores
+        // Calcular la cantidad de jugadores por categoría
+        List<Object[]> playersByCategory = playerRepository.countPlayersByCategory();
+        Map<String, Integer> playersByCategoryMap = new HashMap<>();
+        for (Object[] row : playersByCategory) {
+            String categoryName = (String) row[0];
+            Long categoryCount = (Long) row[1];
+            playersByCategoryMap.put(categoryName, categoryCount.intValue());
+        }
+        int upToDateCount = playerRepository.playersFeePaid().size(); // Cantidad de jugadores que pagaron la cuota
+        Long inDebtCount = totalCount - upToDateCount; // Cantidad de jugadores en deuda
+
+        return new PlayersMetricsDTO(totalCount, upToDateCount, inDebtCount, playersByCategory);
+    }*/
 }
 
 
