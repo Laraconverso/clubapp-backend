@@ -45,6 +45,16 @@ public class GameServiceImpl implements GameService {
         return gameRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Game not found with ID: " + id));
     }
+    
+    @Override
+    public List<Game> getGamesByCategoryId(Long idCategory){
+        List<Game> games = gameRepository.getGamesByCategoryId(idCategory);
+        if (games != null && !games.isEmpty()) {
+            return games;
+        } else {
+            throw new NotFoundException("Games not found with ID: " + idCategory);
+        }
+    }
 
     @Override
     public Game updateGame(GameDTO gameDTO) {

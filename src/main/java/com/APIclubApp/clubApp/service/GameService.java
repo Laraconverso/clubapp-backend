@@ -15,5 +15,7 @@ public interface GameService {
     Game updateGame(GameDTO gameDTO);
 
     void deleteGame(Long id);
+
+    List<Game> getGamesByCategoryId(Long idCategory);
 }
 
