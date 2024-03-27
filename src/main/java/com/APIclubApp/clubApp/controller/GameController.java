@@ -85,6 +85,13 @@ public class GameController {
         }
     }
 
+    @Operation(summary = "Obtener una lista de partidos por el ID de la Categoria")
+    @GetMapping("/getGamesCategory/{id}")
+    public ResponseEntity<List<Game>> getGamesByCategoryId(@PathVariable Long id) {
+        List<Game> games = gameService.getGamesByCategoryId(id);
+            return ResponseEntity.ok(games);
+    }
+
     @Operation(summary = "Eliminar un partido por ID")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteGame(@PathVariable Long id) {
