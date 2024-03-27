@@ -190,7 +190,17 @@ public class PlayerServiceImpl implements PlayerService {
         return  players;
     }
 
-
+    @Override
+    public Player updatePlayerFeePaidBoolean(String dni) {
+        Player player = playerRepository.findByUserDni(dni);
+        if(player!=null){
+            player.setPlayerFeePaid(true);
+            playerRepository.save(player);
+            return player;
+        } else{
+            throw new NotFoundException("Player not found with DNI" + dni);
+        }
+    }
 
 
     @Override

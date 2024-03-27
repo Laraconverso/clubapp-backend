@@ -125,7 +125,7 @@ public class PlayerController {
             // Si el jugador no se encuentra, devolver una respuesta HTTP 404 con un mensaje de error
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-  }
+    }
     @Operation(summary = "modificar contraseña de usuario jugador")
     @PutMapping("/update/password")
     public ResponseEntity<?> updatePlayerChangePassword(@RequestBody PlayerChangePasswordDTO player){
@@ -187,5 +187,15 @@ public class PlayerController {
         return playerService.countPlayersByCategory();
     }
 
+    @Operation(summary = "Actualiza el booleano de cuota pagada")
+    @PatchMapping("/updateFeePaid/{dni}")
+    public ResponseEntity<Object> updatePlayerFeePaidBoolean(@PathVariable String dni) {
+        try {
+            Player p = playerService.updatePlayerFeePaidBoolean(dni);;
+            return ResponseEntity.ok(p);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
 }
