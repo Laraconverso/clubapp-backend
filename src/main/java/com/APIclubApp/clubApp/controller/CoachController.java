@@ -1,7 +1,11 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.CoachCategryDTO;
 import com.APIclubApp.clubApp.dto.CoachDTO;
+import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Coach;
+import com.APIclubApp.clubApp.model.Player;
+import com.APIclubApp.clubApp.service.CategoryService;
 import com.APIclubApp.clubApp.service.CoachService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.security.PermitAll;
@@ -20,6 +24,9 @@ import java.util.Optional;
 public class CoachController {
     @Autowired
     private CoachService coachService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -94,5 +101,16 @@ public class CoachController {
         return coachService.getCoachesCount();
     }
 
+
+    @Operation(summary = "Actualiza la categoria de un coach")
+    @PatchMapping("/updateCategory")
+    public ResponseEntity<Object> updateCoachCategory(@RequestBody CoachCategryDTO coachCategryDTO) {
+        try {
+            Coach c = categoryService.updateCategoryCoach(coachCategryDTO.getUserDni(),coachCategryDTO.getCategoryName());
+            return ResponseEntity.ok(c);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
 }
