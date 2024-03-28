@@ -14,6 +14,7 @@ import java.util.Optional;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category,Long> {
     Category findByCategoryName(String name);
+
     //PlayerFormDTO PlayersByCategoryName(String categoryName);
     @Query("SELECT c FROM Category c JOIN FETCH c.coach WHERE c.coach.coachNumber = :coachNumber")
     Optional<Category> findByCoachNumber(@Param("coachNumber") Long coachNumber);

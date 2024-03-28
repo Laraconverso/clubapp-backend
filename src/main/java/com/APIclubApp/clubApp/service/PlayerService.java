@@ -30,4 +30,5 @@ public interface PlayerService {
 
     List<Object[]> countPlayersByCategory();
 
+    Player updatePlayerFeePaidBoolean(String dni);
 }

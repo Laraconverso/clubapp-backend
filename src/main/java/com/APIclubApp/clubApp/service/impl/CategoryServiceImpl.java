@@ -2,6 +2,7 @@ package com.APIclubApp.clubApp.service.impl;
 
 import com.APIclubApp.clubApp.dto.CategoryDTO;
 import com.APIclubApp.clubApp.dto.CategoryListAllDTO;
+import com.APIclubApp.clubApp.dto.CoachCategryDTO;
 import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.exception.AlreadyExistsException;
 import com.APIclubApp.clubApp.exception.NotFoundException;
@@ -151,6 +152,19 @@ public class CategoryServiceImpl implements CategoryService {
         categoryDTO.setPlayers(playersByCategory(categoryDTO.getCategoryId()));
 
         return categoryDTO;
+    }
+
+    @Override
+    public Coach updateCategoryCoach(String coachDni, String categoryName) {
+        Category category = categoryRepository.findByCategoryName(categoryName);
+        Coach coach = coachRepository.findByUserDni(coachDni);
+        if (category != null && coach!=null) {
+            category.setCoach(coach);
+            categoryRepository.save(category);
+            return coach;
+        } else {
+            throw new NotFoundException("Category not found with Name: " + categoryName);
+        }
     }
 }
 
