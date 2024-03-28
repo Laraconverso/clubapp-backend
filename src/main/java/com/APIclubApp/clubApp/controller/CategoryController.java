@@ -2,6 +2,7 @@ package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.dto.CategoryDTO;
 import com.APIclubApp.clubApp.dto.CategoryListAllDTO;
+import com.APIclubApp.clubApp.dto.CategoryShortListDTO;
 import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.exception.AlreadyExistsException;
 import com.APIclubApp.clubApp.exception.NotFoundException;
@@ -82,11 +83,23 @@ public class CategoryController {
     }
 
     //agregado
+    @Operation(summary = "Buscar categoria por nombre de categoria")
     @GetMapping("/search/{categoryName}")
     public ResponseEntity<?> getCategoryByName(@PathVariable String categoryName) {
         try {
             CategoryListAllDTO categoryDTO = categoryService.getCategoryByName(categoryName);
             return ResponseEntity.ok(categoryDTO);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Listar categorias solo mostrando ID y Nombre")
+    @GetMapping("/listIdName")
+    public ResponseEntity<?> listAllCategoryIdAndName() {
+        List<CategoryShortListDTO> categoryShortListDTOS = categoryService.listCategoryByNameAndId();
+        try {
+            return ResponseEntity.ok(categoryShortListDTOS);
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

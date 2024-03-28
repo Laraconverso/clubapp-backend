@@ -1,9 +1,6 @@
 package com.APIclubApp.clubApp.service.impl;
 
-import com.APIclubApp.clubApp.dto.CategoryDTO;
-import com.APIclubApp.clubApp.dto.CategoryListAllDTO;
-import com.APIclubApp.clubApp.dto.CoachCategryDTO;
-import com.APIclubApp.clubApp.dto.PlayerFormDTO;
+import com.APIclubApp.clubApp.dto.*;
 import com.APIclubApp.clubApp.exception.AlreadyExistsException;
 import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Category;
@@ -165,6 +162,17 @@ public class CategoryServiceImpl implements CategoryService {
         } else {
             throw new NotFoundException("Category not found with Name: " + categoryName);
         }
+    }
+
+    @Override
+    public List<CategoryShortListDTO> listCategoryByNameAndId(){
+        try{
+            return categoryRepository.listCategoryByNameAndId();
+        }catch(Exception e) {
+            throw new NotFoundException("Categories not found");
+        }
+
+
     }
 }
 
