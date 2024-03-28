@@ -32,6 +32,9 @@ public class Game {
     @Column(name = "game_teamrival", nullable = false, unique = false)
     private String gameTeamrival;
 
+    @Column(name = "game_rivaldirection")
+    private String gameRivalDirection;
+
     @Column(name = "game_localgoals", nullable = true, unique = false)
     private Integer gameLocalgoals;
 
