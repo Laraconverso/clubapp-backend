@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.repository;
 
+import com.APIclubApp.clubApp.dto.CategoryShortListDTO;
 import com.APIclubApp.clubApp.dto.PlayerFormDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Player;
@@ -18,4 +19,8 @@ public interface CategoryRepository extends JpaRepository<Category,Long> {
     //PlayerFormDTO PlayersByCategoryName(String categoryName);
     @Query("SELECT c FROM Category c JOIN FETCH c.coach WHERE c.coach.coachNumber = :coachNumber")
     Optional<Category> findByCoachNumber(@Param("coachNumber") Long coachNumber);
+
+    //@Query("SELECT c.categoryId, c.categoryName FROM Category c")
+    @Query("SELECT new com.APIclubApp.clubApp.dto.CategoryShortListDTO(c.categoryId, c.categoryName) FROM Category c")
+    List<CategoryShortListDTO> listCategoryByNameAndId();
 }
