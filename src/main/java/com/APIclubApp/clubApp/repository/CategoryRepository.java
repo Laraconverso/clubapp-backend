@@ -20,6 +20,7 @@ public interface CategoryRepository extends JpaRepository<Category,Long> {
     @Query("SELECT c FROM Category c JOIN FETCH c.coach WHERE c.coach.coachNumber = :coachNumber")
     Optional<Category> findByCoachNumber(@Param("coachNumber") Long coachNumber);
 
-    @Query("SELECT c.categoryId, c.categoryName FROM Category c")
+    //@Query("SELECT c.categoryId, c.categoryName FROM Category c")
+    @Query("SELECT new com.APIclubApp.clubApp.dto.CategoryShortListDTO(c.categoryId, c.categoryName) FROM Category c")
     List<CategoryShortListDTO> listCategoryByNameAndId();
 }
