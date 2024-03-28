@@ -23,7 +23,7 @@ public class GameDTO {
     private String gameTime;
     private Boolean gameIslocal;
     private String gameTeamrival;
-    private String gameRivalDirection;
+    private String location;
     private Integer gameLocalgoals;
     private Integer gameRivalgoals;
     private Long categoryId;
