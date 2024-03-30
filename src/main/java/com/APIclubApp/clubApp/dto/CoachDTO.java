@@ -1,7 +1,6 @@
 package com.APIclubApp.clubApp.dto;
 
-import com.APIclubApp.clubApp.model.Category;
-import jakarta.persistence.Column;
+
 import lombok.*;
 
 

@@ -1,21 +1,19 @@
 package com.APIclubApp.clubApp.controller;
 
-import com.APIclubApp.clubApp.dto.EmployeeDTO;
 import com.APIclubApp.clubApp.dto.FixtureDTO;
 import com.APIclubApp.clubApp.exception.NotFoundException;
-import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Fixture;
 import com.APIclubApp.clubApp.service.FixtureService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import java.util.List;
 
 @CrossOrigin
@@ -38,6 +36,7 @@ public class FixtureController {
 
     @Operation(summary = "Listar todos los fixtures")
     @GetMapping("/list")
+    @PermitAll
     public ResponseEntity<List<Fixture>> listAllFixtures() {
         List<Fixture> fixtures= fixtureService.listAllFixtures();
         if (fixtures.isEmpty()){
@@ -50,6 +49,7 @@ public class FixtureController {
 
     @Operation(summary = "Obtener un fixture por ID")
     @GetMapping("/get/{id}")
+    @PermitAll
     public ResponseEntity<?> getFixtureById(@PathVariable Long id){
         Fixture fixture = fixtureService.getFixtureById(id);
         try {
@@ -72,6 +72,7 @@ public class FixtureController {
 
     @Operation(summary = "Obtener un fixture ID y Nombre")
     @GetMapping("/listIdName")
+    @PermitAll
     public ResponseEntity<?> listAllFixtureIdAndName() {
         List<Object[]> fixtureIdAndNameList = fixtureService.listAllFixtureIdAndName();
         try {
@@ -83,6 +84,7 @@ public class FixtureController {
 
     @Operation(summary = "Crear un fixture")
     @PostMapping("/save")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<Fixture> saveFixture(@RequestBody FixtureDTO fixtureDTO) {
 
         // Llamar al método saveFixture del servicio para guardar el Fixture
@@ -100,6 +102,7 @@ public class FixtureController {
 
     @Operation(summary = "Actualizar un fixture")
     @PutMapping("/update")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<?> updateFixture(@RequestBody FixtureDTO fixtureDTO) {
         try {
             Fixture updatedFixture = fixtureService.updateFixture(fixtureDTO);
@@ -111,6 +114,7 @@ public class FixtureController {
 
     @Operation(summary = "Eliminar un fixture por ID")
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<String> deleteFixture(@PathVariable Long id) {
         try {
             fixtureService.deleteFixture(id);

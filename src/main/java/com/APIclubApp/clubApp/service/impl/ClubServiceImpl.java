@@ -1,10 +1,8 @@
 package com.APIclubApp.clubApp.service.impl;
 
-import com.APIclubApp.clubApp.dto.CategoryDTO;
 import com.APIclubApp.clubApp.dto.ClubDTO;
 import com.APIclubApp.clubApp.exception.AlreadyExistsException;
 import com.APIclubApp.clubApp.exception.NotFoundException;
-import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.repository.ClubRepository;
 import com.APIclubApp.clubApp.service.ClubService;

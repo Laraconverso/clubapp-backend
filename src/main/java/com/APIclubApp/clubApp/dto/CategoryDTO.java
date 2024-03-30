@@ -1,12 +1,9 @@
 package com.APIclubApp.clubApp.dto;
 
-import com.APIclubApp.clubApp.model.Coach;
-import com.APIclubApp.clubApp.model.Game;
-import com.APIclubApp.clubApp.model.Player;
+
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
+
 
 @NoArgsConstructor
 @AllArgsConstructor

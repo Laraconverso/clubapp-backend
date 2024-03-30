@@ -1,9 +1,7 @@
 package com.APIclubApp.clubApp.service.impl;
 
-import com.APIclubApp.clubApp.dto.EmployeeDTO;
 import com.APIclubApp.clubApp.dto.FixtureDTO;
 import com.APIclubApp.clubApp.exception.NotFoundException;
-import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.model.Fixture;
 import com.APIclubApp.clubApp.model.Game;
 import com.APIclubApp.clubApp.repository.FixtureRepository;
@@ -13,11 +11,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class FixtureServiceImpl implements FixtureService {

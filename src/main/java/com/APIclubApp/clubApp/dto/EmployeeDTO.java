@@ -1,9 +1,5 @@
 package com.APIclubApp.clubApp.dto;
 
-import com.APIclubApp.clubApp.model.Club;
-import com.APIclubApp.clubApp.model.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -4,19 +4,17 @@ import com.APIclubApp.clubApp.dto.CoachCategryDTO;
 import com.APIclubApp.clubApp.dto.CoachDTO;
 import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Coach;
-import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.service.CategoryService;
 import com.APIclubApp.clubApp.service.CoachService;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -33,6 +31,7 @@ public class CoachController {
 
     @Operation(summary = "Listar todos los coaches/dts")
     @GetMapping("/list")
+    @PreAuthorize("hasRole('Coach', 'Admin', 'Player')")
     public ResponseEntity<List<Coach>> listAllCoaches(){
         return ResponseEntity.ok(coachService.listAllCoaches());
     }
@@ -40,6 +39,7 @@ public class CoachController {
 
     @Operation(summary = "Obtener un coach/dt por su ID")
     @GetMapping("/get/{id}")
+    @PreAuthorize("hasRole('Coach', 'Admin', 'Player')")
     public ResponseEntity<Coach> getCoachById(@PathVariable Long id){
         ResponseEntity<Coach> response;
 
@@ -52,8 +52,25 @@ public class CoachController {
         return response;
     }
 
+
+    @Operation(summary = "Obtener un coach/dt por su DNI")
+    @GetMapping("/getByDni/{dni}")
+    @PreAuthorize("hasRole('Coach', 'Admin', 'Player')")
+    public ResponseEntity<Coach> getCoachByDNI(@PathVariable String dni){
+        ResponseEntity<Coach> response;
+
+        Coach coach = coachService.getCoachByDNI(dni);
+        if (coach != null) {
+            response = ResponseEntity.ok(coach);
+        } else {
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return response;
+    }
+
     @Operation(summary = "Crear un coach")
     @PostMapping("/save")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<Coach> saveCoach(@RequestBody CoachDTO coach){
         //descomentar para encriptar
         //String passWEncrypt= passwordEncoder.encode(coach.getUserPassword());
@@ -77,7 +94,7 @@ public class CoachController {
 
     @Operation(summary = "Actualizar un coach")
     @PutMapping("/update")
-    @PermitAll
+    @PreAuthorize("hasRole('Admin', 'Coach')")
     public ResponseEntity<Coach> updateCoach(@RequestBody CoachDTO coach){
         ResponseEntity<Coach> response;
         if (coach.getCoachNumber() != null /*&& coachService.getCoachById(coach.getCoachNumber()) != null*/){
@@ -90,6 +107,7 @@ public class CoachController {
 
     @Operation(summary = "Eliminar un coach/dt por su ID")
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<String> deleteCoach(@PathVariable Long id){
         coachService.deleteCoach(id);
         return ResponseEntity.ok().body("Deleted");
@@ -104,6 +122,7 @@ public class CoachController {
 
     @Operation(summary = "Actualiza la categoria de un coach")
     @PatchMapping("/updateCategory")
+    @PreAuthorize("hasRole('Admin', 'Coach')")
     public ResponseEntity<Object> updateCoachCategory(@RequestBody CoachCategryDTO coachCategryDTO) {
         try {
             Coach c = categoryService.updateCategoryCoach(coachCategryDTO.getUserDni(),coachCategryDTO.getCategoryName());

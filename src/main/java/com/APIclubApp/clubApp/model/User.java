@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.model;
 
+import com.APIclubApp.clubApp.security.usersecurity.model.RoleEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,8 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-//@Table(name="users")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class User {
 
     //@Id
@@ -42,7 +42,7 @@ public abstract class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     //@JsonIgnore
-    private Role role;
+    private RoleEntity role;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="club_id")

@@ -7,7 +7,8 @@ import com.APIclubApp.clubApp.model.*;
 import com.APIclubApp.clubApp.repository.CategoryRepository;
 import com.APIclubApp.clubApp.repository.ClubRepository;
 import com.APIclubApp.clubApp.repository.PlayerRepository;
-import com.APIclubApp.clubApp.repository.RoleRepository;
+import com.APIclubApp.clubApp.security.usersecurity.model.RoleEntity;
+import com.APIclubApp.clubApp.security.usersecurity.repository.RoleSecurityRepository;
 import com.APIclubApp.clubApp.service.PlayerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,10 @@ import java.util.*;
 public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepository;
-    private final RoleRepository roleRepository;
     private final CategoryRepository categoryRepository;
     private final ClubRepository clubRepository;
-
+    @Autowired
+    private RoleSecurityRepository roleSecurityRepository;
 
 //    @Autowired
 //    private ModelMapper modelMapper;
@@ -32,9 +33,9 @@ public class PlayerServiceImpl implements PlayerService {
 
 
     @Autowired
-    public PlayerServiceImpl(PlayerRepository playerRepository, RoleRepository roleRepository, CategoryRepository categoryRepository, ClubRepository clubRepository) {
+    public PlayerServiceImpl(PlayerRepository playerRepository, RoleSecurityRepository roleSecurityRepository, CategoryRepository categoryRepository, ClubRepository clubRepository) {
         this.playerRepository = playerRepository;
-        this.roleRepository = roleRepository;
+        this.roleSecurityRepository = roleSecurityRepository;
         this.categoryRepository = categoryRepository;
         this.clubRepository = clubRepository;
     }
@@ -53,13 +54,13 @@ public class PlayerServiceImpl implements PlayerService {
         Player player = objectMapper.convertValue(playerDto, Player.class);
         Category category = categoryRepository.findById(playerDto.getCategoryId())
                 .orElseThrow(() -> new NotFoundException("Category not found"));
-        Role role = roleRepository.findByRoleName("Player")
+        RoleEntity roleEntity = roleSecurityRepository.findByRolename("Player")
                 .orElseThrow(()->new NotFoundException("Role not found"));
         Club club = clubRepository.findById(playerDto.getClubId())
                 .orElseThrow(() -> new NotFoundException("Club not found"));
 
         player.setCategory(category);
-        player.setRole(role);
+        player.setRole(roleEntity);
         player.setClub(club);
 
         return playerRepository.save(player);
@@ -82,9 +83,9 @@ public class PlayerServiceImpl implements PlayerService {
         Category category = categoryRepository.findByCategoryName(player.getCategoryName());
         if(category == null ) throw new NotFoundException("Category not found");
 
-        Role role = roleRepository.findByRoleName("Player")
+        RoleEntity roleEntity = roleSecurityRepository.findByRolename("Player")
                 .orElseThrow(()->new NotFoundException("Role not found"));
-        p.setRole(role);
+        p.setRole(roleEntity);
         p.setCategory(category);
         p.setPlayerFeePaid(false);
         p.setPlayerPasswordChanged(false);

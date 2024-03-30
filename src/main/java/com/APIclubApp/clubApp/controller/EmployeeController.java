@@ -3,16 +3,14 @@ package com.APIclubApp.clubApp.controller;
 import com.APIclubApp.clubApp.dto.EmployeeDTO;
 import com.APIclubApp.clubApp.exception.AlreadyExistsException;
 import com.APIclubApp.clubApp.exception.NotFoundException;
-import com.APIclubApp.clubApp.model.Coach;
 import com.APIclubApp.clubApp.model.Employee;
-import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.service.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.annotation.security.PermitAll;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -97,7 +95,7 @@ public class EmployeeController {
 
     @Operation(summary = "Crear un empleado")
     @PostMapping("/save")
-    @PermitAll
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<?> saveEmployee(@RequestBody EmployeeDTO employeeDTO){
         try {
             String passWEncrypt= passwordEncoder.encode(employeeDTO.getUserPassword());
@@ -110,7 +108,7 @@ public class EmployeeController {
 
     @Operation(summary = "Listar todos los empleados")
     @GetMapping("/list")
-    @PermitAll
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<List<Employee>> listAllEmployee(){
         List<Employee> employees= employeeService.listAllEmployees();
         if (employees.isEmpty()){
@@ -127,7 +125,7 @@ public class EmployeeController {
 
     @Operation(summary = "Obtener un empleado por su ID")
     @GetMapping("/get/{id}")
-    @PermitAll
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<?> getEmployeeById(@PathVariable Long id){
         try {
             Employee employee= employeeService.getEmployeeById(id);
@@ -139,7 +137,7 @@ public class EmployeeController {
 
     @Operation(summary = "Obtener un empleado por su DNI")
     @GetMapping("/getByDni/{dni}")
-    @PermitAll
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<?> getEmployeeByDni(@PathVariable String dni){
         try {
             Employee employee = employeeService.getEmployeeByDni(dni);
@@ -151,7 +149,7 @@ public class EmployeeController {
 
     @Operation(summary = "Actualizar un empleado")
     @PutMapping("/update")
-    @PermitAll
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<?> updateEmployee(@RequestBody EmployeeDTO employeeDTO){
         try {
             Employee updatedEmployee = employeeService.updateEmployee(employeeDTO);
@@ -165,7 +163,7 @@ public class EmployeeController {
 
     @Operation(summary = "Eliminar un empleado por su ID")
     @DeleteMapping("/delete/{id}")
-    @PermitAll
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<String> deleteEmployee(@PathVariable Long id){
         try {
             employeeService.deleteEmployee(id);

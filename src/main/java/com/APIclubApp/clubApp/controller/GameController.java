@@ -1,15 +1,16 @@
 package com.APIclubApp.clubApp.controller;
 
-import com.APIclubApp.clubApp.dto.FixtureDTO;
 import com.APIclubApp.clubApp.dto.GameDTO;
 import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Game;
 import com.APIclubApp.clubApp.service.GameService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.annotation.security.PermitAll;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class GameController {
 
     @Operation(summary = "Lista todos los partidos")
     @GetMapping("/list")
+    @PermitAll
     public ResponseEntity<List<Game>> listAllGames() {
         List<Game> games= gameService.listAllGames();
         if (games.isEmpty()){
@@ -36,6 +38,7 @@ public class GameController {
 
     @Operation(summary = "Obtener un partido por ID")
     @GetMapping("/get/{id}")
+    @PermitAll
     public ResponseEntity<?> getGameById(@PathVariable Long id) {
         Game game = gameService.getGameById(id);
         try {
@@ -47,6 +50,7 @@ public class GameController {
 
     @Operation(summary = "Crear un partido")
     @PostMapping("/save")
+    @PreAuthorize("hasRole('Coach', 'Admin')")
     public ResponseEntity<?> saveGame(@RequestBody GameDTO gameDTO) {
 // Mapear GameDTO a Game
         Game game = modelMapper.map(gameDTO, Game.class);
@@ -62,6 +66,7 @@ public class GameController {
 
     @Operation(summary = "Actualizar un partido")
     @PutMapping("/update")
+    @PreAuthorize("hasRole('Coach', 'Admin')")
     public ResponseEntity<?> updateGame( @RequestBody GameDTO gameDTO) {
         /*ResponseEntity<Game> response;
         if (gameService.getGameById(id) != null) {
@@ -87,6 +92,7 @@ public class GameController {
 
     @Operation(summary = "Obtener una lista de partidos por el ID de la Categoria")
     @GetMapping("/getGamesCategory/{id}")
+    @PermitAll
     public ResponseEntity<List<Game>> getGamesByCategoryId(@PathVariable Long id) {
         List<Game> games = gameService.getGamesByCategoryId(id);
             return ResponseEntity.ok(games);
@@ -94,6 +100,7 @@ public class GameController {
 
     @Operation(summary = "Eliminar un partido por ID")
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('Coach', 'Admin')")
     public ResponseEntity<String> deleteGame(@PathVariable Long id) {
         try {
             gameService.deleteGame(id);

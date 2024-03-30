@@ -1,9 +1,7 @@
 package com.APIclubApp.clubApp.dto;
 
-import com.APIclubApp.clubApp.model.Category;
 import lombok.*;
 
-import java.util.Set;
 
 @Getter
 @Setter

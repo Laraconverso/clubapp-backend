@@ -5,21 +5,16 @@ import com.APIclubApp.clubApp.exception.AlreadyExistsException;
 import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.model.Employee;
-import com.APIclubApp.clubApp.model.Role;
 import com.APIclubApp.clubApp.repository.ClubRepository;
 import com.APIclubApp.clubApp.repository.EmployeeRepository;
-import com.APIclubApp.clubApp.repository.RoleRepository;
+import com.APIclubApp.clubApp.security.usersecurity.model.RoleEntity;
+import com.APIclubApp.clubApp.security.usersecurity.repository.RoleSecurityRepository;
 import com.APIclubApp.clubApp.service.EmployeeService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -31,8 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private ClubRepository clubRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
-
+    private RoleSecurityRepository roleSecurityRepository;
     @Autowired
     //ObjectMapper objectMapper;
     public ModelMapper modelMapper; // Necesitamos una instancia de ModelMapper para convertir entre Employee y EmployeeDTO
@@ -56,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new AlreadyExistsException("Employee already exists with email: " + employeeDTO.getUserEmail());
         }
 
-        Role role = roleRepository.findByRoleName("Admin")
+        RoleEntity roleEntity = roleSecurityRepository.findByRolename("Employee")
                 .orElseThrow(() -> new NotFoundException("Role not found"));
 
         Club club = clubRepository.findById(employeeDTO.getClubId())
@@ -64,7 +58,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee newEmployee = modelMapper.map(employeeDTO, Employee.class);
 
-        newEmployee.setRole(role);
+        newEmployee.setRole(roleEntity);
         newEmployee.setClub(club);
 
         Employee savedEmployee = employeeRepository.save(newEmployee);

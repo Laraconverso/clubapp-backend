@@ -4,7 +4,6 @@ import com.APIclubApp.clubApp.dto.TeamDTO;
 import com.APIclubApp.clubApp.exception.AlreadyExistsException;
 import com.APIclubApp.clubApp.exception.AssociatedCategoriesException;
 import com.APIclubApp.clubApp.exception.NotFoundException;
-import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Team;
 import com.APIclubApp.clubApp.service.TeamService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,6 +11,7 @@ import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +26,7 @@ public class TeamController {
 
     @Operation(summary = "Listar todos los equipos")
     @GetMapping("/list")
+    @PermitAll
     public ResponseEntity<List<Team>> listAllTeams() {
         List<Team> teams= teamService.listAllTeams();
         if (teams.isEmpty()) {
@@ -36,6 +37,7 @@ public class TeamController {
 
     @Operation(summary = "Obtener un equipo por su ID")
     @GetMapping("/get/{id}")
+    @PermitAll
     public ResponseEntity<?> getTeamById(@PathVariable Long id) {
         try {
             Team team = teamService.getTeamById(id);
@@ -47,6 +49,7 @@ public class TeamController {
 
     @Operation(summary = "Crear un equipo ")
     @PostMapping("/save")
+    @PreAuthorize("hasRole('Coach', 'Admin')")
     public ResponseEntity<?> saveTeam(@RequestBody TeamDTO team) {
         try {
             return ResponseEntity.ok(teamService.saveTeam(team));
@@ -57,7 +60,7 @@ public class TeamController {
 
     @Operation(summary = "Actualizar un equipo")
     @PutMapping("/update")
-    @PermitAll
+    @PreAuthorize("hasRole('Coach', 'Admin')")
     public ResponseEntity<?> updateTeam(@RequestBody TeamDTO team){
         try {
             return ResponseEntity.ok(teamService.updateTeamById(team));
@@ -70,6 +73,7 @@ public class TeamController {
 
     @Operation(summary = "Borrar un equipo por su ID")
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('Coach', 'Admin')")
     public ResponseEntity<String> deleteTeam(@PathVariable Long id) {
         try {
             teamService.deleteTeam(id);

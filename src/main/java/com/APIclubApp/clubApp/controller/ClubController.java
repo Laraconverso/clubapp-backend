@@ -3,13 +3,12 @@ package com.APIclubApp.clubApp.controller;
 import com.APIclubApp.clubApp.dto.ClubDTO;
 import com.APIclubApp.clubApp.exception.AlreadyExistsException;
 import com.APIclubApp.clubApp.exception.NotFoundException;
-import com.APIclubApp.clubApp.model.Club;
 import com.APIclubApp.clubApp.service.ClubService;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +39,7 @@ public class ClubController {
     }
     @Operation(summary = "Guardar un club")
     @PostMapping("/save")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<?> saveClub(@RequestBody ClubDTO club) {
         try {
             return ResponseEntity.ok(clubService.saveClub(club));
@@ -49,6 +49,7 @@ public class ClubController {
 
     @Operation(summary = "Actualizar un club")
     @PutMapping("/update")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<?> updateClub(@RequestBody ClubDTO club) {
         try {
             return ResponseEntity.ok(clubService.updateClub(club));
@@ -61,6 +62,7 @@ public class ClubController {
 
     @Operation(summary = "Borrar un club por su id")
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<String> deleteClub(@PathVariable Long id) {
         try {
             clubService.deleteClub(id);

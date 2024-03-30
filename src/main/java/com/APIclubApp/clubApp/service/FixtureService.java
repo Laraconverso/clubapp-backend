@@ -1,6 +1,5 @@
 package com.APIclubApp.clubApp.service;
 
-import com.APIclubApp.clubApp.dto.EmployeeDTO;
 import com.APIclubApp.clubApp.dto.FixtureDTO;
 import com.APIclubApp.clubApp.model.Fixture;
 

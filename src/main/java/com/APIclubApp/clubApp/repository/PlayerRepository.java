@@ -1,7 +1,5 @@
 package com.APIclubApp.clubApp.repository;
 
-import com.APIclubApp.clubApp.dto.PlayerDTOreport;
-import com.APIclubApp.clubApp.model.Employee;
 import com.APIclubApp.clubApp.model.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
