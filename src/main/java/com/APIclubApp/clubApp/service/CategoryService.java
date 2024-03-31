@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface CategoryService {
    // List<CategoryDTO> listAllCategories();
+
    List<CategoryListAllDTO> listAllCategories();
     Category saveCategory(CategoryDTO category);
 

@@ -1,5 +1,6 @@
 package com.APIclubApp.clubApp.service.impl;
 
+import com.APIclubApp.clubApp.dto.CoachBasicDTO;
 import com.APIclubApp.clubApp.dto.CoachDTO;
 import com.APIclubApp.clubApp.model.Category;
 import com.APIclubApp.clubApp.model.Club;
@@ -14,7 +15,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CoachServiceImpl implements CoachService {
@@ -33,14 +36,27 @@ public class CoachServiceImpl implements CoachService {
 
 
     @Override
-    public List<Coach> listAllCoaches() {
-        return coachRepository.findAll();
-        /*List<Coach> allCoachs = coachRepository.findAll();
-        List<CoachDTO> allCoachsDto = new ArrayList<>();
-        for (Coach coach: allCoachs)
-            allCoachsDto.add(objectMapper.convertValue(coach, CoachDTO.class));
+    public List<CoachDTO> listAllCoaches() {
+        //return coachRepository.findAll();
+        List<Coach> allCoaches = coachRepository.findAll();
+        List<CoachDTO> allCoachesDto = new ArrayList<>();
+        for (Coach coach: allCoaches)
+            allCoachesDto.add(objectMapper.convertValue(coach, CoachDTO.class));
 
-        return allCoachsDto;*/
+        return allCoachesDto;
+    }
+
+    @Override
+    public List<CoachBasicDTO> listAllCoachesBasic() {
+        List<Coach> allCoaches = coachRepository.findAll();
+        return allCoaches.stream()
+                .map(coach -> {
+                    CoachBasicDTO coachBasicDTO = new CoachBasicDTO();
+                    coachBasicDTO.setCoachNumber(coach.getCoachNumber());
+                    coachBasicDTO.setUserName(coach.getUserName());
+                    return coachBasicDTO;
+                })
+                .collect(Collectors.toList());+
     }
 
     @Override

@@ -1,10 +1,10 @@
 package com.APIclubApp.clubApp.controller;
 
+import com.APIclubApp.clubApp.dto.CoachBasicDTO;
 import com.APIclubApp.clubApp.dto.CoachCategryDTO;
 import com.APIclubApp.clubApp.dto.CoachDTO;
 import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Coach;
-import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.service.CategoryService;
 import com.APIclubApp.clubApp.service.CoachService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,7 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -33,9 +32,15 @@ public class CoachController {
 
     @Operation(summary = "Listar todos los coaches/dts")
     @GetMapping("/list")
-    public ResponseEntity<List<Coach>> listAllCoaches(){
+    public ResponseEntity<List<CoachDTO>> listAllCoaches(){
         return ResponseEntity.ok(coachService.listAllCoaches());
     }
+
+    @Operation(summary = "Obtener todos los coach/dts traer solo nombre e id")
+    @GetMapping("/list_basic")
+    public ResponseEntity<List<CoachBasicDTO>> listAllCoachesBasic(){
+    return ResponseEntity.ok(coachService.listAllCoachesBasic());
+}
 
 
     @Operation(summary = "Obtener un coach/dt por su ID")

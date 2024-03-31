@@ -1,28 +1,18 @@
 package com.APIclubApp.clubApp.dto;
 
-import com.APIclubApp.clubApp.model.Category;
-import jakarta.persistence.Column;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CoachDTO {
+public class CoachBasicDTO {
 
     private Long coachNumber;
     private String userName;
-    private String userLastname;
-    private String userDni;
-    private String userEmail;
-    private String userAddress;
-    private String userPassword;
-    private Long roleId;
-    //private RolDTO rol;
-    private Long clubId;
-    //private ClubDTO club;
-    //private Long categoryId;
-    //private CategoryDTO category;
 
 }
