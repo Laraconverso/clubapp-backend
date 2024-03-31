@@ -56,7 +56,7 @@ public class CoachServiceImpl implements CoachService {
                     coachBasicDTO.setUserName(coach.getUserName());
                     return coachBasicDTO;
                 })
-                .collect(Collectors.toList());+
+                .collect(Collectors.toList());
     }
 
     @Override
