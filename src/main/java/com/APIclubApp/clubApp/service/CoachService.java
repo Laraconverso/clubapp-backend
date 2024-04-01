@@ -19,4 +19,6 @@ public interface CoachService {
     void deleteCoach(Long id);
 
     Long getCoachesCount();
+
+    Coach getCoachByDNI(String dni);
 }

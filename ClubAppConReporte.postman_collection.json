@@ -151,6 +151,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "listCategoriesNameAndId",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -246,10 +254,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://clubapp-backend-production.up.railway.app/coaches/get/10",
+							"raw": "https://clubapp-backend-production-2.up.railway.app/coaches/get/10",
 							"protocol": "https",
 							"host": [
-								"clubapp-backend-production",
+								"clubapp-backend-production-2",
 								"up",
 								"railway",
 								"app"
@@ -269,10 +277,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://clubapp-backend-production.up.railway.app/coaches/list",
+							"raw": "https://clubapp-backend-production-2.up.railway.app/coaches/list",
 							"protocol": "https",
 							"host": [
-								"clubapp-backend-production",
+								"clubapp-backend-production-2",
 								"up",
 								"railway",
 								"app"
@@ -311,10 +319,28 @@
 				{
 					"name": "updateCoach",
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "/*private Long coachNumber;\r\n    private String userName;\r\n    private String userLastname;\r\n    private String userDni;\r\n    private String userEmail;\r\n    private String userAddress;\r\n    private String userPassword;\r\n    private Long roleId;\r\n    \r\n    private Long clubId;*/",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:8080/coaches/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"coaches",
+								"update"
+							]
 						}
 					},
 					"response": []
@@ -324,6 +350,51 @@
 					"request": {
 						"method": "GET",
 						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getCoachByDni",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://clubapp-backend-production-2.up.railway.app/coaches/getByDni/22222222",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production-2",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"coaches",
+								"getByDni",
+								"22222222"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCoachNameAndId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://clubapp-backend-production-2.up.railway.app/coaches/list_basic",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production-2",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"coaches",
+								"list_basic"
+							]
+						}
 					},
 					"response": []
 				}
@@ -683,10 +754,10 @@
 							}
 						},
 						"url": {
-							"raw": "https://clubapp-backend-production.up.railway.app/games/list",
+							"raw": "https://clubapp-backend-production-2.up.railway.app/games/list",
 							"protocol": "https",
 							"host": [
-								"clubapp-backend-production",
+								"clubapp-backend-production-2",
 								"up",
 								"railway",
 								"app"
@@ -735,10 +806,10 @@
 							}
 						},
 						"url": {
-							"raw": "https://clubapp-backend-production.up.railway.app/games/save",
+							"raw": "https://clubapp-backend-production-2.up.railway.app/games/save",
 							"protocol": "https",
 							"host": [
-								"clubapp-backend-production",
+								"clubapp-backend-production-2",
 								"up",
 								"railway",
 								"app"
@@ -786,7 +857,42 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "https://clubapp-backend-production-2.up.railway.app/games/delete/",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production-2",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"games",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGamesByIdCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://clubapp-backend-production-2.up.railway.app/games/getGamesCategory/2013",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production-2",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"games",
+								"getGamesCategory",
+								"2013"
+							]
 						}
 					},
 					"response": []
@@ -1237,7 +1343,43 @@
 					"name": "getMetricsPlayers",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "https://clubapp-backend-production.up.railway.app/players/metrics",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"players",
+								"metrics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "metricsByCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://clubapp-backend-production.up.railway.app/players/metricsByCategory",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"players",
+								"metricsByCategory"
+							]
+						}
 					},
 					"response": []
 				}
