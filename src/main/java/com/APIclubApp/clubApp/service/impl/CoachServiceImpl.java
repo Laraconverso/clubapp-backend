@@ -1,6 +1,7 @@
 package com.APIclubApp.clubApp.service.impl;
 
 import com.APIclubApp.clubApp.dto.CoachBasicDTO;
+import com.APIclubApp.clubApp.dto.CoachCategoryDTO;
 import com.APIclubApp.clubApp.dto.CoachDTO;
 import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.*;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -104,8 +106,26 @@ public class CoachServiceImpl implements CoachService {
     public Coach getCoachByDNI(String dni) {
         Coach coach = coachRepository.findByUserDni(dni);
         if (coach == null) {
-            throw new NotFoundException("Player not found with DNI: " + dni);
+            throw new NotFoundException("Coach not found with DNI: " + dni);
         }
         return coach;
+    }
+
+    @Override
+    public Optional<Coach> getCoachByDNICat(String dni) {
+
+        Optional<Coach> coach = coachRepository.findByUserDniCat(dni);
+        if (!coach.isPresent()) { // Verificar si la opción contiene un valor
+            throw new NotFoundException("Coach not found with DNI: " + dni);
+        }
+        return coach;
+
+       /* Optional<Coach> coach = coachRepository.findByUserDniCat(dni);
+        if (coach.isPresent()) {
+            Coach coachObj = coach.get();
+            System.out.println("Category ID: " + coachObj.getCategory().getCategoryId()); // Verifica si se obtiene la categoría
+        }
+        return coach;*/
+
     }
 }
