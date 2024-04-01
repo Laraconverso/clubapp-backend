@@ -5,15 +5,15 @@ INSERT INTO clubs (club_name, club_logo, club_description) VALUES ('The Best Clu
 INSERT INTO roles (role_name) VALUES ('Admin'),('Player'),('Coach');
 
 --COACHES -> revisar si se agrega CLUB ID
-INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Carlos', 'González', '11111', 'carlos.gonzalez@example.com', 'Avenida Principal 456', 'password',3,1);
-INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Silvina', 'Boggi', '22222', 'dos@example.com', 'Avenida Principal 400', '5323',3,1);
-INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Mariano', 'Mendez', '33333', 'tres@example.com', 'Avenida Principal 333', '12451',3,1);
-INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Juliana', 'Basi', '44444', 'cuatro@example.com', 'Avenida Guemes 44', 'basii22',3,1);
-INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Cristina', 'Casna', '55555', 'cinco@example.com', 'Avenida Guemes 55', 'criscas',3,1);
-INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Marcos', 'Vitro', '66666', 'seis@example.com', 'Libertador 66', '66666',3,1);
-INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Ariel', 'Ensusalsa', '77777', 'siete@example.com', 'Federico Lacorze 000', 'comidaaa',3,1);
-INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Gerorgi', 'barbarossa', '888888', 'ocho@example.com', 'Av Paseo Colon 550', 'tartadeciruela',3,1);
-INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Coach', 'Prueba', '00000', 'zero@example.com', 'Direccion 0', 'cero0',3,1);
+INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Carlos', 'González', '11111111', 'carlos.gonzalez@example.com', 'Avenida Principal 456', 'password',3,1);
+INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Silvina', 'Boggi', '22222222', 'dos@example.com', 'Avenida Principal 400', '5323',3,1);
+INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Mariano', 'Mendez', '33333333', 'tres@example.com', 'Avenida Principal 333', '12451',3,1);
+INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Juliana', 'Basi', '44444444', 'cuatro@example.com', 'Avenida Guemes 44', 'basii22',3,1);
+INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Cristina', 'Casna', '55555555', 'cinco@example.com', 'Avenida Guemes 55', 'criscas',3,1);
+INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Marcos', 'Vitro', '66666666', 'seis@example.com', 'Libertador 66', '66666',3,1);
+INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Ariel', 'Ensusalsa', '77777777', 'siete@example.com', 'Federico Lacorze 000', 'comidaaa',3,1);
+INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Gerorgi', 'barbarossa', '888888888', 'ocho@example.com', 'Av Paseo Colon 550', 'tartadeciruela',3,1);
+INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Paz', 'Lucia', '99999999', 'lucia@example.com', 'Del Paso 01', 'cero0',3,1);
 
 -- TEAM
 INSERT INTO team (team_name, team_description) VALUES ('Los dragones', 'Vuelan alto y veloz');

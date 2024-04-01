@@ -5,6 +5,7 @@ import com.APIclubApp.clubApp.dto.CoachCategryDTO;
 import com.APIclubApp.clubApp.dto.CoachDTO;
 import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Coach;
+import com.APIclubApp.clubApp.model.Player;
 import com.APIclubApp.clubApp.service.CategoryService;
 import com.APIclubApp.clubApp.service.CoachService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,7 +40,7 @@ public class CoachController {
     @Operation(summary = "Obtener todos los coach/dts traer solo nombre e id")
     @GetMapping("/list_basic")
     public ResponseEntity<List<CoachBasicDTO>> listAllCoachesBasic(){
-    return ResponseEntity.ok(coachService.listAllCoachesBasic());
+        return ResponseEntity.ok(coachService.listAllCoachesBasic());
 }
 
 
@@ -113,6 +114,18 @@ public class CoachController {
         try {
             Coach c = categoryService.updateCategoryCoach(coachCategryDTO.getUserDni(),coachCategryDTO.getCategoryName());
             return ResponseEntity.ok(c);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Obtiene un coach por su DNI")
+    @GetMapping("/getByDni/{dni}")
+    @PermitAll
+    public ResponseEntity<?> getCoachById(@PathVariable String dni){
+        try {
+            Coach coach = coachService.getCoachByDNI(dni);
+            return ResponseEntity.ok(coach);
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
