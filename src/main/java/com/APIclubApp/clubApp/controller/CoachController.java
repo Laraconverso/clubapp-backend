@@ -1,6 +1,7 @@
 package com.APIclubApp.clubApp.controller;
 
 import com.APIclubApp.clubApp.dto.CoachBasicDTO;
+import com.APIclubApp.clubApp.dto.CoachCategoryDTO;
 import com.APIclubApp.clubApp.dto.CoachCategryDTO;
 import com.APIclubApp.clubApp.dto.CoachDTO;
 import com.APIclubApp.clubApp.exception.NotFoundException;
@@ -16,7 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -129,6 +133,38 @@ public class CoachController {
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+    }
+
+    @Operation(summary = "Obtiene un coach por su DNI y la categoria asociada")
+    @GetMapping("/getByDniCat/{dni}")
+    @PermitAll
+    public ResponseEntity<?> getCoachByDniCat(@PathVariable String dni) {
+        /*try {
+            Optional<Coach> coach = coachService.getCoachByDNICat(dni);
+            return ResponseEntity.ok(coach);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }*/
+
+        try {
+            Optional<Coach> coach = coachService.getCoachByDNICat(dni);
+            if (coach.isPresent()) {
+                // Obtener el objeto Coach
+                Coach coachObj = coach.get();
+
+                // Crear un mapa para almacenar la información del coach y su categoría
+                Map<String, Object> response = new HashMap<>();
+                response.put("coach", coachObj);
+                response.put("category", coachObj.getCategory().getCategoryId()); // Agregar la categoría al mapa
+
+                return ResponseEntity.ok(response); // Devolver el mapa con el coach y la categoría
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Coach not found with DNI: " + dni);
+            }
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
     }
 
 }
