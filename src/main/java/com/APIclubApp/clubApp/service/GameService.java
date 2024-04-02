@@ -4,6 +4,7 @@ import com.APIclubApp.clubApp.dto.GameDTO;
 import com.APIclubApp.clubApp.model.Game;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GameService {
     List<Game> listAllGames();
@@ -17,5 +18,7 @@ public interface GameService {
     void deleteGame(Long id);
 
     List<Game> getGamesByCategoryId(Long idCategory);
+
+    Optional<Game> findGameWithFixtureById(Long gameId);
 }
 
