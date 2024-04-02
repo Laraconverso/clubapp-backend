@@ -3,6 +3,7 @@ package com.APIclubApp.clubApp.service.impl;
 import com.APIclubApp.clubApp.dto.GameDTO;
 import com.APIclubApp.clubApp.exception.NotFoundException;
 import com.APIclubApp.clubApp.model.Category;
+import com.APIclubApp.clubApp.model.Coach;
 import com.APIclubApp.clubApp.model.Fixture;
 import com.APIclubApp.clubApp.model.Game;
 import com.APIclubApp.clubApp.repository.CategoryRepository;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -83,5 +85,16 @@ public class GameServiceImpl implements GameService {
             gameRepository.deleteById(id);
         } else {
             throw new NotFoundException("Game not found with ID: " + id);
-        }    }
+        }
+    }
+
+    @Override
+    public Optional<Game> findGameWithFixtureById(Long gameId) {
+        Optional<Game> game = gameRepository.findGameWithFixtureById(gameId);
+        if (!game.isPresent()) { // Verificar si la opción contiene un valor
+            throw new NotFoundException("Game not found with gameId: " + gameId);
+        }
+        return game;
+        //return gameRepository.findGameWithFixtureById(gameId);
+    }
 }

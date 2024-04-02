@@ -3,6 +3,7 @@ package com.APIclubApp.clubApp.controller;
 import com.APIclubApp.clubApp.dto.FixtureDTO;
 import com.APIclubApp.clubApp.dto.GameDTO;
 import com.APIclubApp.clubApp.exception.NotFoundException;
+import com.APIclubApp.clubApp.model.Coach;
 import com.APIclubApp.clubApp.model.Game;
 import com.APIclubApp.clubApp.service.GameService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,7 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -102,5 +106,37 @@ public class GameController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    @Operation(summary = "Obtener un partido por ID y su fixture asociado")
+    @GetMapping("/getGameFix/{gameId}")
+    public ResponseEntity<?> getGameByIdFix(@PathVariable Long gameId) {
+       /* Optional<Game> game = gameService.findGameWithFixtureById(gameId);
+        try {
+            return ResponseEntity.ok(game);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }*/
+        try {
+            Optional<Game> game = gameService.findGameWithFixtureById(gameId);
+        if (game.isPresent()) {
+            // Obtener el objeto Coach
+            Game gameObj = game.get();
+
+            // Crear un mapa para almacenar la información del game y su fixture
+            Map<String, Object> response = new HashMap<>();
+            response.put("game", game);
+            response.put("fixture", gameObj.getFixture().getFixtureId()); // Agregar la fixture al mapa
+
+            return ResponseEntity.ok(response); // Devolver el mapa con el coach y la categoría
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found with idGame: " + gameId);
+        }
+    } catch (NotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
+}
+
+
 }
 
