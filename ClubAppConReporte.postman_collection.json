@@ -377,6 +377,29 @@
 					"response": []
 				},
 				{
+					"name": "getCoachByDniCat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://clubapp-backend-production-2.up.railway.app/coaches/getByDni/22222222",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production-2",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"coaches",
+								"getByDni",
+								"22222222"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getCoachNameAndId",
 					"request": {
 						"method": "GET",
@@ -892,6 +915,29 @@
 								"games",
 								"getGamesCategory",
 								"2013"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGameFix",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://clubapp-backend-production-2.up.railway.app/games/getGameFix/2",
+							"protocol": "https",
+							"host": [
+								"clubapp-backend-production-2",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"games",
+								"getGameFix",
+								"2"
 							]
 						}
 					},
