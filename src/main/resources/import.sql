@@ -1,11 +1,11 @@
 -- CLUBS
-INSERT INTO clubs (club_name, club_logo, club_description) VALUES ('The Best Club', 'logo_url', 'El mejor Club');
+INSERT INTO clubs (club_name, club_logo, club_description) VALUES ('Atlantico Club', 'logo_url', 'El mejor Club');
 
 -- ROLES
 INSERT INTO roles (role_name) VALUES ('Admin'),('Player'),('Coach');
 
 --COACHES -> revisar si se agrega CLUB ID
-INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Carlos', 'González', '11111111', 'carlos.gonzalez@example.com', 'Avenida Principal 456', 'password',3,1);
+INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Carlos', 'Gonzalez', '11111111', 'carlos.gonzalez@example.com', 'Avenida Principal 456', 'password',3,1);
 INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Silvina', 'Boggi', '22222222', 'dos@example.com', 'Avenida Principal 400', '5323',3,1);
 INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Mariano', 'Mendez', '33333333', 'tres@example.com', 'Avenida Principal 333', '12451',3,1);
 INSERT INTO coaches (user_name, user_lastname, user_dni, user_email, user_address, user_password, role_id, club_id) VALUES ('Juliana', 'Basi', '44444444', 'cuatro@example.com', 'Avenida Guemes 44', 'basii22',3,1);
@@ -116,14 +116,14 @@ INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_locat
 INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_location, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-23', '18:00', 0, 'Club Wilcoop', 'Raquel Español y Guamini - Wilde',4, 2, 2016, 1);
 INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_location, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-23', '19:00', 0, 'Club Wilcoop', 'Raquel Español y Guamini - Wilde',5, 4, 2014, 1);
 INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_location, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-23', '20:00', 0, 'Club Wilcoop', 'Raquel Español y Guamini - Wilde',0, 7, 2012, 1);
-INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '13:00', 1, 'Club 1º de Mayo', 0, 0, 2015, 1);
-INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '14:00', 1, 'Club 1º de Mayo', 0, 0, 2013, 1);
-INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '15:00', 1, 'Club 1º de Mayo', 0, 0, 2017, 1);
-INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '16:00', 1, 'Club 1º de Mayo', 0, 0, 2011, 1);
-INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '17:00', 1, 'Club 1º de Mayo', 0, 0, 2018, 1);
-INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '18:00', 1, 'Club 1º de Mayo', 0, 0, 2016, 1);
-INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '19:00', 1, 'Club 1º de Mayo', 0, 0, 2014, 1);
-INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '20:00', 1, 'Club 1º de Mayo', 0, 0, 2012, 1);
+INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '13:00', 1, 'Club 1ro de Mayo', 0, 0, 2015, 1);
+INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '14:00', 1, 'Club 1ro de Mayo', 0, 0, 2013, 1);
+INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '15:00', 1, 'Club 1ro de Mayo', 0, 0, 2017, 1);
+INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '16:00', 1, 'Club 1ro de Mayo', 0, 0, 2011, 1);
+INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '17:00', 1, 'Club 1ro de Mayo', 0, 0, 2018, 1);
+INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '18:00', 1, 'Club 1ro de Mayo', 0, 0, 2016, 1);
+INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '19:00', 1, 'Club 1ro de Mayo', 0, 0, 2014, 1);
+INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-03-30', '20:00', 1, 'Club 1ro de Mayo', 0, 0, 2012, 1);
 INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_location, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-04-02', '13:00', 0, 'Club Domingo Savio', 'Heredia 3500 - Sarandi', 0, 0, 2015, 1);
 INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_location, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-04-02', '14:00', 0, 'Club Domingo Savio', 'Heredia 3500 - Sarandi', 0, 0, 2013, 1);
 INSERT INTO games (game_day, game_time, game_islocal, game_teamrival, game_location, game_localgoals, game_rivalgoals, category_id, id_fixture) VALUES ('2024-04-02', '15:00', 0, 'Club Domingo Savio', 'Heredia 3500 - Sarandi', 0, 0, 2017, 1);

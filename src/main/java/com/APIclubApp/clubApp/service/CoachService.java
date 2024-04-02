@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CoachService {
-    public List<CoachDTO> listAllCoaches();
+    public List<Coach> listAllCoaches();
     public List<CoachBasicDTO> listAllCoachesBasic();
 
     Coach saveCoach(CoachDTO coach);

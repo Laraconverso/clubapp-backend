@@ -36,14 +36,14 @@ public class CoachServiceImpl implements CoachService {
 
 
     @Override
-    public List<CoachDTO> listAllCoaches() {
+    public List<Coach> listAllCoaches() {
         //return coachRepository.findAll();
         List<Coach> allCoaches = coachRepository.findAll();
-        List<CoachDTO> allCoachesDto = new ArrayList<>();
-        for (Coach coach: allCoaches)
-            allCoachesDto.add(objectMapper.convertValue(coach, CoachDTO.class));
+//        List<CoachDTO> allCoachesDto = new ArrayList<>();
+//        for (Coach coach: allCoaches)
+//            allCoachesDto.add(objectMapper.convertValue(coach, CoachDTO.class));
 
-        return allCoachesDto;
+        return allCoaches;
     }
 
     @Override

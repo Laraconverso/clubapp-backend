@@ -37,7 +37,7 @@ public class CoachController {
 
     @Operation(summary = "Listar todos los coaches/dts")
     @GetMapping("/list")
-    public ResponseEntity<List<CoachDTO>> listAllCoaches(){
+    public ResponseEntity<List<Coach>> listAllCoaches(){
         return ResponseEntity.ok(coachService.listAllCoaches());
     }
 
