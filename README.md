@@ -1,4 +1,0 @@
-CLUB APP 
-Backend
-
-Collaborators: 
