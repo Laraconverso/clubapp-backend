@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b8f4f7e9-16d4-4a16-8792-09e911f9c99a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/CONMODIFICACION.postman_collection.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ClubAPP_Role.postman_collection.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ClubApp.postman_collection.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ClubApp.postman_collectionEmployeeFixtureGame" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ClubAppConReporte.postman_collection.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/ClubAppApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/CardPaymentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/CategoryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/ClubController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/CoachController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/EmployeeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/FixtureController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/GameController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/PaymentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/PlayerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/RoleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/TeamController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/controller/TemplateController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/CardPaymentDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/CategoryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/CategoryListAllDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/CategoryShortListDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/ClubDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/CoachBasicDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/CoachCategoryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/CoachCategryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/CoachDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/CoachSimpleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/EmployeeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/FixtureDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/GameDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/PayerDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/PayerIdentificationDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/PaymentDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/PaymentResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/PlayerChangePasswordDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/PlayerDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/PlayerDTOreport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/PlayerFormDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/PlayerUpdateAdminDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/PlayersMetricsDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/RoleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/dto/TeamDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/exception/Advisor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/exception/AlreadyExistsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/exception/AssociatedCategoriesException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/exception/CategoryNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/exception/InvalidCategoryException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/exception/MercadoPagoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/exception/NoChangesException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/exception/NotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/model/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/model/Club.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/model/Coach.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/model/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/model/Fixture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/model/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/model/Payment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/model/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/model/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/model/Team.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/repository/CategoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/repository/ClubRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/repository/CoachRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/repository/EmployeeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/repository/FixtureRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/repository/GameRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/repository/PaymentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/repository/PlayerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/repository/RoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/repository/TeamRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/CategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/ClubService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/CoachService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/EmployeeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/FixtureService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/GameService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/PaymentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/PlayerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/RoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/TeamService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/CardPaymentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/ClubServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/CoachServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/EmployeeServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/FixtureServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/GameServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/PaymentServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/PlayerServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/ReportService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/RoleServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/TeamServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/swagger/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/import.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/APIclubApp/clubApp/ClubAppApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/mercadoPago" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2dK4eCc7jFqxqDiUsaJvgxBFyIc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_directory_selection": "/Users/laraconverso/Desktop/Stuff/CTD/GRUPO6-PI2/clubapp-backend/.idea",
+    "last_opened_file_path": "/Users/laraconverso/Desktop/Stuff/CTD/GRUPO6-PI2/clubapp-backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "4d645aa0418e27dd94804b08328bad05",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="ClubAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="MYSQL_HOST" value="localhost" />
+        <env name="MYSQL_PORT" value="3306" />
+        <env name="MYSQL_DATABASE" value="clubapp" />
+        <env name="MYSQL_USERNAME" value="root" />
+        <env name="MYSQL_PASSWORD" value="password" />
+        <env name="mercado_pago_sample_public_key" value="YOUR_PUBLIC_KEY" />
+        <env name="mercado_pago_sample_access_token" value="YOUR_ACCESS_TOKEN&quot;" />
+      </envs>
+      <module name="clubApp" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.APIclubApp.clubApp.ClubAppApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b8f4f7e9-16d4-4a16-8792-09e911f9c99a" name="Changes" comment="" />
+      <created>1709743529255</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1709743529255</updated>
+      <workItem from="1709743530389" duration="7406000" />
+      <workItem from="1710103236530" duration="645000" />
+      <workItem from="1710205191470" duration="1415000" />
+      <workItem from="1710360188455" duration="5819000" />
+      <workItem from="1710526204156" duration="715000" />
+      <workItem from="1710544907337" duration="1882000" />
+      <workItem from="1710599068187" duration="2504000" />
+      <workItem from="1710727835430" duration="7646000" />
+      <workItem from="1711289907926" duration="2436000" />
+      <workItem from="1711409495000" duration="2327000" />
+      <workItem from="1711579470802" duration="4730000" />
+      <workItem from="1711834194141" duration="767000" />
+      <workItem from="1711835071570" duration="358000" />
+      <workItem from="1712014387176" duration="2442000" />
+      <workItem from="1712088870697" duration="4682000" />
+      <workItem from="1712167345632" duration="2940000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/APIclubApp/clubApp/service/impl/CategoryServiceImpl.java</url>
+          <line>175</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
