@@ -40,13 +40,13 @@ CLUBAPP🥅⚽ es un Website responsive que ofrecer una solución integral a clu
 - Sebastian Robayo [@sebasRT](https://github.com/sebasRT)
 - Gisela Urriza [@Gigi-U](https://github.com/Gigi-U)
 
-- [volver](#volver)
+  
 
 
 ## Demo
 
 (🚧 gif de app cuando este desplegada)
-- [volver](#volver)
+
 
 <!---
 
@@ -72,21 +72,20 @@ CLUBAPP🥅⚽ es un Website responsive que ofrecer una solución integral a clu
     ✔️ Login de usuarios
     ✔️ Gestión de jugadores como usuario empleado
     ✔️ Interfaz de usuario responsive    
-- [volver](#volver)
+
 
 ## Infraestructura
 El backend de la aplicaicon en conjunto con la base de datos se deployo en railway. Permitiendonos utilizar las variables de entorno declaradas en el proyecto. 
 Y tambien un deploy al instante de haber pusheado al repositorio ya que funciona conectado a este. 
 
 
-- [volver](#volver)
+
 
 ## Uso
 
 (🚧 Insertar gif con acciones) 
 
-- [volver](#volver)
-
+-------
 
 ## Licencia
 
@@ -112,4 +111,4 @@ Y tambien un deploy al instante de haber pusheado al repositorio ya que funciona
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
     
-- [volver](#volver)
+
